@@ -1,12 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './app/app';
-import { Provider} from 'react-redux';
-import {legacy_createStore as createStore} from 'redux';
+import App from './app/app.component';
+import {applyMiddleware, legacy_createStore as createStore, Store} from 'redux';
 import {BrowserRouter as Router} from 'react-router-dom';
 import { rootReducer } from './redux/reducers/index';
+import { Provider } from 'react-redux';
+import createSagaMiddleware from 'redux-saga';
+import { mainSagaWatcher } from './redux/saga';
 
-const store = createStore(rootReducer);
+const reSaga = createSagaMiddleware();
+
+const store : Store = createStore(rootReducer, applyMiddleware(reSaga));
+// reSaga.run(mainSagaWatcher);
 
 const root = ReactDOM.createRoot(document.querySelector('.app'));
 root.render(
