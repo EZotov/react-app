@@ -1,12 +1,19 @@
 {
     "compilerOptions": {
       "outDir": "./dist/",
-      "noImplicitAny": true,
-      "module": "es6",
+      "noImplicitOverride": true,
+      "module": "es2020",
       "target": "es5",
       "jsx": "react",
       "allowJs": true,
       "allowSyntheticDefaultImports": true,
-      "moduleResolution": "Node"
+      "moduleResolution": "Node",
+      "experimentalDecorators": true,
+      "importHelpers": true,
+      "sourceMap": true,
+      "lib": [
+        "es2020",
+        "dom"
+      ]
     }
 }

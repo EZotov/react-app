@@ -1,0 +1,16 @@
+.placeBtn {
+  cursor: pointer;
+  background-color: #ffffff;
+}
+
+.placeReserved {
+  background-color: #cf8282;
+  padding: 60px 33px;
+  text-align: center;
+  border : 1px solid #000000;
+}
+
+.placeBtn:hover, .placeBtn:active {
+  background-color: #da9c54;
+  color : #ffffff;
+}
