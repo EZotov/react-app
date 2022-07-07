@@ -1,19 +1,26 @@
 import React from 'react';
-// import { Route } from 'react-router-dom';
 import '../styles.scss';
 import './app.component.scss';
-import Table from './table/table.component';
+import AdminCenter from './admin-center/admin-center.component'
+import { Routes, Route, useNavigate } from 'react-router-dom';
+import ReserveService from './reserve-service/reserve-service.component';
 
 
 
 const App : React.FC = () => {
+  const navigate = useNavigate();
+
+  React.useEffect(() => {
+    navigate('/administration');
+  }, []);
 
   return (
     <div className="appContainer">
-      <div className="fixed-container flex-container">
-        <Table type='circle' size={[1,1]} maxPlaces={5} />
-        <Table type='square' size={[2,1]} maxPlaces={5} />
-      </div>
+      <h1 className="appContainer__headline visually-hidden">Сервис бронирование столов</h1>
+      <Routes>
+        <Route path='/' element={<ReserveService />}/>
+        <Route path='administration/*' element={<AdminCenter />}/>
+      </Routes>
     </div>
   )
 }

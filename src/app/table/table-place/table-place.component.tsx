@@ -2,30 +2,26 @@ import React from 'react';
 import './table-place.component.scss';
 
 interface TablePlace {
-  state : PlaceStateType
+  placeStatus : PlaceStateType
 }
 
 const TablePlace : React.FC<TablePlace> = (props) => {
-  const { state } = props;
+  const { placeStatus } = props;
 
-  return (
-    <>
-      {
-        state === 'FREE' && (
-          <button className="placeBtn" type="button">
-            Добавить <br/> место
-          </button>
-        )
-      }
-
-      {
-        state === 'RESERVED' && (
-          <div className="placeReserved">Бронь</div>
-        )
-      }
-
-    </>
-  )
+  switch(placeStatus) {
+    case 'FREE':
+      return (
+        <button className="tableGeneralContainer__place" type="button">
+          Добавить <br/> место
+        </button>
+      );
+    case 'RESERVED':
+      return (
+        <div className="tableGeneralContainer__place_reserved">Бронь</div>
+      )
+    default:
+      return null;
+  }
 }
 
 export default TablePlace;

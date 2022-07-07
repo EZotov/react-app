@@ -1,16 +1,19 @@
-.placeBtn {
+.tableGeneralContainer__place {
   cursor: pointer;
   background-color: #ffffff;
-}
-
-.placeReserved {
-  background-color: #cf8282;
-  padding: 60px 33px;
-  text-align: center;
+  display: block;
+  height: 100%;
+  padding-bottom: 30px;
   border : 1px solid #000000;
 }
 
-.placeBtn:hover, .placeBtn:active {
+.tableGeneralContainer__place_reserved {
+  background-color: #cf8282;
+  padding: 60px 33px;
+  text-align: center;
+}
+
+.tableGeneralContainer__place:hover, .tableGeneralContainer__place:active {
   background-color: #da9c54;
   color : #ffffff;
 }

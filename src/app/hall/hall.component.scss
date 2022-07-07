@@ -1,0 +1,67 @@
+.hallContainer {
+  display: flex;
+  flex-direction: column;
+  padding: 50px 40px;
+  flex-wrap: wrap;
+  border-radius: 20px;
+  background-color: #2f2f2f;
+  border : 2px solid #e87b16;
+  margin-top: 40px;
+  &__headline {
+    font-size: 30px;
+    border-bottom: 1px solid #ffffff;
+    padding: 15px 0;
+    text-align: center;
+  }
+  .hallList {
+    display: grid;
+    grid-gap : 40px;
+    grid-template-columns: repeat(5, 215px);
+    grid-auto-rows: 200px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    margin-top: 40px;
+    .hallListItem {
+      cursor: pointer;
+      border : 1px solid #d0d0d0;
+      border-radius: 10px;
+      display: flex;
+      flex-direction: column;
+      padding: 20px;
+      text-align: center;
+
+      font-weight: bold;
+      &__id {
+        font-size: 24px;
+      }
+      &__countPlaces {
+        font-size: 20px;
+        margin-top: 40px;
+      }
+    }
+    .hallListItem:first-child {
+      margin-left: 0;
+    }
+  }
+
+  .hallContainer__addTableBtn {
+    border : none;
+    text-align: center;
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+    background-color: inherit;
+    border-radius: 10px;
+    color : #ffffff;
+    font-size: 20px;
+    font-weight: bold;
+  }
+  .hallContainer__addTableBtn:hover {
+    background-color: #585858;
+  }
+}
+
+.hallContainer:first-child {
+  margin-top: 0;
+}

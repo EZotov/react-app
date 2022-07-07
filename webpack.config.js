@@ -52,7 +52,8 @@ let conf = {
                         sourceMap: false
                     }
           },
-          "sass-loader"]
+          "sass-loader"],
+        exclude: '/node_modules/'
       }
     ]
   },

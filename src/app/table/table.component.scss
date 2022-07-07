@@ -1,8 +1,7 @@
-.tableContainer {
-  padding: 100px;
+.tableGeneralContainer {
+  padding: 60px 70px;
   display: flex;
   position: relative;
-
   .squareTableContainer {
     display: grid;
     grid-template-columns: repeat(3, 150px);
@@ -10,23 +9,17 @@
     grid-gap: 5px;
     background-color: #9bebed;
     position: relative;
+    .squareTableContainer__table {
+      position: absolute;
+      top : 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
   }
 
-  .squareTableContainer > span {
-    padding: 20px;
-    background-color: #87be0b;
-  }
-
-  .squareTable {
-    position: absolute;
-    top : 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-
-  .circleTable {
+  .circleTableContainer {
     position: relative;
-    .circleTablePlace {
+    .circleTablePlaceWrapper {
       position: absolute;
       width: 80px;
       height: 80px;
@@ -35,11 +28,6 @@
       text-align: center;
       transform: translateX(-50%);
       transform-origin: 1px 150px;
-      & button {
-        display: block;
-        height: 100%;
-        padding-bottom: 30px;
-      }
     }
   }
 }
