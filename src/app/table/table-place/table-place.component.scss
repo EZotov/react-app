@@ -1,19 +1,33 @@
 .tableGeneralContainer__place {
-  cursor: pointer;
-  background-color: #ffffff;
   display: block;
+  background-color: #ffffff;
   height: 100%;
+  font-size: 12px;
+  font-weight: bold;
   padding-bottom: 30px;
-  border : 1px solid #000000;
+  border : 1px solid #1565c0;
+  color : #1565c0;
+  text-align: center;
+  cursor: pointer;
+}
+
+.tableGeneralContainer__place:hover, .tableGeneralContainer__place:active {
+  color : #ffffff;
+  border : 1px solid #ffffff;
+  background-color: #f1943f;
+}
+
+.tableGeneralContainer__place_square {
+  width: 100px;
+  padding-top: 30px;
+}
+
+.tableGeneralContainer__place_circle {
+  width: 80px;
+  padding-top: 15px;
 }
 
 .tableGeneralContainer__place_reserved {
   background-color: #cf8282;
-  padding: 60px 33px;
-  text-align: center;
-}
-
-.tableGeneralContainer__place:hover, .tableGeneralContainer__place:active {
-  background-color: #da9c54;
-  color : #ffffff;
+  color: #000000;
 }

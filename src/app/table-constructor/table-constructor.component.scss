@@ -6,13 +6,19 @@
   height: 100vh;
   background-color: rgba(#242424, 0.75);
   .constructorContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     position: absolute;
-    top: 30%;
+    top: 100px;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translateX(-50%);
     background-color: #ffffff;
     padding: 40px;
     border-radius: 20px;
+    width: 1000px;
+    height: 740px;
+    overflow-y: auto;
     &__headline {
       color: #000000;
       text-align: center;
@@ -27,6 +33,58 @@
       border : none;
       cursor: pointer;
       background: url('../../assets/close_grey.svg') no-repeat center;
+    }
+
+    .contructorTableType {
+      display: flex;
+      justify-content: center;
+      &__roundBtn {
+        margin-left: 30px;
+      }
+    }
+  }
+}
+
+.controlPanel {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top : 1px solid #000000;
+  color : #000000;
+  .controlPanelElement {
+    display: flex;
+    flex-direction: column;
+    width: 150px;
+    .controlPanelElementTextWrapper {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      &__label {
+        font-size: 18px;
+        font-weight: bold;
+      }
+      &__value {
+        display: inline-block;
+        padding: 5px 10px;
+        margin-left: 10px;
+        border : 1px solid #000000;
+        background-color: #1565c0;
+        color : #ffffff;
+      }
+    }
+
+    .controlPanelElementBtnWrapper {
+      display: flex;
+      flex-direction: column;
+      margin-top: 5px;
+      &__increaseBtn, &__decreaseBtn {
+        height: 40px;
+      }
+
+      &__decreaseBtn {
+        margin-top: 10px;
+      }
     }
   }
 }

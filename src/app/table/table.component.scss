@@ -1,11 +1,12 @@
 .tableGeneralContainer {
   padding: 60px 70px;
   display: flex;
+  justify-content: center;
   position: relative;
   .squareTableContainer {
     display: grid;
-    grid-template-columns: repeat(3, 150px);
-    grid-template-rows: repeat(3, 150px);
+    grid-template-columns: repeat(3, 100px);
+    grid-template-rows: repeat(3, 100px);
     grid-gap: 5px;
     background-color: #9bebed;
     position: relative;

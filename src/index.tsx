@@ -10,8 +10,11 @@ import createSagaMiddleware from 'redux-saga';
 
 const reSaga = createSagaMiddleware();
 
+
 const store : Store = createStore(rootReducer, applyMiddleware(reSaga));
 // reSaga.run(mainSagaWatcher);
+
+export type RootState = ReturnType<typeof store.getState>
 
 const root = ReactDOM.createRoot(document.querySelector('.app'));
 root.render(

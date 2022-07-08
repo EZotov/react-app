@@ -1,11 +1,17 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
+import { RootState } from '../../redux/reducers';
+import { AdministrationState } from '../../redux/reducers/administration.reducer';
 import Hall from '../hall/hall.component';
 import TableConstructor from '../table-constructor/table-constructor.component';
 import './admin-center.component.scss';
 
 
-const AdminCenter : React.FC<any> = () => {
+const AdminCenter : React.FC = () => {
+  const  administration = useSelector<RootState>(state => state.administration);
+  console.log(administration);
+
   return (
     <>
       <header className="headerSection">

@@ -1,6 +1,7 @@
 import Box from '@mui/material/Box';
 
 import React from 'react';
+import AdminCenterService from '../services/admin-center.service';
 import TablePlace from './table-place/table-place.component';
 import './table.component.scss';
 
@@ -28,16 +29,20 @@ const Table : React.FC<TableProps> = (props) => {
 
   //Rect parameters
   const grid : number[] = Array.from(Array((countPlacesX + 2) * (countPlacesY + 2)).keys());
+  let tablePlaceId : number = 0;
+
+  const smartGrid = AdminCenterService.createRenderIndexesArray(countPlacesX, grid);
 
   if (type === 'square') {
     return (
-      <div className="tableGeneralContainer">
-          <div style={{gridTemplateColumns : `repeat(${countPlacesX + 2}, 150px)`, gridTemplateRows : `repeat(${countPlacesY + 2}, 150px)`}} className="squareTableContainer">
+      <div style={{padding : 0}} className="tableGeneralContainer">
+          <div style={{gridTemplateColumns : `repeat(${countPlacesX + 2}, 100px)`, gridTemplateRows : `repeat(${countPlacesY + 2}, 100px)`}} className="squareTableContainer">
             {
               grid.map(i => {
-                if (i !== 0 && i !== countPlacesX + 1 && i !== grid.length-1 && i != grid.length - countPlacesX-2) {
+                if (smartGrid.includes(i)) {
+                  tablePlaceId++;
                   return (
-                    <TablePlace key={i} placeStatus={TablePlaceStatus.free}/>
+                    <TablePlace id={tablePlaceId} tableType={type} key={i} placeStatus={TablePlaceStatus.free}/>
                   )
                 }
                 return (
@@ -47,8 +52,8 @@ const Table : React.FC<TableProps> = (props) => {
             }
             <Box className="squareTableContainer__table" sx={
                 {
-                  width : `${70 + (150 * countPlacesX) + ''}px`,
-                  height : `${70 + (150 * countPlacesY) + ''}px`,
+                  width : `${70 + (100 * countPlacesX) + ''}px`,
+                  height : `${70 + (100 * countPlacesY) + ''}px`,
                   backgroundColor: 'primary.dark',
                   border : '2px solid #000000'
                 }
@@ -63,23 +68,21 @@ const Table : React.FC<TableProps> = (props) => {
           <div className="circleTableContainer">
             {
               circleTemplate.map(i => {
-                if (i !== 0) {
-                  angle = angle + addAngle;
+                if (i == 0) {
+                    angle = 0;
                 }
-                else {
-                  angle = 0
-                }
+                angle = angle + addAngle;
                 return (
-                  <div key={i} style={{transform : `rotate(${angle + ''}deg) translateX(-50%)`, transformOrigin : `1px ${transformOriginValue + 100 * countPlacesX + ''}px`}} className="circleTablePlaceWrapper">
-                    <TablePlace placeStatus={TablePlaceStatus.free} />
+                  <div key={i} style={{transform : `rotate(${angle + ''}deg) translateX(-50%)`, transformOrigin : `1px ${transformOriginValue + 50 * countPlacesX + ''}px`}} className="circleTablePlaceWrapper">
+                    <TablePlace id={i + 1} tableType={type} placeStatus={TablePlaceStatus.free} />
                   </div>
                 )
               })
             }
             <Box className="circleTableContainer__table" sx={
                 {
-                  width : countPlacesX * 200,
-                  height : countPlacesY * 200,
+                  width : countPlacesX * 100,
+                  height : countPlacesY * 100,
                   backgroundColor: 'primary.dark',
                   borderRadius : 100,
                   border : '2px solid #000000',
