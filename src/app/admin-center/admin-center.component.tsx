@@ -9,8 +9,8 @@ import './admin-center.component.scss';
 
 
 const AdminCenter : React.FC = () => {
-  const  administration = useSelector<RootState>(state => state.administration);
-  console.log(administration);
+  // const  administration = useSelector<RootState>(state => state.administration);
+  // console.log(administration);
 
   return (
     <>
