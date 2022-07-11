@@ -1,5 +1,7 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { selectHalls } from '../../redux/selectors/administration.selector';
 import './hall.component.scss';
 
 interface HallProps {
@@ -10,15 +12,9 @@ interface HallProps {
 const Hall : React.FC<HallProps> = (props) => {
   const { id, maxTablesCount  } = props;
   const navigate = useNavigate();
+  const halls = useSelector(selectHalls);
 
-
-  const tables = [
-      {
-        id : 1,
-        placesCount : 4,
-        places : {}
-      }
-    ]
+  const { tables } = halls.find(hall => hall.hallId == id);
 
 
   const onClickAddTableBtn = () : void => {
@@ -36,9 +32,9 @@ const Hall : React.FC<HallProps> = (props) => {
         {
           tables.map(table => {
             return (
-              <li key={table.id} className="hallListItem" onClick={onClickTable}>
-                <span className="hallListItem__id">Стол №{table.id}</span>
-                <span className="hallListItem__countPlaces">Мест : {table.placesCount}</span>
+              <li key={table.tableId} className="hallListItem" onClick={onClickTable}>
+                <span className="hallListItem__id">Стол №{table.tableId}</span>
+                <span className="hallListItem__countPlaces">Мест : {table.places.length}</span>
               </li>
             )
           })

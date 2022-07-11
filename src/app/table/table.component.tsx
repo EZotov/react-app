@@ -1,6 +1,7 @@
 import Box from '@mui/material/Box';
 
 import React from 'react';
+import { TableType } from '../../types/types';
 import AdminCenterService from '../services/admin-center.service';
 import TablePlace from './table-place/table-place.component';
 import './table.component.scss';
@@ -21,9 +22,8 @@ const Table : React.FC<TableProps> = (props) => {
   const [countPlacesX, countPlacesY] = size;
 
   //Circle Parameters
-  const count : number = 5;
-  const addAngle : number = 360 / count;
-  const circleTemplate : number[] = Array.from(Array(count).keys());
+  const addAngle : number = 360 / maxPlaces;
+  const circleTemplate : number[] = Array.from(Array(maxPlaces).keys());
   let angle : number = 0;
   let transformOriginValue : number = 50;
 

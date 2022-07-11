@@ -22,6 +22,4 @@ const createRenderIndexesArray = (countPlacesX : number, grid : number[]) : numb
     return renderIndexesArray;
   }
 
-
-
 export default {createRenderIndexesArray};

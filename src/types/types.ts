@@ -1,3 +1,11 @@
-type TableType = 'square' | 'circle';
+import { ChangeConstrucorTypeAction, SetConstructorParamsAction } from "./administration.types";
 
-type PlaceStateType = 'FREE' | 'RESERVED';
+
+export type TableType = 'square' | 'circle';
+
+export type PlaceStateType = 'FREE' | 'RESERVED';
+
+export type ConstructorType = 'SQUARE' | 'CIRCLE';
+
+export type AdministrationActionsType = ChangeConstrucorTypeAction
+  | SetConstructorParamsAction;

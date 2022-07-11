@@ -10,7 +10,6 @@
       "moduleResolution": "Node",
       "experimentalDecorators": true,
       "importHelpers": true,
-      "sourceMap": true,
       "lib": [
         "es2020",
         "dom"

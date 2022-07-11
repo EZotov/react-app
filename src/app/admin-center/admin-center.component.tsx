@@ -1,14 +1,15 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
-import { RootState, useTypesSelector } from '../../redux/reducers';
+import { AdministrationSelectors } from '../../redux/selectors';
 import Hall from '../hall/hall.component';
 import TableConstructor from '../table-constructor/table-constructor.component';
+
 import './admin-center.component.scss';
 
 
 const AdminCenter : React.FC = () => {
-  const { administration } = useTypesSelector(state  => state);
+  const { halls } = useSelector(AdministrationSelectors.selectAdmin);
 
   return (
     <>
@@ -23,8 +24,16 @@ const AdminCenter : React.FC = () => {
 
       <main className="mainSection">
         <div className="fixed-container flex-container">
-          <Hall id={1} maxTablesCount={2} />
-          <Hall id={2} maxTablesCount={3} />
+          <div className="add">
+            <button className="add__btn" type="button">Добавить зал</button>
+          </div>
+          {
+            halls.map(hall => {
+              return (
+                <Hall key={hall.hallId} id={hall.hallId} maxTablesCount={hall.maxTablesCount} />
+              );
+            })
+          }
         </div>
       </main>
       <Routes>

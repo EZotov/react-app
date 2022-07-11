@@ -1,22 +1,20 @@
+import { PlaceStateType, TableType } from "./types"
+
 export interface TableSize {
   width : number,
   height : number
 }
 
-export interface CircleConstructor {
-  size : number,
-  placesCount : number
-}
-
-export interface SquareConstructor {
+export interface ConstructorParameters {
+  sizeCircle : number,
+  placesCount : number,
   sizeX : number,
-  sizeY : number,
+  sizeY : number
 }
-
 
 export interface TableConstructor {
   mode : TableType,
-  constructorParameters : SquareConstructor | CircleConstructor
+  constructorParameters : ConstructorParameters
 }
 
 export interface TablePlace {

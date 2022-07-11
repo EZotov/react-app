@@ -19,9 +19,6 @@ let conf = {
         open: true,
         compress: true
     },
-  resolve: {
-        extensions: ["", ".webpack.js", ".web.js", ".ts", ".tsx", ".js"]
-    },
   module: {
     rules: [
       {
