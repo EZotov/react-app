@@ -1,10 +1,12 @@
+import { TypedUseSelectorHook, useSelector } from 'react-redux';
 import { combineReducers } from 'redux';
 import { administrationReducer, AdministrationState } from './administration.reducer';
 
-export interface RootState {
-  administration : AdministrationState
-}
 
-export const rootReducer = combineReducers<RootState>({
+export const rootReducer = combineReducers({
   administration : administrationReducer
 });
+
+export type RootState = ReturnType<typeof rootReducer>;
+
+export const useTypesSelector : TypedUseSelectorHook<RootState> = useSelector;
