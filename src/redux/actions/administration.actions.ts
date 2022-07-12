@@ -1,9 +1,22 @@
 import { AdministrationActionsType, TableType } from "../../types/types";
-import { ConstructorParameters } from "../../types/interfaces";
+import { ConstructorParameters, Table } from "../../types/interfaces";
 import { ActionsType } from "../../types/enums.type";
 
+export const addTable = (hallId : number, table : Table) : AdministrationActionsType => {
+  return {
+    type : ActionsType.ADD_TABLE,
+    hallId,
+    table
+  }
+}
 
-
+export const saveTable = (hallId : number, table : Table) : AdministrationActionsType => {
+  return {
+    type : ActionsType.SAVE_TABLE,
+    hallId,
+    table
+  }
+}
 
 
 export const changeConstrucorType = (mode : TableType) : AdministrationActionsType => {

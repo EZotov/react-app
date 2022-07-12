@@ -25,7 +25,9 @@ export interface TablePlace {
 export interface Table {
   tableId : number,
   maxPlaces : number,
-  places : TablePlace[]
+  places : TablePlace[],
+  type : TableType,
+  tableParams : ConstructorParameters
 }
 
 export interface Hall {

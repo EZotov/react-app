@@ -3,11 +3,12 @@ import Button from '@mui/material/Button';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useSearchParams } from 'react-router-dom'
-import { changeConstrucorType, setConstructorParams } from '../../redux/actions/administration.actions';
+import { addTable, changeConstrucorType, setConstructorParams } from '../../redux/actions/administration.actions';
 import { selectConstructorParams, selectMode } from '../../redux/selectors/administration.selector';
 import { ConstructorParameters } from "../../types/interfaces";
 
 import Table from '../table/table.component';
+import { Table as TableInterface } from '../../types/interfaces';
 import './table-constructor.component.scss';
 
 enum ContructorType {
@@ -71,13 +72,37 @@ const TableConstructor : React.FC = () => {
     newValueParams[parameter] >= 1 ? dispatch(setConstructorParams(newValueParams)) : false;
   }
 
+  const onClickSaveTableBtn = () : void => {
+    const table : TableInterface = {
+      tableId : 2,
+      type : 'circle',
+      maxPlaces : 3,
+      places : [],
+      tableParams : {
+        placesCount : 3,
+        sizeCircle : 2,
+        sizeX : 0,
+        sizeY : 0
+      }
+    }
+    dispatch(addTable(1, table));
+  }
+
   return (
     <div className="modalOverlay">
       <div className="constructorContainer">
-        <div className="constructorContainerHeader">
-          <h2 className="constructorContainer__headline">Конструктор</h2>
+        <div className="constructorContainerGeneral">
+          <div className="constructorContainerHeader">
+            <Button className="constructorContainerHeader__saveBtn" variant="contained" onClick={onClickSaveTableBtn} >Сохранить</Button>
+            {
+              typeParameterValue === 'edit' && (
+                <Button className="constructorContainerHeader__delBtn" variant="contained" >Удалить</Button>
+              )
+            }
+            <h2 className="constructorContainerHeader__headline">Конструктор</h2>
+          </div>
           <div className="contructorTableType">
-            <Button className="contructorTableType__squareBtn" variant='outlined' disabled={mode === 'square' ? true : false} onClick={onClickSquareTypeBtn}>Квадратный</Button>
+            <Button className="contructorTableType__squareBhtn" variant='outlined' disabled={mode === 'square' ? true : false} onClick={onClickSquareTypeBtn}>Квадратный</Button>
             <Button className="contructorTableType__roundBtn" variant='outlined' disabled={mode === 'circle' ? true : false} onClick={onClickCircleTypeBtn}>Круглый</Button>
           </div>
           {

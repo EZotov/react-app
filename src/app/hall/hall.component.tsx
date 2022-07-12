@@ -1,3 +1,5 @@
+import Button from '@mui/material/Button';
+
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -28,6 +30,7 @@ const Hall : React.FC<HallProps> = (props) => {
   return (
     <div className="hallContainer">
       <h2 className="hallContainer__headline">Зал {id}</h2>
+      <Button className="hallContainer__delBtn" variant="outlined" sx={{color : 'red', border : '1px solid red'}}>Удалить</Button>
       <ul className="hallList">
         {
           tables.map(table => {

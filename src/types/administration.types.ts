@@ -1,6 +1,6 @@
 
 import { ActionsType } from "./enums.type";
-import { ConstructorParameters } from "./interfaces";
+import { ConstructorParameters, Table } from "./interfaces";
 import { TableType } from "./types";
 
 
@@ -12,4 +12,16 @@ export interface ChangeConstrucorTypeAction {
 export interface SetConstructorParamsAction {
   type : ActionsType.SET_CONSTRUCTOR_PARAMS,
   params : ConstructorParameters
+}
+
+export interface AddTableAction {
+  type : ActionsType.ADD_TABLE,
+  hallId : number,
+  table : Table
+}
+
+export interface SaveTableAction {
+  type : ActionsType.SAVE_TABLE,
+  hallId : number
+  table : Table
 }

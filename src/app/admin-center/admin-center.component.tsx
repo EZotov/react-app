@@ -1,3 +1,4 @@
+import Button from '@mui/material/Button';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
@@ -25,7 +26,7 @@ const AdminCenter : React.FC = () => {
       <main className="mainSection">
         <div className="fixed-container flex-container">
           <div className="add">
-            <button className="add__btn" type="button">Добавить зал</button>
+            <Button className="add__btn" variant="outlined" sx={{border : '1px solid #e87b16', color : '#e87b16'}}>Добавить зал</Button>
           </div>
           {
             halls.map(hall => {

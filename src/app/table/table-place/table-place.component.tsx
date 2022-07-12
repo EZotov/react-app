@@ -1,4 +1,5 @@
 import React from 'react';
+import { PlaceStateType, TableType } from '../../../types/types';
 import './table-place.component.scss';
 
 interface TablePlaceProps {
@@ -24,7 +25,7 @@ const TablePlace : React.FC<TablePlaceProps> = (props) => {
   }
 
   switch(placeStatus) {
-    case 'FREE':
+    case 'NOT SETTING':
       return (
         <button className={`tableGeneralContainer__place ${componentClassesDefinition()}`} type="button" onClick={onClickPlace}>
           Добавить <br/> место
@@ -32,8 +33,12 @@ const TablePlace : React.FC<TablePlaceProps> = (props) => {
       );
     case 'RESERVED':
       return (
-        <div className={`tableGeneralContainer__place ${componentClassesDefinition()} tableGeneralContainer__place_reserved`}>Бронь</div>
+        <div className={`tableGeneralContainer__place ${componentClassesDefinition()} tableGeneralContainer__place_reserved`}>Забронировано</div>
       )
+    case 'FREE':
+      return (
+        <div className={`tableGeneralContainer__place ${componentClassesDefinition()}`}>Свободно</div>
+      );
     default:
       return null;
   }

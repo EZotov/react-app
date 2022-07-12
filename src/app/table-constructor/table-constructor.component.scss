@@ -18,10 +18,20 @@
     border-radius: 20px;
     width: 1000px;
     height: 780px;
-    &__headline {
-      color: #000000;
-      text-align: center;
-      margin-bottom: 20px;
+    .constructorContainerHeader {
+      display: flex;
+      align-items: center;
+      margin-bottom: 40px;
+      padding-right: 150px;
+      &__delBtn {
+        margin-left: 20px;
+        flex-grow: 1;
+      }
+      &__headline {
+        flex-grow: 4;
+        color: #000000;
+        text-align: center;
+      }
     }
     &__closeBtn {
       position: absolute;
@@ -43,10 +53,12 @@
   }
 }
 
-.constructorContainerHeader {
+.constructorContainerGeneral {
   display: flex;
   flex-direction: column;
 }
+
+
 
 .controlPanel {
   display: flex;
