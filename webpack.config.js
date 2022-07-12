@@ -19,10 +19,13 @@ let conf = {
         open: true,
         compress: true
     },
+  resolve : {
+    extensions : [".tsx", ".ts",".jsx", ".js", "..."]
+  },
   module: {
     rules: [
       {
-        test : /\.(tsx|ts)?$/,
+        test : /\.tsx?$/,
         use : ['ts-loader'],
         exclude : '/node_modules/'
       },

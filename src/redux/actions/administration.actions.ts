@@ -1,10 +1,8 @@
 import { AdministrationActionsType, TableType } from "../../types/types";
 import { ConstructorParameters } from "../../types/interfaces";
+import { ActionsType } from "../../types/enums.type";
 
-export enum ActionsType {
-  CHANGE_CONSTRUCTOR_TYPE = 'CHANGE_CONSTRUCTOR_TYPE',
-  SET_CONSTRUCTOR_PARAMS = 'SET_CONSTRUCTOR_PARAMS'
-}
+
 
 
 

@@ -1,5 +1,5 @@
 
-import { ActionsType } from "../redux/actions/administration.actions";
+import { ActionsType } from "./enums.type";
 import { ConstructorParameters } from "./interfaces";
 import { TableType } from "./types";
 

@@ -1,6 +1,7 @@
+import { ActionsType } from "../../types/enums.type";
 import { Hall, TableConstructor } from "../../types/interfaces";
 import { AdministrationActionsType } from "../../types/types";
-import { ActionsType } from "../actions/administration.actions";
+
 
 export interface AdministrationState {
  constructor : TableConstructor,

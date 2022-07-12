@@ -17,8 +17,7 @@
     padding: 40px;
     border-radius: 20px;
     width: 1000px;
-    height: 740px;
-    overflow-y: auto;
+    height: 780px;
     &__headline {
       color: #000000;
       text-align: center;
@@ -42,6 +41,11 @@
       align-self: center;
     }
   }
+}
+
+.constructorContainerHeader {
+  display: flex;
+  flex-direction: column;
 }
 
 .controlPanel {
@@ -86,4 +90,10 @@
       }
     }
   }
+}
+
+.tableWrapper {
+  overflow:auto;
+  max-height: 430px;
+  margin-top: 20px;
 }
