@@ -10,9 +10,25 @@ export const addTable = (hallId : number, table : Table) : AdministrationActions
   }
 }
 
-export const saveTable = (hallId : number, table : Table) : AdministrationActionsType => {
+export const delTable = (hallId : number, tableId : number) : AdministrationActionsType => {
   return {
-    type : ActionsType.SAVE_TABLE,
+    type : ActionsType.DELETE_TABLE,
+    hallId,
+    tableId
+  }
+}
+
+export const updateTable = (hallId : number, table : Table) : AdministrationActionsType => {
+  return {
+    type : ActionsType.UPDATE_TABLE,
+    hallId,
+    table
+  }
+}
+
+export const selectTable = (hallId : number, table : Table) : AdministrationActionsType => {
+  return {
+    type : ActionsType.SELECT_TABLE,
     hallId,
     table
   }

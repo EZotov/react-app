@@ -20,17 +20,17 @@ let conf = {
         compress: true
     },
   resolve : {
-    extensions : [".tsx", ".ts",".jsx", ".js", "..."]
+    extensions : [".tsx", ".ts",".jsx", ".js"]
   },
   module: {
     rules: [
       {
-        test : /\.tsx?$/,
-        use : ['ts-loader'],
+        test : /\.(tsx|ts)$/,
+        use : ['babel-loader', 'ts-loader'],
         exclude : '/node_modules/'
       },
       {
-        test: /\.(jsx|js|ts|tsx)$/,
+        test: /\.(jsx|js)$/,
         use: ['babel-loader'],
         exclude: '/node_modules/'
       },

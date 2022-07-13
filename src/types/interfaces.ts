@@ -14,7 +14,8 @@ export interface ConstructorParameters {
 
 export interface TableConstructor {
   mode : TableType,
-  constructorParameters : ConstructorParameters
+  constructorParameters : ConstructorParameters,
+  places : TablePlace[]
 }
 
 export interface TablePlace {

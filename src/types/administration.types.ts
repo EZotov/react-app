@@ -20,8 +20,20 @@ export interface AddTableAction {
   table : Table
 }
 
-export interface SaveTableAction {
-  type : ActionsType.SAVE_TABLE,
+export interface DelTableAction {
+  type : ActionsType.DELETE_TABLE,
+  hallId : number,
+  tableId : number
+}
+
+export interface UpdateTableAction {
+  type : ActionsType.UPDATE_TABLE,
   hallId : number
+  table : Table
+}
+
+export interface SelectTableAction {
+  type : ActionsType.SELECT_TABLE,
+  hallId : number,
   table : Table
 }

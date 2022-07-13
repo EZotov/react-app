@@ -8,6 +8,7 @@
       "allowJs": true,
       "allowSyntheticDefaultImports": true,
       "moduleResolution": "Node",
+      "downlevelIteration" : true,
       "experimentalDecorators": true,
       "importHelpers": true,
       "lib": [

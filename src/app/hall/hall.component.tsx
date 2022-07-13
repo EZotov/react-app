@@ -1,9 +1,11 @@
 import Button from '@mui/material/Button';
 
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { changeConstrucorType, selectTable, setConstructorParams } from '../../redux/actions/administration.actions';
 import { selectHalls } from '../../redux/selectors/administration.selector';
+import { Table } from '../../types/interfaces';
 import './hall.component.scss';
 
 interface HallProps {
@@ -14,16 +16,34 @@ interface HallProps {
 const Hall : React.FC<HallProps> = (props) => {
   const { id, maxTablesCount  } = props;
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const halls = useSelector(selectHalls);
 
   const { tables } = halls.find(hall => hall.hallId == id);
 
 
   const onClickAddTableBtn = () : void => {
+    dispatch(changeConstrucorType('circle'));
+    dispatch(setConstructorParams({
+      placesCount : 1,
+      sizeCircle : 2,
+      sizeX : 1,
+      sizeY : 1
+    }));
+
     navigate('tableConstructor?type=new');
   }
 
-  const onClickTable = () : void => {
+  const onClickTable = (table : Table) : void => {
+    dispatch(changeConstrucorType(table.type));
+    dispatch(setConstructorParams({
+      placesCount : table.tableParams.placesCount,
+      sizeCircle : table.tableParams.sizeCircle,
+      sizeX : table.tableParams.sizeX,
+      sizeY : table.tableParams.sizeY
+    }));
+    dispatch(selectTable(id, table));
+
     navigate('tableConstructor?type=edit');
   }
 
@@ -35,7 +55,7 @@ const Hall : React.FC<HallProps> = (props) => {
         {
           tables.map(table => {
             return (
-              <li key={table.tableId} className="hallListItem" onClick={onClickTable}>
+              <li key={table.tableId} className="hallListItem" onClick={() => onClickTable(table)}>
                 <span className="hallListItem__id">Стол №{table.tableId}</span>
                 <span className="hallListItem__countPlaces">Мест : {table.places.length}</span>
               </li>

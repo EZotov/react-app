@@ -12,7 +12,7 @@ const TablePlace : React.FC<TablePlaceProps> = (props) => {
   const { placeStatus, tableType, id } = props;
 
   const onClickPlace = () : void => {
-    console.log(id);
+    
   }
 
   const componentClassesDefinition = () : string => {
@@ -37,7 +37,7 @@ const TablePlace : React.FC<TablePlaceProps> = (props) => {
       )
     case 'FREE':
       return (
-        <div className={`tableGeneralContainer__place ${componentClassesDefinition()}`}>Свободно</div>
+        <button className={`tableGeneralContainer__place ${componentClassesDefinition()}`} type="button" onClick={onClickPlace}>Свободно</button>
       );
     default:
       return null;

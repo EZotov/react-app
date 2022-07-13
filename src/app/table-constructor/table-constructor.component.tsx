@@ -3,27 +3,41 @@ import Button from '@mui/material/Button';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useSearchParams } from 'react-router-dom'
-import { addTable, changeConstrucorType, setConstructorParams } from '../../redux/actions/administration.actions';
-import { selectConstructorParams, selectMode } from '../../redux/selectors/administration.selector';
+import { addTable, changeConstrucorType, delTable, setConstructorParams, updateTable } from '../../redux/actions/administration.actions';
+import { selectConstructorParams, selectHalls, selectMode, selectSelectedTable } from '../../redux/selectors/administration.selector';
 import { ConstructorParameters } from "../../types/interfaces";
 
 import Table from '../table/table.component';
 import { Table as TableInterface } from '../../types/interfaces';
 import './table-constructor.component.scss';
+import { ConstructorType } from '../../types/enums.type';
 
-enum ContructorType {
-  newTable = 'new',
-  changeTable = 'edit'
-}
+let typeParameterValue : string;
 
 const TableConstructor : React.FC = () => {
   const [params] = useSearchParams()
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const mode = useSelector(selectMode);
+  const halls = useSelector(selectHalls);
+  const selectedTable = useSelector(selectSelectedTable);
   const constructorParams = useSelector(selectConstructorParams);
 
-  const typeParameterValue : string = params.get('type');
+  console.log(selectedTable);
+
+
+  switch(params.get('type')) {
+    case 'new':
+      typeParameterValue = ConstructorType.new;
+      break;
+    case 'edit':
+      typeParameterValue = ConstructorType.edit;
+      console.log();
+
+      break;
+    default:
+      break;
+  }
 
   const onClickCloseConstructorBtn  = () : void => {
     navigate('/administration');
@@ -74,18 +88,31 @@ const TableConstructor : React.FC = () => {
 
   const onClickSaveTableBtn = () : void => {
     const table : TableInterface = {
-      tableId : 2,
+      tableId : 1,
       type : 'circle',
-      maxPlaces : 3,
+      maxPlaces : 2,
       places : [],
       tableParams : {
-        placesCount : 3,
+        placesCount : 2,
         sizeCircle : 2,
         sizeX : 0,
         sizeY : 0
       }
     }
-    dispatch(addTable(1, table));
+    switch(typeParameterValue) {
+      case 'edit':
+        dispatch(updateTable(1, table));
+        break;
+      case 'new':
+        dispatch(addTable(1, table));
+        break;
+      default:
+        break;
+    }
+  }
+
+  const onClickDeleteTableBtn = () : void => {
+    dispatch(delTable(1, 1));
   }
 
   return (
@@ -95,8 +122,8 @@ const TableConstructor : React.FC = () => {
           <div className="constructorContainerHeader">
             <Button className="constructorContainerHeader__saveBtn" variant="contained" onClick={onClickSaveTableBtn} >Сохранить</Button>
             {
-              typeParameterValue === 'edit' && (
-                <Button className="constructorContainerHeader__delBtn" variant="contained" >Удалить</Button>
+              typeParameterValue === ConstructorType.edit && (
+                <Button className="constructorContainerHeader__delBtn" variant="contained" onClick={onClickDeleteTableBtn}>Удалить</Button>
               )
             }
             <h2 className="constructorContainerHeader__headline">Конструктор</h2>
@@ -109,7 +136,7 @@ const TableConstructor : React.FC = () => {
             mode === 'circle' && (
               <>
                 <div className="tableWrapper">
-                  <Table type='circle' maxPlaces={constructorParams.placesCount} size={[constructorParams.sizeCircle,constructorParams.sizeCircle]} />
+                  <Table constructorMode={typeParameterValue} places={selectedTable.table.places} type='circle' maxPlaces={constructorParams.placesCount} size={[constructorParams.sizeCircle,constructorParams.sizeCircle]} />
                 </div>
               </>
             )
@@ -118,7 +145,7 @@ const TableConstructor : React.FC = () => {
             mode === 'square' && (
               <>
                 <div className="tableWrapper">
-                  <Table type='square' maxPlaces={constructorParams.placesCount} size={[constructorParams.sizeX,constructorParams.sizeY]} />
+                  <Table constructorMode={typeParameterValue} places={selectedTable.table.places} type='square' maxPlaces={constructorParams.placesCount} size={[constructorParams.sizeX,constructorParams.sizeY]} />
                 </div>
               </>
             )
