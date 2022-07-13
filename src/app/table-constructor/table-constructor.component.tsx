@@ -19,7 +19,7 @@ const TableConstructor : React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const mode = useSelector(selectMode);
-  const halls = useSelector(selectHalls);
+  // const halls = useSelector(selectHalls);
   const selectedTable = useSelector(selectSelectedTable);
   const constructorParams = useSelector(selectConstructorParams);
 
