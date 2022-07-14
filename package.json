@@ -5,11 +5,13 @@
   "main": "index.ts",
   "scripts": {
     "start": "webpack serve --mode development",
-    "build": "webpack --mode production"
+    "build": "webpack --mode production",
+    "predeploy": "npm run build",
++   "deploy": "gh-pages -d build"
   },
   "author": "Evgeniy Zotov",
   "license": "ISC",
-  "homepage": ".",
+  "homepage": "https://EZotov.github.io/react-app",
   "dependencies": {
     "@emotion/react": "^11.9.3",
     "@emotion/styled": "^11.9.3",
@@ -37,6 +39,7 @@
     "babel-loader": "^8.2.5",
     "clean-webpack-plugin": "^4.0.0",
     "css-loader": "^6.7.1",
+    "gh-pages": "^4.0.0",
     "html-webpack-plugin": "^5.5.0",
     "mini-css-extract-plugin": "^2.6.1",
     "node-sass": "^7.0.1",
