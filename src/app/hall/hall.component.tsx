@@ -1,9 +1,9 @@
 import Button from '@mui/material/Button';
 
-import React from 'react';
+import  React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { changeConstrucorType, selectTable, setConstructorParams } from '../../redux/actions/administration.actions';
+import { changeConstrucorType, deleteHall, selectTable, setConstructorParams } from '../../redux/actions/administration.actions';
 import { selectHalls } from '../../redux/selectors/administration.selector';
 import { Table } from '../../types/interfaces';
 import './hall.component.scss';
@@ -20,6 +20,10 @@ const Hall : React.FC<HallProps> = (props) => {
   const halls = useSelector(selectHalls);
 
   const { tables } = halls.find(hall => hall.hallId == id);
+
+  const onClickDeleteHallBtn = (id : number) : void => {
+    dispatch(deleteHall(id));
+  }
 
 
   const onClickAddTableBtn = () : void => {
@@ -50,7 +54,7 @@ const Hall : React.FC<HallProps> = (props) => {
   return (
     <div className="hallContainer">
       <h2 className="hallContainer__headline">Зал {id}</h2>
-      <Button className="hallContainer__delBtn" variant="outlined" sx={{color : 'red', border : '1px solid red'}}>Удалить</Button>
+      <Button className="hallContainer__delBtn" variant="outlined" sx={{color : 'red', border : '1px solid red'}} onClick={() => onClickDeleteHallBtn(id)}>Удалить</Button>
       <ul className="hallList">
         {
           tables.map(table => {

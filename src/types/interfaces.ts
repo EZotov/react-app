@@ -12,6 +12,11 @@ export interface ConstructorParameters {
   sizeY : number
 }
 
+export interface SelectedTable {
+  hallId : number,
+  table : Table
+}
+
 export interface TableConstructor {
   mode : TableType,
   constructorParameters : ConstructorParameters,

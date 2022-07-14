@@ -6,28 +6,21 @@ import AdminCenterService from '../services/admin-center.service';
 import TablePlace from './table-place/table-place.component';
 import { TablePlace as  TablePlaceInterface} from '../../types/interfaces';
 import './table.component.scss';
-import { ConstructorType } from '../../types/enums.type';
+import { ConstructorType, TablePlaceStatus } from '../../types/enums.type';
 
 interface TableProps {
   type : TableType,
   maxPlaces : number,
   size : [number, number],
   constructorMode : string,
-  places : TablePlaceInterface[]
-}
-
-enum TablePlaceStatus {
-  free = 'FREE',
-  reserved = 'RESERVED',
-  notSetting = 'NOT SETTING'
+  places : TablePlaceInterface[],
+  hallId : number,
+  tableId : number
 }
 
 const Table : React.FC<TableProps> = (props) => {
-  const { type, maxPlaces, size, places, constructorMode } = props;
+  const { type, maxPlaces, size, places, constructorMode, tableId, hallId } = props;
   const [countPlacesX, countPlacesY] = size;
-
-  console.log(constructorMode);
-
 
   //Circle Parameters
   const addAngle : number = 360 / maxPlaces;
@@ -52,12 +45,12 @@ const Table : React.FC<TableProps> = (props) => {
                   const place = places.find(place => place.placeId === tablePlaceId);
                   if (constructorMode === ConstructorType.new) {
                     return (
-                      <TablePlace id={tablePlaceId} tableType={type} key={i} placeStatus={TablePlaceStatus.notSetting}/>
+                      <TablePlace placeId={tablePlaceId} hallId={hallId} tableId={tableId} tableType={type} key={i} placeStatus={TablePlaceStatus.notSetting}/>
                     );
                   }
                   else if (constructorMode === ConstructorType.edit) {
                     return (
-                      <TablePlace id={tablePlaceId} tableType={type} key={i} placeStatus={place ? place.placeStatus : TablePlaceStatus.notSetting}/>
+                      <TablePlace placeId={tablePlaceId} hallId={hallId} tableId={tableId} tableType={type} key={i} placeStatus={place ? place.placeStatus : TablePlaceStatus.notSetting}/>
                     );
                   }
                 }
@@ -91,7 +84,7 @@ const Table : React.FC<TableProps> = (props) => {
                 if (constructorMode === ConstructorType.new) {
                   return (
                     <div key={i} style={{transform : `rotate(${angle + ''}deg) translateX(-50%)`, transformOrigin : `1px ${transformOriginValue + 50 * countPlacesX + ''}px`}} className="circleTablePlaceWrapper">
-                      <TablePlace id={i + 1} tableType={type} placeStatus={TablePlaceStatus.notSetting} />
+                      <TablePlace placeId={i + 1} hallId={hallId} tableId={tableId} tableType={type} placeStatus={TablePlaceStatus.notSetting} />
                     </div>
                   )
                 }
@@ -99,7 +92,7 @@ const Table : React.FC<TableProps> = (props) => {
                   const place = places.find(place => place.placeId === i + 1);
                   return (
                     <div key={i} style={{transform : `rotate(${angle + ''}deg) translateX(-50%)`, transformOrigin : `1px ${transformOriginValue + 50 * countPlacesX + ''}px`}} className="circleTablePlaceWrapper">
-                      <TablePlace id={i + 1} tableType={type} placeStatus={place ? place.placeStatus : TablePlaceStatus.notSetting} />
+                      <TablePlace placeId={i + 1} hallId={hallId} tableId={tableId} tableType={type} placeStatus={place ? place.placeStatus : TablePlaceStatus.notSetting} />
                     </div>
                   )
                 }

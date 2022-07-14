@@ -19,12 +19,8 @@ const TableConstructor : React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const mode = useSelector(selectMode);
-  // const halls = useSelector(selectHalls);
   const selectedTable = useSelector(selectSelectedTable);
   const constructorParams = useSelector(selectConstructorParams);
-
-  console.log(selectedTable);
-
 
   switch(params.get('type')) {
     case 'new':
@@ -32,8 +28,6 @@ const TableConstructor : React.FC = () => {
       break;
     case 'edit':
       typeParameterValue = ConstructorType.edit;
-      console.log();
-
       break;
     default:
       break;
@@ -136,7 +130,7 @@ const TableConstructor : React.FC = () => {
             mode === 'circle' && (
               <>
                 <div className="tableWrapper">
-                  <Table constructorMode={typeParameterValue} places={selectedTable.table.places} type='circle' maxPlaces={constructorParams.placesCount} size={[constructorParams.sizeCircle,constructorParams.sizeCircle]} />
+                  <Table hallId={selectedTable.hallId} tableId={selectedTable.table.tableId} constructorMode={typeParameterValue} places={selectedTable.table.places} type='circle' maxPlaces={constructorParams.placesCount} size={[constructorParams.sizeCircle,constructorParams.sizeCircle]} />
                 </div>
               </>
             )
@@ -145,7 +139,7 @@ const TableConstructor : React.FC = () => {
             mode === 'square' && (
               <>
                 <div className="tableWrapper">
-                  <Table constructorMode={typeParameterValue} places={selectedTable.table.places} type='square' maxPlaces={constructorParams.placesCount} size={[constructorParams.sizeX,constructorParams.sizeY]} />
+                  <Table hallId={1} tableId={2} constructorMode={typeParameterValue} places={selectedTable.table.places} type='square' maxPlaces={constructorParams.placesCount} size={[constructorParams.sizeX,constructorParams.sizeY]} />
                 </div>
               </>
             )

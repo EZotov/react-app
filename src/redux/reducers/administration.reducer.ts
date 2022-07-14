@@ -1,15 +1,28 @@
 import { ActionsType } from "../../types/enums.type";
-import { Hall, Table, TableConstructor } from "../../types/interfaces";
+import { Hall, SelectedTable, Table, TableConstructor } from "../../types/interfaces";
 import { AdministrationActionsType } from "../../types/types";
 
 
 export interface AdministrationState {
  constructor : TableConstructor,
  halls : Hall[],
- selectedTable : {
-   table : Table,
-   hallId : number
- }
+ selectedTable : SelectedTable
+}
+
+const defaultSelectedTable : SelectedTable = {
+  hallId: 0,
+  table : {
+    maxPlaces: 0,
+    places : [],
+    tableId : 0,
+    tableParams : {
+      placesCount : 0,
+      sizeCircle : 0,
+      sizeX : 0,
+      sizeY : 0
+    },
+    type : 'circle',
+  }
 }
 
 const initState : AdministrationState = {
@@ -38,10 +51,6 @@ const initState : AdministrationState = {
             },
             {
               placeId : 2,
-              placeStatus : "NOT SETTING"
-            },
-            {
-              placeId : 3,
               placeStatus : "FREE"
             }
           ],
@@ -81,17 +90,8 @@ export const administrationReducer = (state : AdministrationState = initState, a
 
       let newTablesAddTable = [...state.halls[hallIndex].tables, action.table];
 
-      const newHallsAddTable = state.halls.map(hallItem => {
-        if (hallItem.hallId === hall.hallId) {
-          const hall : Hall = {
-            hallId : hallItem.hallId,
-            maxTablesCount : hallItem.maxTablesCount,
-            tables : newTablesAddTable
-          }
-          return hall;
-        }
-        return hallItem;
-      })
+      let newHallsAddTable = [...state.halls];
+      newHallsAddTable[hallIndex].tables = newTablesAddTable;
 
       return {
         constructor : state.constructor,
@@ -133,20 +133,11 @@ export const administrationReducer = (state : AdministrationState = initState, a
 
       const tableItem = state.halls[hallIndexDelTAbleAction].tables.find(table => table.tableId === action.tableId);
 
-      let sourceTablesDelTable = [...state.halls[hallIndexDelTAbleAction].tables];
-      sourceTablesDelTable.splice(sourceTablesDelTable.indexOf(tableItem), 1);
+      let newTablesDelTable = [...state.halls[hallIndexDelTAbleAction].tables];
+      newTablesDelTable.splice(newTablesDelTable.indexOf(tableItem), 1);
 
-      const newHallsDelTable = state.halls.map(hallItem => {
-        if (hallItem.hallId === action.hallId) {
-          const hall : Hall = {
-            hallId : hallItem.hallId,
-            maxTablesCount : hallItem.maxTablesCount,
-            tables : sourceTablesDelTable
-          }
-          return hall;
-        }
-        return hallItem;
-      })
+      let newHallsDelTable = [...state.halls];
+      newHallsDelTable[hallIndexDelTAbleAction].tables = newTablesDelTable;
 
       return {
         constructor : state.constructor,
@@ -181,6 +172,51 @@ export const administrationReducer = (state : AdministrationState = initState, a
           constructorParameters : action.params,
           places : state.constructor.places
         },
+        selectedTable : state.selectedTable
+      }
+    case ActionsType.DELETE_HALL:
+      let newHalls = [...state.halls];
+      const hall_DelHallAction = state.halls.find(hall => hall.hallId === action.hallId);
+      newHalls.splice(state.halls.indexOf(hall_DelHallAction), 1);
+
+      return {
+        constructor : state.constructor,
+        halls : newHalls,
+        selectedTable : state.selectedTable
+      }
+    case ActionsType.ADD_HALL:
+      return {
+        constructor : state.constructor,
+        halls : [...state.halls, action.hall],
+        selectedTable : state.selectedTable
+      }
+    case ActionsType.RESET_SELECTED_TABLE:
+      return {
+        constructor : state.constructor,
+        halls : state.halls,
+        selectedTable : defaultSelectedTable
+      }
+    case ActionsType.ADD_PLACE_IN_TABLE:
+      const hallAddPlace = state.halls.find(hall => hall.hallId === action.hallId);
+      const hallIndexAddPlace = state.halls.indexOf(hallAddPlace);
+
+      const tableAddPlace = state.halls[hallIndexAddPlace].tables.find(table => table.tableId === action.tableId);
+      const tableIndexAddPlace = state.halls[hallIndexAddPlace].tables.indexOf(tableAddPlace);
+
+      const newPlaces = [...state.halls[hallIndexAddPlace].tables[tableIndexAddPlace].places, action.place];
+
+      let newHallsAddPlace = [...state.halls];
+      newHallsAddPlace[hallIndexAddPlace].tables[tableIndexAddPlace].places = newPlaces;
+
+      return {
+        constructor : state.constructor,
+        halls : newHallsAddPlace,
+        selectedTable : state.selectedTable
+      }
+    case ActionsType.DELETE_PLACE_FROM_TABLE:
+      return {
+        constructor : state.constructor,
+        halls :state.halls,
         selectedTable : state.selectedTable
       }
     default :

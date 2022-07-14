@@ -4,10 +4,21 @@ export enum ActionsType {
   ADD_TABLE = 'ADD_TABLE',
   UPDATE_TABLE = 'UPDATE_TABLE',
   DELETE_TABLE = 'DELETE_TABLE',
-  SELECT_TABLE = 'SELECT_TABLE'
+  SELECT_TABLE = 'SELECT_TABLE',
+  DELETE_HALL = 'DELETE_HALL',
+  ADD_HALL = 'ADD_HALL',
+  RESET_SELECTED_TABLE = 'RESET_SELECTED_TABLE',
+  ADD_PLACE_IN_TABLE = 'ADD_PLACE_IN_TABLE',
+  DELETE_PLACE_FROM_TABLE = 'DELETE_PLACE_FROM_TABLE',
 }
 
 export enum ConstructorType {
   new = 'new',
   edit = 'edit'
+}
+
+export enum TablePlaceStatus {
+  free = 'FREE',
+  reserved = 'RESERVED',
+  notSetting = 'NOT SETTING'
 }

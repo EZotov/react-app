@@ -1,4 +1,4 @@
-import { AddTableAction, ChangeConstrucorTypeAction, DelTableAction, UpdateTableAction, SetConstructorParamsAction, SelectTableAction } from "./administration.types";
+import { AddTableAction, ChangeConstrucorTypeAction, DelTableAction, UpdateTableAction, SetConstructorParamsAction, SelectTableAction, DeleteHallAction, AddHallAction, ResetSelectedTableAction, AddPlaceInTableAction, DeletePlaceFromTableAction } from "./administration.types";
 
 
 export type TableType = 'square' | 'circle';
@@ -12,4 +12,9 @@ export type AdministrationActionsType = ChangeConstrucorTypeAction
   | UpdateTableAction
   | AddTableAction
   | DelTableAction
-  | SelectTableAction;
+  | SelectTableAction
+  | DeleteHallAction
+  | AddHallAction
+  | ResetSelectedTableAction
+  | AddPlaceInTableAction
+  | DeletePlaceFromTableAction;
