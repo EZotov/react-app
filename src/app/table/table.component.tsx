@@ -12,14 +12,14 @@ interface TableProps {
   type : TableType,
   maxPlaces : number,
   size : [number, number],
-  constructorMode : string,
+  constructorMode : ConstructorType,
   places : TablePlaceInterface[],
   hallId : number,
   tableId : number
 }
 
 const Table : React.FC<TableProps> = (props) => {
-  const { type, maxPlaces, size, places, constructorMode, tableId, hallId } = props;
+  const { type, maxPlaces, size, places, tableId, hallId } = props;
   const [countPlacesX, countPlacesY] = size;
 
   //Circle Parameters
@@ -43,16 +43,16 @@ const Table : React.FC<TableProps> = (props) => {
                 if (smartGrid.includes(i)) {
                   tablePlaceId++;
                   const place = places.find(place => place.placeId === tablePlaceId);
-                  if (constructorMode === ConstructorType.new) {
-                    return (
-                      <TablePlace placeId={tablePlaceId} hallId={hallId} tableId={tableId} tableType={type} key={i} placeStatus={TablePlaceStatus.notSetting}/>
-                    );
-                  }
-                  else if (constructorMode === ConstructorType.edit) {
-                    return (
-                      <TablePlace placeId={tablePlaceId} hallId={hallId} tableId={tableId} tableType={type} key={i} placeStatus={place ? place.placeStatus : TablePlaceStatus.notSetting}/>
-                    );
-                  }
+                  return (
+                    <TablePlace
+                      placeId={tablePlaceId}
+                      hallId={hallId}
+                      tableId={tableId}
+                      tableType={type}
+                      key={i}
+                      placeStatus={place ? place.placeStatus : TablePlaceStatus.notSetting}
+                    />
+                  );
                 }
                 return (
                   <div key={i}></div>
@@ -81,21 +81,19 @@ const Table : React.FC<TableProps> = (props) => {
                   angle = 0;
                 }
                 angle = angle + addAngle;
-                if (constructorMode === ConstructorType.new) {
-                  return (
-                    <div key={i} style={{transform : `rotate(${angle + ''}deg) translateX(-50%)`, transformOrigin : `1px ${transformOriginValue + 50 * countPlacesX + ''}px`}} className="circleTablePlaceWrapper">
-                      <TablePlace placeId={i + 1} hallId={hallId} tableId={tableId} tableType={type} placeStatus={TablePlaceStatus.notSetting} />
-                    </div>
-                  )
-                }
-                else if (ConstructorType.edit) {
-                  const place = places.find(place => place.placeId === i + 1);
-                  return (
-                    <div key={i} style={{transform : `rotate(${angle + ''}deg) translateX(-50%)`, transformOrigin : `1px ${transformOriginValue + 50 * countPlacesX + ''}px`}} className="circleTablePlaceWrapper">
-                      <TablePlace placeId={i + 1} hallId={hallId} tableId={tableId} tableType={type} placeStatus={place ? place.placeStatus : TablePlaceStatus.notSetting} />
-                    </div>
-                  )
-                }
+
+                const place = places.find(place => place.placeId === i + 1);
+                return (
+                  <div key={i} style={{transform : `rotate(${angle + ''}deg) translateX(-50%)`, transformOrigin : `1px ${transformOriginValue + 50 * countPlacesX + ''}px`}} className="circleTablePlaceWrapper">
+                    <TablePlace
+                      placeId={i + 1}
+                      hallId={hallId}
+                      tableId={tableId}
+                      tableType={type}
+                      placeStatus={place ? place.placeStatus : TablePlaceStatus.notSetting}
+                    />
+                  </div>
+                )
               })
             }
             <Box className="circleTableContainer__table" sx={

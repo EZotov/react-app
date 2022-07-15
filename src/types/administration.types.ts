@@ -28,14 +28,16 @@ export interface DelTableAction {
 
 export interface UpdateTableAction {
   type : ActionsType.UPDATE_TABLE,
-  hallId : number
+  hallId : number,
   table : Table
 }
 
 export interface SelectTableAction {
   type : ActionsType.SELECT_TABLE,
   hallId : number,
-  table : Table
+  tableId : number,
+  constructorParameters : ConstructorParameters,
+  places : TablePlace[]
 }
 
 export interface DeleteHallAction {
@@ -48,15 +50,19 @@ export interface AddHallAction {
   hall : Hall
 }
 
-export interface ResetSelectedTableAction {
-  type : ActionsType.RESET_SELECTED_TABLE
+export interface ResetConstructorAction {
+  type : ActionsType.RESET_CONSTRUCTOR
+}
+
+export interface SaveHallIdAction {
+  type : ActionsType.SAVE_HALL_ID_IN_CONSTRUCTOR,
+  hallId : number
 }
 
 export interface AddPlaceInTableAction {
   type : ActionsType.ADD_PLACE_IN_TABLE,
-  hallId : number,
-  tableId : number,
   place : TablePlace
+
 }
 
 export interface DeletePlaceFromTableAction {

@@ -12,15 +12,12 @@ export interface ConstructorParameters {
   sizeY : number
 }
 
-export interface SelectedTable {
-  hallId : number,
-  table : Table
-}
-
 export interface TableConstructor {
   mode : TableType,
   constructorParameters : ConstructorParameters,
-  places : TablePlace[]
+  places : TablePlace[],
+  hallId : number,
+  tableId : number
 }
 
 export interface TablePlace {
@@ -33,7 +30,7 @@ export interface Table {
   maxPlaces : number,
   places : TablePlace[],
   type : TableType,
-  tableParams : ConstructorParameters
+  constructorParams : ConstructorParameters
 }
 
 export interface Hall {

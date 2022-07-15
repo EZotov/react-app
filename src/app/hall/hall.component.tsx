@@ -3,7 +3,7 @@ import Button from '@mui/material/Button';
 import  React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { changeConstrucorType, deleteHall, selectTable, setConstructorParams } from '../../redux/actions/administration.actions';
+import { changeConstrucorType, deleteHall, resetConstructor, saveHallIdInConstructor, selectTable } from '../../redux/actions/administration.actions';
 import { selectHalls } from '../../redux/selectors/administration.selector';
 import { Table } from '../../types/interfaces';
 import './hall.component.scss';
@@ -26,28 +26,27 @@ const Hall : React.FC<HallProps> = (props) => {
   }
 
 
-  const onClickAddTableBtn = () : void => {
-    dispatch(changeConstrucorType('circle'));
-    dispatch(setConstructorParams({
-      placesCount : 1,
-      sizeCircle : 2,
-      sizeX : 1,
-      sizeY : 1
-    }));
-
+  const onClickAddTableBtn = (hallId : number) : void => {
+    dispatch(resetConstructor());
+    dispatch(saveHallIdInConstructor(hallId));
     navigate('tableConstructor?type=new');
   }
 
-  const onClickTable = (table : Table) : void => {
+  const onClickTable = (hallId : number, table : Table) : void => {
     dispatch(changeConstrucorType(table.type));
-    dispatch(setConstructorParams({
-      placesCount : table.tableParams.placesCount,
-      sizeCircle : table.tableParams.sizeCircle,
-      sizeX : table.tableParams.sizeX,
-      sizeY : table.tableParams.sizeY
-    }));
-    dispatch(selectTable(id, table));
-
+    dispatch(
+      selectTable(
+        hallId,
+        table.tableId,
+        {
+          placesCount : table.constructorParams.placesCount,
+          sizeCircle : table.constructorParams.sizeCircle,
+          sizeX : table.constructorParams.sizeX,
+          sizeY : table.constructorParams.sizeY,
+        },
+        table.places
+      )
+    );
     navigate('tableConstructor?type=edit');
   }
 
@@ -59,7 +58,7 @@ const Hall : React.FC<HallProps> = (props) => {
         {
           tables.map(table => {
             return (
-              <li key={table.tableId} className="hallListItem" onClick={() => onClickTable(table)}>
+              <li key={table.tableId} className="hallListItem" onClick={() => onClickTable(id, table)}>
                 <span className="hallListItem__id">Стол №{table.tableId}</span>
                 <span className="hallListItem__countPlaces">Мест : {table.places.length}</span>
               </li>
@@ -69,7 +68,7 @@ const Hall : React.FC<HallProps> = (props) => {
         {
           tables.length < maxTablesCount && (
             <li className="hallListItem">
-              <button className="hallContainer__addTableBtn" type="button" onClick={onClickAddTableBtn}>Добавить стол</button>
+              <button className="hallContainer__addTableBtn" type="button" onClick={() => onClickAddTableBtn(id)}>Добавить стол</button>
             </li>
           )
         }

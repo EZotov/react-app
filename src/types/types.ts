@@ -1,11 +1,9 @@
-import { AddTableAction, ChangeConstrucorTypeAction, DelTableAction, UpdateTableAction, SetConstructorParamsAction, SelectTableAction, DeleteHallAction, AddHallAction, ResetSelectedTableAction, AddPlaceInTableAction, DeletePlaceFromTableAction } from "./administration.types";
+import { AddTableAction, ChangeConstrucorTypeAction, DelTableAction, UpdateTableAction, SetConstructorParamsAction, SelectTableAction, DeleteHallAction, AddHallAction, ResetConstructorAction, AddPlaceInTableAction, DeletePlaceFromTableAction, SaveHallIdAction } from "./administration.types";
 
 
 export type TableType = 'square' | 'circle';
 
 export type PlaceStateType = 'FREE' | 'RESERVED' | 'NOT SETTING';
-
-export type ConstructorType = 'SQUARE' | 'CIRCLE';
 
 export type AdministrationActionsType = ChangeConstrucorTypeAction
   | SetConstructorParamsAction
@@ -15,6 +13,7 @@ export type AdministrationActionsType = ChangeConstrucorTypeAction
   | SelectTableAction
   | DeleteHallAction
   | AddHallAction
-  | ResetSelectedTableAction
+  | ResetConstructorAction
   | AddPlaceInTableAction
-  | DeletePlaceFromTableAction;
+  | DeletePlaceFromTableAction
+  | SaveHallIdAction;

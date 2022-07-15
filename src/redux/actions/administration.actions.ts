@@ -26,11 +26,13 @@ export const updateTable = (hallId : number, table : Table) : AdministrationActi
   }
 }
 
-export const selectTable = (hallId : number, table : Table) : AdministrationActionsType => {
+export const selectTable = (hallId : number, tableId : number, constructorParameters : ConstructorParameters, places : TablePlace[]) : AdministrationActionsType => {
   return {
     type : ActionsType.SELECT_TABLE,
     hallId,
-    table
+    tableId,
+    constructorParameters,
+    places
   }
 }
 
@@ -63,11 +65,9 @@ export const addHall = (hall : Hall) : AdministrationActionsType => {
   }
 }
 
-export const addPlaceTable = (hallId : number, tableId : number, place : TablePlace) : AdministrationActionsType => {
+export const addPlaceTable = (place : TablePlace) : AdministrationActionsType => {
   return {
     type : ActionsType.ADD_PLACE_IN_TABLE,
-    hallId,
-    tableId,
     place
   }
 }
@@ -78,5 +78,18 @@ export const delPlaceTable = (hallId : number, tableId : number, placeId : numbe
     hallId,
     tableId,
     placeId
+  }
+}
+
+export const resetConstructor = () : AdministrationActionsType => {
+  return {
+    type : ActionsType.RESET_CONSTRUCTOR,
+  }
+}
+
+export const saveHallIdInConstructor = (hallId : number) : AdministrationActionsType => {
+  return {
+    type : ActionsType.SAVE_HALL_ID_IN_CONSTRUCTOR,
+    hallId
   }
 }

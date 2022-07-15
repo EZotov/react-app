@@ -4,7 +4,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { addTable, changeConstrucorType, delTable, setConstructorParams, updateTable } from '../../redux/actions/administration.actions';
-import { selectConstructorParams, selectHalls, selectMode, selectSelectedTable } from '../../redux/selectors/administration.selector';
+import { selectConstructor, selectConstructorParams, selectMode } from '../../redux/selectors/administration.selector';
 import { ConstructorParameters } from "../../types/interfaces";
 
 import Table from '../table/table.component';
@@ -12,14 +12,14 @@ import { Table as TableInterface } from '../../types/interfaces';
 import './table-constructor.component.scss';
 import { ConstructorType } from '../../types/enums.type';
 
-let typeParameterValue : string;
+let typeParameterValue : ConstructorType;
 
 const TableConstructor : React.FC = () => {
   const [params] = useSearchParams()
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const mode = useSelector(selectMode);
-  const selectedTable = useSelector(selectSelectedTable);
+  const constructor = useSelector(selectConstructor);
   const constructorParams = useSelector(selectConstructorParams);
 
   switch(params.get('type')) {
@@ -77,36 +77,53 @@ const TableConstructor : React.FC = () => {
       sizeY : constructorParams.sizeY
     };
     newValueParams[parameter]--;
-    newValueParams[parameter] >= 1 ? dispatch(setConstructorParams(newValueParams)) : false;
+    newValueParams[parameter] >= 1 ? dispatch(setConstructorParams(newValueParams,)) : false;
   }
 
-  const onClickSaveTableBtn = () : void => {
-    const table : TableInterface = {
-      tableId : 1,
-      type : 'circle',
-      maxPlaces : 2,
-      places : [],
-      tableParams : {
-        placesCount : 2,
-        sizeCircle : 2,
-        sizeX : 0,
-        sizeY : 0
-      }
-    }
+  const onClickSaveTableBtn = (hallId : number) : void => {
+
     switch(typeParameterValue) {
       case 'edit':
-        dispatch(updateTable(1, table));
+        const newTableOnEdit : TableInterface = {
+          tableId : constructor.tableId,
+          type : constructor.mode,
+          maxPlaces : mode === 'square' ? constructor.constructorParameters.sizeX + constructor.constructorParameters.sizeY : mode === 'circle' ? constructor.constructorParameters.placesCount : 0,
+          places : constructor.places,
+          constructorParams : {
+            placesCount : constructor.constructorParameters.placesCount,
+            sizeCircle : constructor.constructorParameters.sizeCircle,
+            sizeX : constructor.constructorParameters.sizeX,
+            sizeY : constructor.constructorParameters.sizeY
+          }
+        }
+        dispatch(updateTable(hallId, newTableOnEdit));
         break;
       case 'new':
-        dispatch(addTable(1, table));
+        //Нужен опрделитель tableId для следующего нового стола
+        const newTableOnNew : TableInterface = {
+          tableId : 1,
+          type : constructor.mode,
+          maxPlaces : mode === 'square' ? constructor.constructorParameters.sizeX + constructor.constructorParameters.sizeY : mode === 'circle' ? constructor.constructorParameters.placesCount : 0,
+          places : constructor.places,
+          constructorParams : {
+            placesCount : constructor.constructorParameters.placesCount,
+            sizeCircle : constructor.constructorParameters.sizeCircle,
+            sizeX : constructor.constructorParameters.sizeX,
+            sizeY : constructor.constructorParameters.sizeY
+          }
+        }
+        dispatch(addTable(hallId, newTableOnNew));
         break;
       default:
         break;
     }
+    alert('Изменения сохранены');
+    // navigate('/administration');
   }
 
-  const onClickDeleteTableBtn = () : void => {
-    dispatch(delTable(1, 1));
+  const onClickDeleteTableBtn = (hallId : number, tableId : number) : void => {
+    dispatch(delTable(hallId, tableId));
+    navigate('/administration');
   }
 
   return (
@@ -114,10 +131,10 @@ const TableConstructor : React.FC = () => {
       <div className="constructorContainer">
         <div className="constructorContainerGeneral">
           <div className="constructorContainerHeader">
-            <Button className="constructorContainerHeader__saveBtn" variant="contained" onClick={onClickSaveTableBtn} >Сохранить</Button>
+            <Button className="constructorContainerHeader__saveBtn" variant="contained" onClick={() => onClickSaveTableBtn(constructor.hallId)} >Сохранить</Button>
             {
               typeParameterValue === ConstructorType.edit && (
-                <Button className="constructorContainerHeader__delBtn" variant="contained" onClick={onClickDeleteTableBtn}>Удалить</Button>
+                <Button className="constructorContainerHeader__delBtn" variant="contained" onClick={() => onClickDeleteTableBtn(constructor.hallId, constructor.tableId)}>Удалить</Button>
               )
             }
             <h2 className="constructorContainerHeader__headline">Конструктор</h2>
@@ -130,7 +147,15 @@ const TableConstructor : React.FC = () => {
             mode === 'circle' && (
               <>
                 <div className="tableWrapper">
-                  <Table hallId={selectedTable.hallId} tableId={selectedTable.table.tableId} constructorMode={typeParameterValue} places={selectedTable.table.places} type='circle' maxPlaces={constructorParams.placesCount} size={[constructorParams.sizeCircle,constructorParams.sizeCircle]} />
+                  <Table
+                    hallId={constructor.hallId}
+                    tableId={typeParameterValue === ConstructorType.edit ? constructor.tableId : 2}
+                    constructorMode={typeParameterValue}
+                    places={constructor.places}
+                    type='circle'
+                    maxPlaces={constructorParams.placesCount}
+                    size={[constructorParams.sizeCircle,constructorParams.sizeCircle]}
+                  />
                 </div>
               </>
             )
@@ -139,7 +164,15 @@ const TableConstructor : React.FC = () => {
             mode === 'square' && (
               <>
                 <div className="tableWrapper">
-                  <Table hallId={1} tableId={2} constructorMode={typeParameterValue} places={selectedTable.table.places} type='square' maxPlaces={constructorParams.placesCount} size={[constructorParams.sizeX,constructorParams.sizeY]} />
+                  <Table
+                    hallId={constructor.hallId}
+                    tableId={typeParameterValue === ConstructorType.edit ? constructor.tableId : 2}
+                    constructorMode={typeParameterValue}
+                    places={constructor.places}
+                    type='square'
+                    maxPlaces={constructorParams.placesCount}
+                    size={[constructorParams.sizeX,constructorParams.sizeY]}
+                  />
                 </div>
               </>
             )

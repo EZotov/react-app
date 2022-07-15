@@ -1,41 +1,28 @@
 import { ActionsType } from "../../types/enums.type";
-import { Hall, SelectedTable, Table, TableConstructor } from "../../types/interfaces";
+import { Hall, TableConstructor } from "../../types/interfaces";
 import { AdministrationActionsType } from "../../types/types";
 
 
 export interface AdministrationState {
  constructor : TableConstructor,
- halls : Hall[],
- selectedTable : SelectedTable
+ halls : Hall[]
 }
 
-const defaultSelectedTable : SelectedTable = {
-  hallId: 0,
-  table : {
-    maxPlaces: 0,
-    places : [],
-    tableId : 0,
-    tableParams : {
-      placesCount : 0,
-      sizeCircle : 0,
-      sizeX : 0,
-      sizeY : 0
-    },
-    type : 'circle',
-  }
+const defaultConstructor : TableConstructor = {
+  mode : 'circle',
+  places : [],
+  constructorParameters : {
+    sizeCircle : 2,
+    placesCount : 1,
+    sizeX : 1,
+    sizeY : 1
+  },
+  hallId : 0,
+  tableId : 0
 }
 
 const initState : AdministrationState = {
-  constructor : {
-    mode : 'circle',
-    constructorParameters :  {
-      sizeCircle : 2,
-      placesCount : 1,
-      sizeX : 1,
-      sizeY : 1
-    },
-    places : []
-  },
+  constructor : defaultConstructor,
   halls : [
     {
       hallId : 1,
@@ -55,7 +42,7 @@ const initState : AdministrationState = {
             }
           ],
           type : "circle",
-          tableParams : {
+          constructorParams : {
             placesCount : 3,
             sizeCircle : 2,
             sizeX : 1,
@@ -64,22 +51,7 @@ const initState : AdministrationState = {
         }
       ]
     }
-  ],
-  selectedTable : {
-    hallId : 0,
-    table : {
-      places : [],
-      maxPlaces : 2,
-      tableId : 0,
-      type : 'square',
-      tableParams : {
-        placesCount : 0,
-        sizeCircle : 0,
-        sizeX : 0,
-        sizeY : 0
-      }
-    }
-  }
+  ]
 }
 
 export const administrationReducer = (state : AdministrationState = initState, action : AdministrationActionsType) : AdministrationState => {
@@ -95,8 +67,7 @@ export const administrationReducer = (state : AdministrationState = initState, a
 
       return {
         constructor : state.constructor,
-        halls : newHallsAddTable,
-        selectedTable : state.selectedTable
+        halls : newHallsAddTable
       }
     case ActionsType.UPDATE_TABLE:
       const hallUpdateTAbleAction = state.halls.find(hall => hall.hallId === action.hallId);
@@ -124,8 +95,7 @@ export const administrationReducer = (state : AdministrationState = initState, a
       })
       return {
         halls : newHallsUpdateTable,
-        constructor : state.constructor,
-        selectedTable : state.selectedTable
+        constructor : state.constructor
       }
     case ActionsType.DELETE_TABLE:
       const hallDelTAbleAction = state.halls.find(hall => hall.hallId === action.hallId);
@@ -141,28 +111,29 @@ export const administrationReducer = (state : AdministrationState = initState, a
 
       return {
         constructor : state.constructor,
-        halls : newHallsDelTable,
-        selectedTable : state.selectedTable
+        halls : newHallsDelTable
       };
     case ActionsType.SELECT_TABLE:
       return {
-        constructor : state.constructor,
-        halls : state.halls,
-        selectedTable : {
-          table : action.table,
-          hallId : action.hallId
-        }
+        constructor : {
+          mode : state.constructor.mode,
+          constructorParameters : action.constructorParameters,
+          places : action.places,
+          hallId : action.hallId,
+          tableId : action.tableId
+        },
+        halls : state.halls
       }
     case ActionsType.CHANGE_CONSTRUCTOR_TYPE:
-      const newConstructorValue : TableConstructor = {
-        mode : action.mode,
-        constructorParameters : state.constructor.constructorParameters,
-        places : state.constructor.places
-      }
       return {
-        constructor : newConstructorValue,
-        halls : state.halls,
-        selectedTable : state.selectedTable
+        constructor : {
+          mode : action.mode,
+          constructorParameters : state.constructor.constructorParameters,
+          places : state.constructor.places,
+          hallId : state.constructor.hallId,
+          tableId : state.constructor.tableId
+        },
+        halls : state.halls
       }
     case ActionsType.SET_CONSTRUCTOR_PARAMS:
       return {
@@ -170,9 +141,10 @@ export const administrationReducer = (state : AdministrationState = initState, a
         constructor : {
           mode : state.constructor.mode,
           constructorParameters : action.params,
-          places : state.constructor.places
-        },
-        selectedTable : state.selectedTable
+          places : state.constructor.places,
+          hallId : state.constructor.hallId,
+          tableId : state.constructor.tableId
+        }
       }
     case ActionsType.DELETE_HALL:
       let newHalls = [...state.halls];
@@ -181,44 +153,55 @@ export const administrationReducer = (state : AdministrationState = initState, a
 
       return {
         constructor : state.constructor,
-        halls : newHalls,
-        selectedTable : state.selectedTable
+        halls : newHalls
       }
     case ActionsType.ADD_HALL:
       return {
         constructor : state.constructor,
-        halls : [...state.halls, action.hall],
-        selectedTable : state.selectedTable
+        halls : [...state.halls, action.hall]
       }
-    case ActionsType.RESET_SELECTED_TABLE:
+    case ActionsType.RESET_CONSTRUCTOR:
       return {
-        constructor : state.constructor,
+        constructor : defaultConstructor,
         halls : state.halls,
-        selectedTable : defaultSelectedTable
+      }
+    case ActionsType.SAVE_HALL_ID_IN_CONSTRUCTOR:
+      return {
+        constructor : {
+          hallId : action.hallId,
+          mode : state.constructor.mode,
+          constructorParameters : state.constructor.constructorParameters,
+          places : state.constructor.places,
+          tableId : state.constructor.tableId
+        },
+        halls : state.halls
       }
     case ActionsType.ADD_PLACE_IN_TABLE:
-      const hallAddPlace = state.halls.find(hall => hall.hallId === action.hallId);
-      const hallIndexAddPlace = state.halls.indexOf(hallAddPlace);
-
-      const tableAddPlace = state.halls[hallIndexAddPlace].tables.find(table => table.tableId === action.tableId);
-      const tableIndexAddPlace = state.halls[hallIndexAddPlace].tables.indexOf(tableAddPlace);
-
-      const newPlaces = [...state.halls[hallIndexAddPlace].tables[tableIndexAddPlace].places, action.place];
-
-      let newHallsAddPlace = [...state.halls];
-      newHallsAddPlace[hallIndexAddPlace].tables[tableIndexAddPlace].places = newPlaces;
-
       return {
-        constructor : state.constructor,
-        halls : newHallsAddPlace,
-        selectedTable : state.selectedTable
+        constructor : {
+          hallId : state.constructor.hallId,
+          constructorParameters : state.constructor.constructorParameters,
+          mode : state.constructor.mode,
+          tableId : state.constructor.tableId,
+          places : [...state.constructor.places, action.place]
+        },
+        halls : state.halls
       }
     case ActionsType.DELETE_PLACE_FROM_TABLE:
+      const newPlaces = [...state.constructor.places];
+      const placeIndex = newPlaces.find(place => place.placeId === action.placeId);
+      newPlaces.splice(newPlaces.indexOf(placeIndex), 1);
+
       return {
-        constructor : state.constructor,
-        halls :state.halls,
-        selectedTable : state.selectedTable
-      }
+        constructor : {
+          hallId : state.constructor.hallId,
+          constructorParameters : state.constructor.constructorParameters,
+          mode : state.constructor.mode,
+          tableId : state.constructor.tableId,
+          places : newPlaces
+        },
+        halls : state.halls
+      };
     default :
       return state;
   }

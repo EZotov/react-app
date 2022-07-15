@@ -25,23 +25,23 @@ const TablePlace : React.FC<TablePlaceProps> = (props) => {
         onDelPlaceTable(hallId, tableId, placeId);
         break;
       case TablePlaceStatus.notSetting:
-        onAddPlaceTable(hallId, tableId, placeId);
+        onAddPlaceTable(placeId);
         break;
       default:
         break;
     }
   }
 
-  const onAddPlaceTable = (hallId1 : number, tableId1 : number, placeId : number) => {
+  const onAddPlaceTable = (placeId : number) => {
     const newPlace : TablePlaceInterface = {
       placeId : placeId,
       placeStatus : TablePlaceStatus.free
-    }
-    dispatch(addPlaceTable(hallId1, tableId1, newPlace));
+    };
+    dispatch(addPlaceTable(newPlace));
   }
 
-  const onDelPlaceTable = (hallId1 : number, tableId1 : number, placeId1: number) => {
-    dispatch(delPlaceTable(hallId1, tableId1, placeId1));
+  const onDelPlaceTable = (hallId_delete : number, tableId_delete : number, placeId1_delete: number) => {
+    dispatch(delPlaceTable(hallId_delete, tableId_delete, placeId1_delete));
   }
 
   const componentClassesDefinition = () : string => {

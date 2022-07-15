@@ -31,14 +31,11 @@ const AdminCenter : React.FC = () => {
     else {
       newHallId = 1;
     }
-
-
     const newHall : HallInterface = {
       hallId : newHallId,
       maxTablesCount : maxTablesCount,
       tables : []
     }
-
     dispatch(addHall(newHall));
   }
 
