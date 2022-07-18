@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { useDispatch } from 'react-redux';
+
 import { addPlaceTable, delPlaceTable } from '../../../redux/actions/administration.actions';
 import { TablePlaceStatus } from '../../../types/enums.type';
 import { PlaceStateType, TableType } from '../../../types/types';
@@ -18,6 +19,8 @@ interface TablePlaceProps {
 const TablePlace : React.FC<TablePlaceProps> = (props) => {
   const dispatch = useDispatch();
   const { placeStatus, tableType, placeId, hallId, tableId } = props;
+
+
 
   const onClickPlaceBtn = (hallId : number, tableId : number, placeId : number) : void => {
     switch(placeStatus) {
@@ -46,27 +49,29 @@ const TablePlace : React.FC<TablePlaceProps> = (props) => {
 
   const componentClassesDefinition = () : string => {
     if (tableType === 'square') {
-      return 'tableGeneralContainer__place_square';
+      return 'tableGeneralContainer__place tableGeneralContainer__place_square';
     }
     else if (tableType === 'circle') {
-      return 'tableGeneralContainer__place_circle';
+      return 'tableGeneralContainer__place tableGeneralContainer__place_circle';
     }
   }
+
+  const componentClassesDefinitionMemo = useMemo(() => componentClassesDefinition(), [tableType]);
 
   switch(placeStatus) {
     case TablePlaceStatus.notSetting:
       return (
-        <button className={`tableGeneralContainer__place ${componentClassesDefinition()}`} type="button" onClick={() => onClickPlaceBtn(hallId, tableId, placeId)}>
+        <button className={componentClassesDefinitionMemo} type="button" onClick={() => onClickPlaceBtn(hallId, tableId, placeId)}>
           Добавить <br/> место
         </button>
       );
     case TablePlaceStatus.reserved:
       return (
-        <div className={`tableGeneralContainer__place ${componentClassesDefinition()} tableGeneralContainer__place_reserved`}>Забронировано</div>
+        <div className={`${componentClassesDefinitionMemo} tableGeneralContainer__place_reserved`}>Забронировано</div>
       )
     case TablePlaceStatus.free:
       return (
-        <button className={`tableGeneralContainer__place ${componentClassesDefinition()}`} type="button" onClick={() => onClickPlaceBtn(hallId, tableId, placeId)}>Свободно</button>
+        <button className={componentClassesDefinitionMemo} type="button" onClick={() => onClickPlaceBtn(hallId, tableId, placeId)}>Свободно</button>
       );
     default:
       return null;

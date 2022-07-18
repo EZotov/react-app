@@ -1,8 +1,8 @@
 import Button from '@mui/material/Button';
-
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
+
 import { addHall } from '../../redux/actions/administration.actions';
 import { AdministrationSelectors } from '../../redux/selectors';
 import Hall from '../hall/hall.component';

@@ -22,7 +22,7 @@
   .hallList {
     display: grid;
     grid-gap : 40px;
-    grid-template-columns: repeat(5, 215px);
+    grid-template-columns: repeat(auto-fit, minmax(130px, 215px));
     grid-auto-rows: 200px;
     list-style: none;
     padding: 0;

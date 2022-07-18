@@ -1,6 +1,6 @@
 import { AdministrationActionsType, TableType } from "../../types/types";
 import { ConstructorParameters, Hall, Table, TablePlace } from "../../types/interfaces";
-import { ActionsType } from "../../types/enums.type";
+import { ActionsHttpType, ActionsType } from "../../types/enums.type";
 
 export const addTable = (hallId : number, table : Table) : AdministrationActionsType => {
   return {
@@ -91,5 +91,11 @@ export const saveHallIdInConstructor = (hallId : number) : AdministrationActions
   return {
     type : ActionsType.SAVE_HALL_ID_IN_CONSTRUCTOR,
     hallId
+  }
+}
+
+export const loadHallsRequest = () : AdministrationActionsType => {
+  return {
+    type : ActionsHttpType.LOAD_HALLS_REQUEST
   }
 }

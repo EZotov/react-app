@@ -1,10 +1,11 @@
 import React from 'react';
-import '../styles.scss';
-import './app.component.scss';
-import AdminCenter from './admin-center/admin-center.component'
 import { Routes, Route, useNavigate } from 'react-router-dom';
+
+import AdminCenter from './admin-center/admin-center.component'
 import ReserveService from './reserve-service/reserve-service.component';
 
+import '../styles.scss';
+import './app.component.scss';
 
 
 const App : React.FC = () => {

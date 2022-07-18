@@ -13,6 +13,10 @@ export enum ActionsType {
   DELETE_PLACE_FROM_TABLE = 'DELETE_PLACE_FROM_TABLE',
 }
 
+export enum ActionsHttpType {
+  LOAD_HALLS_REQUEST = 'LOAD_HALLS_REQUEST'
+}
+
 export enum ConstructorType {
   new = 'new',
   edit = 'edit'

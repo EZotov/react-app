@@ -1,16 +1,16 @@
-const createRenderIndexesArray = (countPlacesX : number, grid : number[]) : number[] => {
-    const renderIndexesArray : number[] = [];
+import { Hall, Table } from "../../types/interfaces";
 
+const createRenderIndexesArray = (countPlacesX : number, grid : number[]) : number[] => {
     let startRowIndex = 0;
     let endRowIndex = startRowIndex + countPlacesX + 1;
 
-    grid.forEach(i => {
-      if (i < countPlacesX + 1 && i > 0 || i > grid.length - 2 - countPlacesX && i < grid.length-1) {
-        renderIndexesArray.push(i);
+    const renderIndexesArray = grid.map(i => {
+      if ((i < countPlacesX + 1 && i > 0) || (i > grid.length - 2 - countPlacesX && i < grid.length-1)) {
+        return i;
       }
       else if (startRowIndex !== 0 && startRowIndex !== grid.length - countPlacesX - 2) {
         if (i === startRowIndex || i === endRowIndex) {
-          renderIndexesArray.push(i);
+          return i;
         }
       }
 
@@ -20,6 +20,34 @@ const createRenderIndexesArray = (countPlacesX : number, grid : number[]) : numb
       }
     });
     return renderIndexesArray;
-  }
+}
 
-export default {createRenderIndexesArray};
+const defindIndexNewTableItem = (array : Table[]) : number => {
+  let nextIdTable : number = 1;
+  let maxItemId : number = 0;
+  if (array.length) {
+    const tableIdArray = array.map(item => {
+      return item.tableId;
+    });
+
+    array.forEach((item, i) => {
+      if (item.tableId >= maxItemId) {
+        maxItemId = item.tableId;
+        maxItemId++;
+      }
+
+      if (!tableIdArray.includes(i + 1)) {
+        nextIdTable = i + 1;
+      }
+      else {
+        nextIdTable = maxItemId;
+      }
+    });
+    return nextIdTable;
+  }
+  else {
+    return 1;
+  }
+}
+
+export default {createRenderIndexesArray, defindIndexNewTableItem};

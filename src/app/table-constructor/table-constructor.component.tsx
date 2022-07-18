@@ -1,18 +1,20 @@
 import Button from '@mui/material/Button';
 
-import React from 'react';
+import React, { useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { addTable, changeConstrucorType, delTable, setConstructorParams, updateTable } from '../../redux/actions/administration.actions';
-import { selectConstructor, selectConstructorParams, selectMode } from '../../redux/selectors/administration.selector';
+import { selectConstructor, selectConstructorParams, selectHalls, selectMode } from '../../redux/selectors/administration.selector';
 import { ConstructorParameters } from "../../types/interfaces";
 
 import Table from '../table/table.component';
 import { Table as TableInterface } from '../../types/interfaces';
 import './table-constructor.component.scss';
 import { ConstructorType } from '../../types/enums.type';
+import AdminCenterService from '../services/admin-center.service';
 
 let typeParameterValue : ConstructorType;
+
 
 const TableConstructor : React.FC = () => {
   const [params] = useSearchParams()
@@ -21,6 +23,15 @@ const TableConstructor : React.FC = () => {
   const mode = useSelector(selectMode);
   const constructor = useSelector(selectConstructor);
   const constructorParams = useSelector(selectConstructorParams);
+  const halls = useSelector(selectHalls);
+
+  const { tables } = halls.find(hall => hall.hallId == constructor.hallId);
+
+  let memoizedTableId : number = 0;
+
+  if (tables) {
+    memoizedTableId = useMemo(() => AdminCenterService.defindIndexNewTableItem(tables), [tables]);
+  }
 
   switch(params.get('type')) {
     case 'new':
@@ -63,6 +74,9 @@ const TableConstructor : React.FC = () => {
       case 'sizeY':
         newValueParams[parameter] < 8 ? dispatch(setConstructorParams(newValueParams)) : false;
         break;
+      case 'placesCount':
+        newValueParams[parameter] < 21 ? dispatch(setConstructorParams(newValueParams)) : false;
+        break;
       default:
         dispatch(setConstructorParams(newValueParams));
         break;
@@ -101,7 +115,7 @@ const TableConstructor : React.FC = () => {
       case 'new':
         //Нужен опрделитель tableId для следующего нового стола
         const newTableOnNew : TableInterface = {
-          tableId : 1,
+          tableId : memoizedTableId,
           type : constructor.mode,
           maxPlaces : mode === 'square' ? constructor.constructorParameters.sizeX + constructor.constructorParameters.sizeY : mode === 'circle' ? constructor.constructorParameters.placesCount : 0,
           places : constructor.places,
@@ -149,11 +163,11 @@ const TableConstructor : React.FC = () => {
                 <div className="tableWrapper">
                   <Table
                     hallId={constructor.hallId}
-                    tableId={typeParameterValue === ConstructorType.edit ? constructor.tableId : 2}
+                    tableId={typeParameterValue === ConstructorType.edit ? constructor.tableId : memoizedTableId}
                     constructorMode={typeParameterValue}
                     places={constructor.places}
                     type='circle'
-                    maxPlaces={constructorParams.placesCount}
+                    countPlacesCircle={constructorParams.placesCount}
                     size={[constructorParams.sizeCircle,constructorParams.sizeCircle]}
                   />
                 </div>
@@ -166,11 +180,11 @@ const TableConstructor : React.FC = () => {
                 <div className="tableWrapper">
                   <Table
                     hallId={constructor.hallId}
-                    tableId={typeParameterValue === ConstructorType.edit ? constructor.tableId : 2}
+                    tableId={typeParameterValue === ConstructorType.edit ? constructor.tableId : memoizedTableId}
                     constructorMode={typeParameterValue}
                     places={constructor.places}
                     type='square'
-                    maxPlaces={constructorParams.placesCount}
+                    countPlacesCircle={constructorParams.placesCount}
                     size={[constructorParams.sizeX,constructorParams.sizeY]}
                   />
                 </div>

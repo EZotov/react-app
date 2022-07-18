@@ -1,11 +1,12 @@
 import Button from '@mui/material/Button';
-
 import  React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+
 import { changeConstrucorType, deleteHall, resetConstructor, saveHallIdInConstructor, selectTable } from '../../redux/actions/administration.actions';
-import { selectHalls } from '../../redux/selectors/administration.selector';
+import { selectHalls, selectTables } from '../../redux/selectors/administration.selector';
 import { Table } from '../../types/interfaces';
+
 import './hall.component.scss';
 
 interface HallProps {

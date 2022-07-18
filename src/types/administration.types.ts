@@ -1,5 +1,5 @@
 
-import { ActionsType } from "./enums.type";
+import { ActionsHttpType, ActionsType } from "./enums.type";
 import { ConstructorParameters, Hall, Table, TablePlace } from "./interfaces";
 import { TableType } from "./types";
 
@@ -70,4 +70,8 @@ export interface DeletePlaceFromTableAction {
   hallId : number,
   tableId : number,
   placeId : number
+}
+
+export interface LoadHallsHttpAction {
+  type : ActionsHttpType.LOAD_HALLS_REQUEST
 }

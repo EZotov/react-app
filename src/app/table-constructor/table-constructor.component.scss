@@ -10,14 +10,14 @@
     flex-direction: column;
     justify-content: space-between;
     position: absolute;
-    top: 100px;
+    top: 50px;
     left: 50%;
     transform: translateX(-50%);
     background-color: #ffffff;
     padding: 40px;
     border-radius: 20px;
     width: 1000px;
-    height: 780px;
+    height: 850px;
     .constructorContainerHeader {
       display: flex;
       align-items: center;
@@ -105,6 +105,6 @@
 
 .tableWrapper {
   overflow:auto;
-  max-height: 394px;
+  max-height: 450px;
   margin-top: 20px;
 }
