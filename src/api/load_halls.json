@@ -2,11 +2,12 @@
   "halls" : [
     {
       "hallId" : 1,
+      "maxTablesCount" : 20,
       "tables" : [
         {
           "tableId" : 1,
           "maxPlaces" : 3,
-        "places" : [
+          "places" : [
             {
               "placeId" : 1,
               "placeStatus" : "FREE"
@@ -21,7 +22,7 @@
             "placesCount" : 3,
             "sizeCircle" : 2,
             "sizeX" : 1,
-            "sizeY" : 1,
+            "sizeY" : 1
           }
         }
       ]

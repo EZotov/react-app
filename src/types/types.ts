@@ -1,4 +1,4 @@
-import { AddTableAction, ChangeConstrucorTypeAction, DelTableAction, UpdateTableAction, SetConstructorParamsAction, SelectTableAction, DeleteHallAction, AddHallAction, ResetConstructorAction, AddPlaceInTableAction, DeletePlaceFromTableAction, SaveHallIdAction, LoadHallsHttpAction } from "./administration.types";
+import { AddTableAction, ChangeConstrucorTypeAction, DelTableAction, UpdateTableAction, SetConstructorParamsAction, SelectTableAction, DeleteHallAction, AddHallAction, ResetConstructorAction, AddPlaceInTableAction, DeletePlaceFromTableAction, SaveHallIdAction, LoadHallsHttpAction, LoadHallsSuccessHttpAction, SendHallHttpAction, SendHallSuccessHttpAction } from "./administration.types";
 
 
 export type TableType = 'square' | 'circle';
@@ -16,5 +16,10 @@ export type AdministrationActionsType = ChangeConstrucorTypeAction
   | ResetConstructorAction
   | AddPlaceInTableAction
   | DeletePlaceFromTableAction
-  | SaveHallIdAction
-  | LoadHallsHttpAction;
+  | SaveHallIdAction;
+
+
+export type HttpActionsType = LoadHallsHttpAction
+  | LoadHallsSuccessHttpAction
+  | SendHallHttpAction
+  | SendHallSuccessHttpAction;

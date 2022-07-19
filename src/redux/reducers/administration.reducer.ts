@@ -1,6 +1,6 @@
-import { ActionsType } from "../../types/enums.type";
+import { ActionsHttpType, ActionsType } from "../../types/enums.type";
 import { Hall, TableConstructor } from "../../types/interfaces";
-import { AdministrationActionsType } from "../../types/types";
+import { AdministrationActionsType, HttpActionsType } from "../../types/types";
 
 
 export interface AdministrationState {
@@ -23,38 +23,10 @@ const defaultConstructor : TableConstructor = {
 
 const initState : AdministrationState = {
   constructor : defaultConstructor,
-  halls : [
-    {
-      hallId : 1,
-      maxTablesCount : 4,
-      tables : [
-        {
-          tableId : 1,
-          maxPlaces : 3,
-          places : [
-            {
-              placeId : 1,
-              placeStatus : "FREE"
-            },
-            {
-              placeId : 2,
-              placeStatus : "FREE"
-            }
-          ],
-          type : "circle",
-          constructorParams : {
-            placesCount : 3,
-            sizeCircle : 2,
-            sizeX : 1,
-            sizeY : 1,
-          }
-        }
-      ]
-    }
-  ]
+  halls : []
 }
 
-export const administrationReducer = (state : AdministrationState = initState, action : AdministrationActionsType) : AdministrationState => {
+export const administrationReducer = (state : AdministrationState = initState, action : AdministrationActionsType | HttpActionsType) : AdministrationState => {
   switch(action.type) {
     case ActionsType.ADD_TABLE:
       const hall = state.halls.find(hall => hall.hallId === action.hallId);
@@ -202,7 +174,13 @@ export const administrationReducer = (state : AdministrationState = initState, a
         },
         halls : state.halls
       };
+    case ActionsHttpType.LOAD_HALLS_REQUEST_SUCCESS:
+      return {
+        constructor : state.constructor,
+        halls : action.halls
+      }
     default :
+
       return state;
   }
 }

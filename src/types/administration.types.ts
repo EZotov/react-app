@@ -75,3 +75,18 @@ export interface DeletePlaceFromTableAction {
 export interface LoadHallsHttpAction {
   type : ActionsHttpType.LOAD_HALLS_REQUEST
 }
+
+export interface LoadHallsSuccessHttpAction {
+  type : ActionsHttpType.LOAD_HALLS_REQUEST_SUCCESS,
+  halls : Hall[]
+}
+
+export interface SendHallHttpAction {
+  type : ActionsHttpType.ADD_NEW_HALL_REQUEST,
+  hall : Hall
+}
+
+export interface SendHallSuccessHttpAction {
+  type : ActionsHttpType.ADD_NEW_HALL_REQUEST_SUCCESS,
+  hall : Hall
+}

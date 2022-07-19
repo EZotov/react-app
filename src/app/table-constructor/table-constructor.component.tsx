@@ -4,7 +4,7 @@ import React, { useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { addTable, changeConstrucorType, delTable, setConstructorParams, updateTable } from '../../redux/actions/administration.actions';
-import { selectConstructor, selectConstructorParams, selectHalls, selectMode } from '../../redux/selectors/administration.selector';
+import { selectConstructor, selectConstructorParams, selectHalls, selectMode, selectTables } from '../../redux/selectors/administration.selector';
 import { ConstructorParameters } from "../../types/interfaces";
 
 import Table from '../table/table.component';
@@ -12,6 +12,7 @@ import { Table as TableInterface } from '../../types/interfaces';
 import './table-constructor.component.scss';
 import { ConstructorType } from '../../types/enums.type';
 import AdminCenterService from '../services/admin-center.service';
+import { RootState } from '../..';
 
 let typeParameterValue : ConstructorType;
 
@@ -23,9 +24,7 @@ const TableConstructor : React.FC = () => {
   const mode = useSelector(selectMode);
   const constructor = useSelector(selectConstructor);
   const constructorParams = useSelector(selectConstructorParams);
-  const halls = useSelector(selectHalls);
-
-  const { tables } = halls.find(hall => hall.hallId == constructor.hallId);
+  const tables = useSelector((state : RootState) => selectTables(state, constructor.hallId));
 
   let memoizedTableId : number = 0;
 

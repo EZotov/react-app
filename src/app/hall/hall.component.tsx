@@ -2,9 +2,10 @@ import Button from '@mui/material/Button';
 import  React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { RootState } from '../..';
 
 import { changeConstrucorType, deleteHall, resetConstructor, saveHallIdInConstructor, selectTable } from '../../redux/actions/administration.actions';
-import { selectHalls, selectTables } from '../../redux/selectors/administration.selector';
+import { selectTables } from '../../redux/selectors/administration.selector';
 import { Table } from '../../types/interfaces';
 
 import './hall.component.scss';
@@ -18,9 +19,7 @@ const Hall : React.FC<HallProps> = (props) => {
   const { id, maxTablesCount  } = props;
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const halls = useSelector(selectHalls);
-
-  const { tables } = halls.find(hall => hall.hallId == id);
+  const tables = useSelector((state : RootState) => selectTables(state, id));
 
   const onClickDeleteHallBtn = (id : number) : void => {
     dispatch(deleteHall(id));

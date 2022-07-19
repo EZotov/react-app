@@ -93,9 +93,3 @@ export const saveHallIdInConstructor = (hallId : number) : AdministrationActions
     hallId
   }
 }
-
-export const loadHallsRequest = () : AdministrationActionsType => {
-  return {
-    type : ActionsHttpType.LOAD_HALLS_REQUEST
-  }
-}

@@ -10,6 +10,7 @@ import { Hall as HallInterface } from '../../types/interfaces';
 import TableConstructor from '../table-constructor/table-constructor.component';
 
 import './admin-center.component.scss';
+import { loadHallsRequest } from '../../redux/actions/http.actions';
 
 const maxTablesCount : number = 20;
 
@@ -17,6 +18,10 @@ const maxTablesCount : number = 20;
 const AdminCenter : React.FC = () => {
   const dispatch = useDispatch();
   const { halls } = useSelector(AdministrationSelectors.selectAdmin);
+
+  React.useEffect(() => {
+    dispatch(loadHallsRequest());
+  }, [])
 
   const onClickAddHall = () : void => {
     let newHallId : number = 0;
