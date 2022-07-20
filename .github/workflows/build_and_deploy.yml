@@ -8,21 +8,16 @@ jobs:
     build-deploy:
       runs-on: ubuntu-latest
       steps:
-        -name : Checkout
-         uses: actions/checkout@v2
-
-        -name: Node set up
-         uses: actions/setup-node@v1
-         with:
-           node-version : '17.4.0'
-
-        -name: Install
-         run: |
-            npm ci
-            npm run build
-
-        - name: Deploy
-        uses: EZotov/ghaction-github-pages@v1
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Set-up Node
+        uses: actions/setup-node@v3.4.1
+        with:
+          node-version: "17.4.0"
+      - run: npm install
+      - run: npm run build
+      - name: Deploy
+        uses: crazy-max/ghaction-github-pages@v3
         with:
           target_branch: gh-pages
           build_dir: dist
