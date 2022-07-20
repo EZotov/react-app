@@ -1,0 +1,30 @@
+name: CI
+on:
+  push:
+    branches:
+      -master
+
+jobs:
+    build-deploy:
+      runs-on: ubuntu-latest
+      steps:
+        -name : Checkout
+         uses: actions/checkout@v2
+
+        -name: Node set up
+         uses: actions/setup-node@v1
+         with:
+           node-version : '17.4.0'
+
+        -name: Install
+         run: |
+            npm ci
+            npm run build
+
+        - name: Deploy
+        uses: EZotov/ghaction-github-pages@v1
+        with:
+          target_branch: gh-pages
+          build_dir: dist
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_REPO_TOKEN }}
