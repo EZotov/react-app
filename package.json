@@ -7,7 +7,8 @@
     "start": "webpack serve --mode development",
     "build": "webpack --mode production",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
+    "deploy": "gh-pages -d dist",
+    "ssr": "node server/index.js"
   },
   "author": "Evgeniy Zotov",
   "license": "ISC",
@@ -17,6 +18,7 @@
     "@emotion/styled": "^11.9.3",
     "@mui/material": "^5.8.7",
     "axios": "^0.27.2",
+    "express": "^4.18.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-redux": "^7.1.1",
@@ -29,6 +31,8 @@
     "@babel/preset-env": "^7.18.6",
     "@babel/preset-react": "^7.18.6",
     "@babel/preset-typescript": "^7.18.6",
+    "@babel/register": "^7.18.9",
+    "@types/express": "^4.17.13",
     "@types/node": "^18.0.0",
     "@types/react": "^18.0.14",
     "@types/react-dom": "^18.0.6",
@@ -42,6 +46,7 @@
     "css-loader": "^6.7.1",
     "gh-pages": "^4.0.0",
     "html-webpack-plugin": "^5.5.0",
+    "ignore-styles": "^5.0.1",
     "mini-css-extract-plugin": "^2.6.1",
     "node-sass": "^7.0.1",
     "path": "^0.12.7",
@@ -53,6 +58,7 @@
     "url-loader": "^4.1.1",
     "webpack": "^5.73.0",
     "webpack-cli": "^4.10.0",
-    "webpack-dev-server": "^4.9.3"
+    "webpack-dev-server": "^4.9.3",
+    "webpack-node-externals": "^3.0.0"
   }
 }

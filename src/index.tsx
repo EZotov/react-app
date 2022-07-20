@@ -15,7 +15,14 @@ reSaga.run(mainSagaWatcher);
 
 export type RootState = ReturnType<typeof store.getState>;
 
-const root = ReactDOM.createRoot(document.querySelector('.app'));
+const root = ReactDOM.createRoot(document.querySelector('.app')
+  // <Provider store={store}>
+  //   <Router>
+  //     <App/>
+  //   </Router>
+  // </Provider>
+);
+
 root.render(
   <Provider store={store}>
     <Router>
