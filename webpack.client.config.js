@@ -70,7 +70,7 @@ let conf = {
         }
       ]
     }),
-    new CleanWebpackPlugin()
+    // new CleanWebpackPlugin()
   ]
 };
 

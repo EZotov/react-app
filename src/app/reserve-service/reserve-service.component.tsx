@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { Route, Routes } from 'react-router-dom';
+import { Link, Route, Routes } from 'react-router-dom';
 
 import { loadHallsRequest } from '../../redux/actions/http.actions';
 import HallListComponent from './hall-list/hall-list.component';
@@ -26,6 +26,9 @@ const ReserveService : React.FC<any> = () => {
       <main>
         <div className="fixed-container">
           <div className="reserveContainer">
+            <Link to="/administration">
+              Перейти в админинистрирование
+            </Link>
             <Routes>
               <Route path="/" element={<HallListComponent/>}/>
               <Route path="hall/:id" element={<ReserveHallComponent/>} />
