@@ -1,27 +1,37 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './app/app.component';
-import { applyMiddleware, legacy_createStore as createStore } from 'redux';
+import { applyMiddleware, legacy_createStore as createStore, Store } from 'redux';
 import { BrowserRouter as Router} from 'react-router-dom';
 import { rootReducer } from './redux/reducers/index';
 import { Provider } from 'react-redux';
 import createSagaMiddleware from 'redux-saga';
 import { mainSagaWatcher } from './redux/saga';
 
-const reSaga = createSagaMiddleware();
 
-const store = createStore(rootReducer, applyMiddleware(reSaga));
-reSaga.run(mainSagaWatcher);
 
-export type RootState = ReturnType<typeof store.getState>;
+export const reSaga = createSagaMiddleware();
 
-const root = ReactDOM.hydrateRoot(document.querySelector('.app'),
-  <Provider store={store}>
-    <Router>
-      <App/>
-    </Router>
-  </Provider>
-);
+let window_object : any;
+let store : Store;
+
+if (typeof window !== 'undefined') {
+  window_object = window;
+  store = createStore(rootReducer, window_object.REDUX_DATA, applyMiddleware(reSaga));
+  reSaga.run(mainSagaWatcher);
+  delete window_object.REDUX_DATA;
+
+  const root = ReactDOM.hydrateRoot(document.querySelector('.app'),
+    <Provider store={store}>
+      <Router>
+        <App/>
+      </Router>
+    </Provider>
+  );
+}
+
+
+// const root = ReactDOM.createRoot(document.querySelector('.app'));
 // root.render(
 //   <Provider store={store}>
 //     <Router>
@@ -29,3 +39,7 @@ const root = ReactDOM.hydrateRoot(document.querySelector('.app'),
 //     </Router>
 //   </Provider>
 // );
+
+
+
+export type RootState = ReturnType<typeof store.getState>;

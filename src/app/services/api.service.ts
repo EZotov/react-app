@@ -2,15 +2,15 @@ import  axios from 'axios';
 import { Hall } from '../../types/interfaces';
 
 const startGetHalls = () : Promise<any> => {
-  return axios.get('api/load_halls.json');
+  return axios.get('http://localhost:9000/api/load_halls.json');
 }
 
 const addHall = (hall : Hall) : Promise<any> => {
-  return axios.get('api/load_halls.json');
+  return axios.get('http://localhost:9000/api/load_halls.json');
 }
 
 const deleteHall = () : Promise<any> => {
-  return axios.get('api/load_halls.json');
+  return axios.get('http://localhost:9000/api/load_halls.json');
 }
 
 const addTable = () : Promise<any> => {

@@ -1,3 +1,4 @@
+import { END } from 'redux-saga';
 import { call, put, SagaReturnType, takeEvery } from 'redux-saga/effects';
 import ApiService from '../../app/services/api.service';
 import { SendHallHttpAction } from '../../types/administration.types';
@@ -8,7 +9,7 @@ import { addHallRequestSuccess, loadHallsRequestSuccess } from '../actions/http.
 
 function* loadHalls() : SagaReturnType<any> {
   try {
-    const result = yield call(ApiService.startGetHalls)
+    const result = yield call(ApiService.startGetHalls);
     const halls : Hall[] = result.data.halls;
     yield put(loadHallsRequestSuccess(halls));
   }
