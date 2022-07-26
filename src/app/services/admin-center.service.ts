@@ -8,7 +8,7 @@ const createRenderIndexesArray = (countPlacesX : number, grid : number[]) : numb
       if ((i < countPlacesX + 1 && i > 0) || (i > grid.length - 2 - countPlacesX && i < grid.length-1)) {
         return i;
       }
-      else if (startRowIndex !== 0 && startRowIndex !== grid.length - countPlacesX - 2) {
+      if (startRowIndex !== 0 && startRowIndex !== grid.length - countPlacesX - 2) {
         if (i === startRowIndex || i === endRowIndex) {
           return i;
         }

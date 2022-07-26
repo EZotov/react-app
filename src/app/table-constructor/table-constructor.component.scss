@@ -5,6 +5,7 @@
   width: 100%;
   height: 100vh;
   background-color: rgba(#242424, 0.75);
+
   .constructorContainer {
     display: flex;
     flex-direction: column;
@@ -18,20 +19,24 @@
     border-radius: 20px;
     width: 1000px;
     height: 850px;
+
     .constructorContainerHeader {
       display: flex;
       align-items: center;
       margin-bottom: 40px;
       padding-right: 150px;
+
       &__delBtn {
         margin-left: 20px;
       }
+
       &__headline {
         flex-grow: 4;
         color: #000000;
         text-align: center;
       }
     }
+
     &__closeBtn {
       position: absolute;
       right: 10px;
@@ -66,18 +71,22 @@
   padding-top: 20px;
   border-top : 1px solid #000000;
   color : #000000;
+
   .controlPanelElement {
     display: flex;
     flex-direction: column;
     width: 150px;
+
     .controlPanelElementTextWrapper {
       display: flex;
       justify-content: space-between;
       align-items: center;
+
       &__label {
         font-size: 18px;
         font-weight: bold;
       }
+
       &__value {
         display: inline-block;
         padding: 5px 10px;
@@ -92,6 +101,7 @@
       display: flex;
       flex-direction: column;
       margin-top: 5px;
+
       &__increaseBtn, &__decreaseBtn {
         height: 40px;
       }

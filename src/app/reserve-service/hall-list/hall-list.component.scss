@@ -6,26 +6,31 @@
   grid-template-columns: repeat(auto-fit, minmax(100px, 250px));
   grid-auto-rows: 150px;
   grid-gap: 10px;
+
   .reservehallListItem {
     background-color: #dbdbdb;
     color : #000000;
     transition: ease all 0.2s;
     border-radius: 10px;
+
     .reservehallListItemLink {
       display: flex;
       flex-direction: column;
       height: 100%;
       padding: 10px;
+
       &__headline {
         margin: 0;
         text-align: center;
       }
+
       &__countTables {
         text-align: center;
         margin-top: 20px;
       }
     }
   }
+  
   .reservehallListItem:hover {
     transform: scale(105%);
   }

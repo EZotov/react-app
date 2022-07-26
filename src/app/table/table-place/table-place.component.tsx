@@ -51,7 +51,7 @@ const TablePlace : React.FC<TablePlaceProps> = (props) => {
     if (tableType === 'square') {
       return 'tableGeneralContainer__place tableGeneralContainer__place_square';
     }
-    else if (tableType === 'circle') {
+    if (tableType === 'circle') {
       return 'tableGeneralContainer__place tableGeneralContainer__place_circle';
     }
   }

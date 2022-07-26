@@ -8,17 +8,20 @@
   background-color: #2f2f2f;
   border : 2px solid #e87b16;
   margin-top: 40px;
+
   &__headline {
     font-size: 30px;
     border-bottom: 1px solid #ffffff;
     padding: 15px 0;
     text-align: center;
   }
+
   &__delBtn {
     position: absolute !important;
     right: 40px;
     top : 10px;
   }
+
   .hallList {
     display: grid;
     grid-gap : 40px;
@@ -28,6 +31,7 @@
     padding: 0;
     margin: 0;
     margin-top: 40px;
+
     .hallListItem {
       cursor: pointer;
       border : 1px solid #d0d0d0;
@@ -36,16 +40,18 @@
       flex-direction: column;
       padding: 20px;
       text-align: center;
-
       font-weight: bold;
+
       &__id {
         font-size: 24px;
       }
+
       &__countPlaces {
         font-size: 20px;
         margin-top: 40px;
       }
     }
+    
     .hallListItem:first-child {
       margin-left: 0;
     }

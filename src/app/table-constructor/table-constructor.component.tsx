@@ -1,21 +1,21 @@
 import Button from '@mui/material/Button';
-
 import React, { useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useSearchParams } from 'react-router-dom'
-import { addTable, changeConstrucorType, delTable, setConstructorParams, updateTable } from '../../redux/actions/administration.actions';
-import { selectConstructor, selectConstructorParams, selectHalls, selectMode, selectTables } from '../../redux/selectors/administration.selector';
-import { ConstructorParameters } from "../../types/interfaces";
 
-import Table from '../table/table.component';
+import { addTable, changeConstrucorType, delTable, setConstructorParams, updateTable } from '../../redux/actions/administration.actions';
+import { selectConstructor, selectConstructorParams, selectMode, selectTables } from '../../redux/selectors/administration.selector';
+import { ConstructorParameters } from "../../types/interfaces";
 import { Table as TableInterface } from '../../types/interfaces';
-import './table-constructor.component.scss';
 import { ConstructorType } from '../../types/enums.type';
 import AdminCenterService from '../services/admin-center.service';
 import { RootState } from '../..';
 
-let typeParameterValue : ConstructorType;
+import './table-constructor.component.scss';
+import SquareTable from '../table/square-table/square-table.component';
+import CircleTable from '../table/circle-table/circle-table.component';
 
+let typeParameterValue : ConstructorType;
 
 const TableConstructor : React.FC = () => {
   const [params] = useSearchParams()
@@ -112,7 +112,6 @@ const TableConstructor : React.FC = () => {
         dispatch(updateTable(hallId, newTableOnEdit));
         break;
       case 'new':
-        //Нужен опрделитель tableId для следующего нового стола
         const newTableOnNew : TableInterface = {
           tableId : memoizedTableId,
           type : constructor.mode,
@@ -160,7 +159,7 @@ const TableConstructor : React.FC = () => {
             mode === 'circle' && (
               <>
                 <div className="tableWrapper">
-                  <Table
+                  <CircleTable
                     hallId={constructor.hallId}
                     tableId={typeParameterValue === ConstructorType.edit ? constructor.tableId : memoizedTableId}
                     constructorMode={typeParameterValue}
@@ -177,7 +176,7 @@ const TableConstructor : React.FC = () => {
             mode === 'square' && (
               <>
                 <div className="tableWrapper">
-                  <Table
+                  <SquareTable
                     hallId={constructor.hallId}
                     tableId={typeParameterValue === ConstructorType.edit ? constructor.tableId : memoizedTableId}
                     constructorMode={typeParameterValue}

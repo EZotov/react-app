@@ -6,8 +6,7 @@ import ReactDOMServer from 'react-dom/server'
 import { Provider } from 'react-redux';
 import { StaticRouter } from 'react-router-dom/server';
 import { applyMiddleware, legacy_createStore as createStore } from 'redux';
-import { END } from 'redux-saga';
-import { reSaga } from '..';
+import createSagaMiddleware, { END } from 'redux-saga';
 
 import App from '../app/app.component';
 import { loadHallsRequest } from '../redux/actions/http.actions';
@@ -22,27 +21,15 @@ app.get(/\.(js|css|map|ico|svg|png|gif|bmp|jpeg|jpg|woff|woff2|json)$/, express.
 
 app.use('*', (req, res) => {
   let indexHTML = fs.readFileSync(path.resolve('./dist/index.html'), {encoding: 'utf8'});
+  const reSaga = createSagaMiddleware();
   const store = createStore(rootReducer, applyMiddleware(reSaga));
 
-  const sagas = reSaga.run(mainSagaWatcher);
 
-  switch(req.url) {
-    case '/administration':
-      store.dispatch(loadHallsRequest());
-      break;
-    case '/':
-      store.dispatch(loadHallsRequest());
-      break;
-    default:
-      break;
-  }
-
-  sagas.toPromise()
-    .then(() => {
+  reSaga.run(mainSagaWatcher).toPromise().then(() => {
       const preloadedState = store.getState();
       let appHTML = ReactDOMServer.renderToString(
         <Provider store={store}>
-          <StaticRouter location={req.url}>
+          <StaticRouter location={req.originalUrl}>
             <App />
           </StaticRouter>
         </Provider>
@@ -58,6 +45,19 @@ app.use('*', (req, res) => {
       res.send(indexHTML);
     })
     .catch(error => res.status(500));
+    console.log(req.url);
+    switch(req.originalUrl) {
+      case '/administration':
+        store.dispatch(loadHallsRequest());
+        break;
+      case '/':
+        store.dispatch(loadHallsRequest());
+        break;
+      default:
+        break;
+    }
+
+    store.dispatch(END);
 });
 
 app.listen('9000', () => {

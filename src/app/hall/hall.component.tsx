@@ -1,5 +1,5 @@
 import Button from '@mui/material/Button';
-import  React from 'react';
+import  React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { RootState } from '../..';
@@ -19,24 +19,23 @@ const Hall : React.FC<HallProps> = (props) => {
   const { id, maxTablesCount  } = props;
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const tables = useSelector((state : RootState) => selectTables(state, id));
+  const tables : Table[] = useSelector((state : RootState) => selectTables(state, id));
 
-  const onClickDeleteHallBtn = (id : number) : void => {
+  const onClickDeleteHallBtn = () : void => {
     dispatch(deleteHall(id));
   }
 
-
-  const onClickAddTableBtn = (hallId : number) : void => {
+  const onClickAddTableBtn = () : void => {
     dispatch(resetConstructor());
-    dispatch(saveHallIdInConstructor(hallId));
+    dispatch(saveHallIdInConstructor(id));
     navigate('tableConstructor?type=new');
   }
 
-  const onClickTable = (hallId : number, table : Table) : void => {
+  const onClickTable = (table : Table) : void => {
     dispatch(changeConstrucorType(table.type));
     dispatch(
       selectTable(
-        hallId,
+        id,
         table.tableId,
         {
           placesCount : table.constructorParams.placesCount,
@@ -50,25 +49,29 @@ const Hall : React.FC<HallProps> = (props) => {
     navigate('tableConstructor?type=edit');
   }
 
+  const onClickAddTableBtnMemo = useCallback(() => onClickAddTableBtn(), []);
+
+  const onClickDeleteHallBtnMemo = useCallback(() => onClickDeleteHallBtn(), []);
+
+  const onClickTableMemo = useCallback((table : Table) => onClickTable(table), []);
+
   return (
     <div className="hallContainer">
       <h2 className="hallContainer__headline">Зал {id}</h2>
-      <Button className="hallContainer__delBtn" variant="outlined" sx={{color : 'red', border : '1px solid red'}} onClick={() => onClickDeleteHallBtn(id)}>Удалить</Button>
+      <Button className="hallContainer__delBtn" variant="outlined" sx={{color : 'red', border : '1px solid red'}} onClick={onClickDeleteHallBtnMemo}>Удалить</Button>
       <ul className="hallList">
         {
-          tables.map(table => {
-            return (
-              <li key={table.tableId} className="hallListItem" onClick={() => onClickTable(id, table)}>
+          tables.map(table => (
+              <li key={table.tableId} className="hallListItem" onClick={() => onClickTableMemo(table)}>
                 <span className="hallListItem__id">Стол №{table.tableId}</span>
                 <span className="hallListItem__countPlaces">Мест : {table.places.length}</span>
               </li>
-            )
-          })
+          ))
         }
         {
           tables.length < maxTablesCount && (
             <li className="hallListItem">
-              <button className="hallContainer__addTableBtn" type="button" onClick={() => onClickAddTableBtn(id)}>Добавить стол</button>
+              <button className="hallContainer__addTableBtn" type="button" onClick={onClickAddTableBtnMemo}>Добавить стол</button>
             </li>
           )
         }

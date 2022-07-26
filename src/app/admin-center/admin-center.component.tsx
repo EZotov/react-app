@@ -1,5 +1,5 @@
 import Button from '@mui/material/Button';
-import React from 'react';
+import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
 
@@ -8,9 +8,10 @@ import { AdministrationSelectors } from '../../redux/selectors';
 import Hall from '../hall/hall.component';
 import { Hall as HallInterface } from '../../types/interfaces';
 import TableConstructor from '../table-constructor/table-constructor.component';
+import { loadHallsRequest } from '../../redux/actions/http.actions';
 
 import './admin-center.component.scss';
-import { loadHallsRequest } from '../../redux/actions/http.actions';
+
 
 const maxTablesCount : number = 20;
 
@@ -44,6 +45,8 @@ const AdminCenter : React.FC = () => {
     dispatch(addHall(newHall));
   }
 
+  const onClickAddHallMemo = useCallback(() => onClickAddHall(), []);
+
   return (
     <>
       <header className="headerSection">
@@ -58,7 +61,7 @@ const AdminCenter : React.FC = () => {
       <main className="mainSection">
         <div className="fixed-container flex-container">
           <div className="add">
-            <Button className="add__btn" variant="outlined" sx={{border : '1px solid #e87b16', color : '#e87b16'}} onClick={onClickAddHall}>Добавить зал</Button>
+            <Button className="add__btn" variant="outlined" sx={{border : '1px solid #e87b16', color : '#e87b16'}} onClick={onClickAddHallMemo}>Добавить зал</Button>
           </div>
           {
             halls.map(hall => {
