@@ -10,10 +10,10 @@ import { Table as TableInterface } from '../../types/interfaces';
 import { ConstructorType } from '../../types/enums.type';
 import AdminCenterService from '../services/admin-center.service';
 import { RootState } from '../..';
-
-import './table-constructor.component.scss';
 import SquareTable from '../table/square-table/square-table.component';
 import CircleTable from '../table/circle-table/circle-table.component';
+
+import './table-constructor.component.scss';
 
 let typeParameterValue : ConstructorType;
 
