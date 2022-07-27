@@ -22,7 +22,8 @@ export enum ActionsHttpType {
 
 export enum ConstructorType {
   new = 'new',
-  edit = 'edit'
+  edit = 'edit',
+  view = 'view'
 }
 
 export enum TablePlaceStatus {

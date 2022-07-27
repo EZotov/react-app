@@ -10,8 +10,8 @@ import './app.component.scss';
 
 const App : React.FC = () => {
   return (
-    <div className="appContainer">
-      <h1 className="appContainer__headline visually-hidden">Сервис бронирование столов</h1>
+    <div className="app-container">
+      <h1 className="app-container__headline visually-hidden">Сервис бронирование столов</h1>
       <Routes>
         <Route path='/*' element={<ReserveService />}/>
         <Route path='administration/*' element={<AdminCenter />}/>

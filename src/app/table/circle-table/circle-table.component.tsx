@@ -20,21 +20,64 @@ interface TableProps {
 }
 
 const CircleTable : React.FC<TableProps> = (props) => {
-  const { type, countPlacesCircle, size, places, tableId, hallId } = props;
+  const { constructorMode, type, countPlacesCircle, size, places, tableId, hallId } = props;
   const [countPlacesX, countPlacesY] = size;
 
   //Circle Parameters
   const addAngle : number = 360 / countPlacesCircle;
   const circleTemplate : number[] = Array.from(Array(countPlacesCircle).keys());
   let angle : number = 0;
-  // const angleMemo = useMemo(() => , [angle]);
   let transformOriginValue : number = 50;
 
+  if (constructorMode === ConstructorType.view) {
+    return (
+      <div className="table-general-container">
+          <div className="circle-table-container">
+            {
+              circleTemplate.map(i => {
+                if (i == 0) {
+                  angle = 0;
+                }
+                angle = angle + addAngle;
 
+                const place = places.find(place => place.placeId === i + 1);
+                if (!place) {
+                  return (
+                    <div key={i}></div>
+                  );
+                }
+
+                return (
+                  <div key={i} style={{transform : `rotate(${angle + ''}deg) translateX(-50%)`, transformOrigin : `1px ${transformOriginValue + 50 * countPlacesX + ''}px`}} className="circle-table-place-wrapper">
+                    <TablePlace
+                      placeId={i + 1}
+                      hallId={hallId}
+                      tableId={tableId}
+                      tableType={type}
+                      placeStatus={place ? place.placeStatus : TablePlaceStatus.notSetting}
+                    />
+                  </div>
+                )
+              })
+            }
+            <Box className="circle-table-container__table" sx={
+                {
+                  width : countPlacesX * 100,
+                  height : countPlacesY * 100,
+                  backgroundColor: 'primary.dark',
+                  borderRadius : 100,
+                  border : '2px solid #000000',
+                  position : 'relative'
+                }
+              } />
+          </div>
+      </div>
+    );
+  }
 
   return (
-    <div className="tableGeneralContainer">
-        <div className="circleTableContainer">
+    <div className="table-general-container">
+        <div className="circle-table-container">
           {
             circleTemplate.map(i => {
               if (i == 0) {
@@ -44,7 +87,7 @@ const CircleTable : React.FC<TableProps> = (props) => {
 
               const place = places.find(place => place.placeId === i + 1);
               return (
-                <div key={i} style={{transform : `rotate(${angle + ''}deg) translateX(-50%)`, transformOrigin : `1px ${transformOriginValue + 50 * countPlacesX + ''}px`}} className="circleTablePlaceWrapper">
+                <div key={i} style={{transform : `rotate(${angle + ''}deg) translateX(-50%)`, transformOrigin : `1px ${transformOriginValue + 50 * countPlacesX + ''}px`}} className="circle-table-place-wrapper">
                   <TablePlace
                     placeId={i + 1}
                     hallId={hallId}
@@ -56,7 +99,7 @@ const CircleTable : React.FC<TableProps> = (props) => {
               )
             })
           }
-          <Box className="circleTableContainer__table" sx={
+          <Box className="circle-table-container__table" sx={
               {
                 width : countPlacesX * 100,
                 height : countPlacesY * 100,

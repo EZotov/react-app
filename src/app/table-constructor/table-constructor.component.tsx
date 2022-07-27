@@ -1,5 +1,5 @@
 import Button from '@mui/material/Button';
-import React, { useMemo } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useSearchParams } from 'react-router-dom'
 
@@ -47,13 +47,13 @@ const TableConstructor : React.FC = () => {
     navigate('/administration');
   }
 
-  const onClickCircleTypeBtn = () : void => {
+  const onClickCircleTypeBtn = useCallback(() : void => {
     dispatch(changeConstrucorType('circle'));
-  }
+  }, []);
 
-  const onClickSquareTypeBtn = () : void => {
+  const onClickSquareTypeBtn = useCallback(() : void => {
     dispatch(changeConstrucorType('square'));
-  }
+  }, []);
 
   const onClickIncrementValueParam = (parameter : keyof ConstructorParameters) : void => {
     let newValueParams : ConstructorParameters = {
@@ -80,7 +80,7 @@ const TableConstructor : React.FC = () => {
         dispatch(setConstructorParams(newValueParams));
         break;
     }
-  }
+  };
 
   const onClickDecrementValueParam = (parameter : keyof ConstructorParameters) : void => {
     let newValueParams : ConstructorParameters = {
@@ -91,9 +91,9 @@ const TableConstructor : React.FC = () => {
     };
     newValueParams[parameter]--;
     newValueParams[parameter] >= 1 ? dispatch(setConstructorParams(newValueParams,)) : false;
-  }
+  };
 
-  const onClickSaveTableBtn = (hallId : number) : void => {
+  const onClickSaveTableBtn = () : void => {
 
     switch(typeParameterValue) {
       case 'edit':
@@ -109,7 +109,7 @@ const TableConstructor : React.FC = () => {
             sizeY : constructor.constructorParameters.sizeY
           }
         }
-        dispatch(updateTable(hallId, newTableOnEdit));
+        dispatch(updateTable(constructor.hallId, newTableOnEdit));
         break;
       case 'new':
         const newTableOnNew : TableInterface = {
@@ -124,41 +124,40 @@ const TableConstructor : React.FC = () => {
             sizeY : constructor.constructorParameters.sizeY
           }
         }
-        dispatch(addTable(hallId, newTableOnNew));
+        dispatch(addTable(constructor.hallId, newTableOnNew));
         break;
       default:
         break;
     }
     alert('Изменения сохранены');
-    // navigate('/administration');
   }
 
-  const onClickDeleteTableBtn = (hallId : number, tableId : number) : void => {
-    dispatch(delTable(hallId, tableId));
+  const onClickDeleteTableBtn = useCallback(() : void => {
+    dispatch(delTable(constructor.hallId, constructor.tableId));
     navigate('/administration');
-  }
+  }, []);
 
   return (
-    <div className="modalOverlay">
-      <div className="constructorContainer">
-        <div className="constructorContainerGeneral">
-          <div className="constructorContainerHeader">
-            <Button className="constructorContainerHeader__saveBtn" variant="contained" onClick={() => onClickSaveTableBtn(constructor.hallId)} >Сохранить</Button>
+    <div className="modal-overlay">
+      <div className="constructor-container">
+        <div className="constructor-container-general">
+          <div className="constructor-container-header">
+            <Button className="constructor-container-header__save-btn" variant="contained" onClick={onClickSaveTableBtn}>Сохранить</Button>
             {
               typeParameterValue === ConstructorType.edit && (
-                <Button className="constructorContainerHeader__delBtn" variant="contained" onClick={() => onClickDeleteTableBtn(constructor.hallId, constructor.tableId)}>Удалить</Button>
+                <Button className="constructor-container-header__del-btn" variant="contained" onClick={onClickDeleteTableBtn}>Удалить</Button>
               )
             }
-            <h2 className="constructorContainerHeader__headline">Конструктор</h2>
+            <h2 className="constructor-container-header__headline">Конструктор</h2>
           </div>
-          <div className="contructorTableType">
-            <Button className="contructorTableType__squareBhtn" variant='outlined' disabled={mode === 'square' ? true : false} onClick={onClickSquareTypeBtn}>Квадратный</Button>
-            <Button className="contructorTableType__roundBtn" variant='outlined' disabled={mode === 'circle' ? true : false} onClick={onClickCircleTypeBtn}>Круглый</Button>
+          <div className="contructor-table-type">
+            <Button className="contructor-table-type__square-btn" variant='outlined' disabled={mode === 'square' ? true : false} onClick={onClickSquareTypeBtn}>Квадратный</Button>
+            <Button className="contructor-table-type__round-btn" variant='outlined' disabled={mode === 'circle' ? true : false} onClick={onClickCircleTypeBtn}>Круглый</Button>
           </div>
           {
             mode === 'circle' && (
               <>
-                <div className="tableWrapper">
+                <div className="table-wrapper">
                   <CircleTable
                     hallId={constructor.hallId}
                     tableId={typeParameterValue === ConstructorType.edit ? constructor.tableId : memoizedTableId}
@@ -166,7 +165,7 @@ const TableConstructor : React.FC = () => {
                     places={constructor.places}
                     type='circle'
                     countPlacesCircle={constructorParams.placesCount}
-                    size={[constructorParams.sizeCircle,constructorParams.sizeCircle]}
+                    size={[constructorParams.sizeCircle, constructorParams.sizeCircle]}
                   />
                 </div>
               </>
@@ -175,7 +174,7 @@ const TableConstructor : React.FC = () => {
           {
             mode === 'square' && (
               <>
-                <div className="tableWrapper">
+                <div className="table-wrapper">
                   <SquareTable
                     hallId={constructor.hallId}
                     tableId={typeParameterValue === ConstructorType.edit ? constructor.tableId : memoizedTableId}
@@ -190,29 +189,29 @@ const TableConstructor : React.FC = () => {
             )
           }
         </div>
-        <div className="controlPanel">
+        <div className="control-panel">
           {
             mode === 'square' && (
               <>
-                <div className="controlPanelElement">
-                  <div className="controlPanelElementTextWrapper">
-                    <span className="controlPanelElementTextWrapper__label">Размер по X</span>
-                    <span className="controlPanelElementTextWrapper__value">{constructorParams.sizeX}</span>
+                <div className="control-panel-element">
+                  <div className="control-panel-element-text-wrapper">
+                    <span className="control-panel-element-text-wrapper__label">Размер по X</span>
+                    <span className="control-panel-element-text-wrapper__value">{constructorParams.sizeX}</span>
                   </div>
-                  <div className="controlPanelElementBtnWrapper">
-                    <Button className="controlPanelElementBtnWrapper__increaseBtn" variant="contained" onClick={() => onClickIncrementValueParam('sizeX')}>Увеличить</Button>
-                    <Button className="controlPanelElementBtnWrapper__decreaseBtn" variant="contained" onClick={() => onClickDecrementValueParam('sizeX')}>Уменьшить</Button>
+                  <div className="control-panel-element-btn-wrapper">
+                    <Button className="control-panel-element-btn-wrapper__increase-btn" variant="contained" onClick={() => onClickIncrementValueParam('sizeX')}>Увеличить</Button>
+                    <Button className="control-panel-element-btn-wrapper__decrease-btn" variant="contained" onClick={() => onClickDecrementValueParam('sizeX')}>Уменьшить</Button>
                   </div>
                 </div>
 
-                <div className="controlPanelElement">
-                  <div className="controlPanelElementTextWrapper">
-                    <span className="controlPanelElementTextWrapper__label">Размер по Y</span>
-                    <span className="controlPanelElementTextWrapper__value">{constructorParams.sizeY}</span>
+                <div className="control-panel-element">
+                  <div className="control-panel-element-text-wrapper">
+                    <span className="control-panel-element-text-wrapper__label">Размер по Y</span>
+                    <span className="control-panel-element-text-wrapper__value">{constructorParams.sizeY}</span>
                   </div>
-                  <div className="controlPanelElementBtnWrapper">
-                    <Button className="controlPanelElementBtnWrapper__increaseBtn" variant="contained" onClick={() => onClickIncrementValueParam('sizeY')}>Увеличить</Button>
-                    <Button className="controlPanelElementBtnWrapper__decreaseBtn" variant="contained" onClick={() => onClickDecrementValueParam('sizeY')}>Уменьшить</Button>
+                  <div className="control-panel-element-btn-wrapper">
+                    <Button className="control-panel-element-btn-wrapper__increase-btn" variant="contained" onClick={() => onClickIncrementValueParam('sizeY')}>Увеличить</Button>
+                    <Button className="control-panel-element-btn-wrapper__decrease-btn" variant="contained" onClick={() => onClickDecrementValueParam('sizeY')}>Уменьшить</Button>
                   </div>
                 </div>
               </>
@@ -221,32 +220,32 @@ const TableConstructor : React.FC = () => {
           {
             mode === 'circle' && (
               <>
-                <div className="controlPanelElement">
-                  <div className="controlPanelElementTextWrapper">
-                    <span className="controlPanelElementTextWrapper__label">Размер</span>
-                    <span className="controlPanelElementTextWrapper__value">{constructorParams.sizeCircle}</span>
+                <div className="control-panel-element">
+                  <div className="control-panel-element-text-wrapper">
+                    <span className="control-panel-element-text-wrapper__label">Размер</span>
+                    <span className="control-panel-element-text-wrapper__value">{constructorParams.sizeCircle}</span>
                   </div>
-                  <div className="controlPanelElementBtnWrapper">
-                    <Button className="controlPanelElementBtnWrapper__increaseBtn" variant="contained" onClick={() => onClickIncrementValueParam('sizeCircle')}>Увеличить</Button>
-                    <Button className="controlPanelElementBtnWrapper__decreaseBtn" variant="contained" onClick={() => onClickDecrementValueParam('sizeCircle')}>Уменьшить</Button>
+                  <div className="control-panel-element-btn-wrapper">
+                    <Button className="control-panel-element-btn-wrapper__increase-btn" variant="contained" onClick={() => onClickIncrementValueParam('sizeCircle')}>Увеличить</Button>
+                    <Button className="control-panel-element-btn-wrapper__decrease-btn" variant="contained" onClick={() => onClickDecrementValueParam('sizeCircle')}>Уменьшить</Button>
                   </div>
                 </div>
 
-                <div className="controlPanelElement">
-                  <div className="controlPanelElementTextWrapper">
-                    <span className="controlPanelElementTextWrapper__label">Кол-во мест</span>
-                    <span className="controlPanelElementTextWrapper__value">{constructorParams.placesCount}</span>
+                <div className="control-panel-element">
+                  <div className="control-panel-element-text-wrapper">
+                    <span className="control-panel-element-text-wrapper__label">Кол-во мест</span>
+                    <span className="control-panel-element-text-wrapper__value">{constructorParams.placesCount}</span>
                   </div>
-                  <div className="controlPanelElementBtnWrapper">
-                    <Button className="controlPanelElementBtnWrapper__increaseBtn" variant="contained" onClick={() => onClickIncrementValueParam('placesCount')}>Увеличить</Button>
-                    <Button className="controlPanelElementBtnWrapper__decreaseBtn" variant="contained" onClick={() => onClickDecrementValueParam('placesCount')}>Уменьшить</Button>
+                  <div className="control-panel-element-btn-wrapper">
+                    <Button className="control-panel-element-btn-wrapper__increase-btn" variant="contained" onClick={() => onClickIncrementValueParam('placesCount')}>Увеличить</Button>
+                    <Button className="control-panel-element-btn-wrapper__decrease-btn" variant="contained" onClick={() => onClickDecrementValueParam('placesCount')}>Уменьшить</Button>
                   </div>
                 </div>
               </>
             )
           }
         </div>
-        <button className="constructorContainer__closeBtn" type="button" onClick={onClickCloseConstructorBtn}/>
+        <button className="constructor-container__close-btn" type="button" onClick={onClickCloseConstructorBtn}/>
       </div>
     </div>
   );

@@ -9,12 +9,12 @@ import Hall from '../hall/hall.component';
 import { Hall as HallInterface } from '../../types/interfaces';
 import TableConstructor from '../table-constructor/table-constructor.component';
 import { loadHallsRequest } from '../../redux/actions/http.actions';
+import  AdminCenterService from '../services/admin-center.service';
 
 import './admin-center.component.scss';
 
 
 const maxTablesCount : number = 20;
-
 
 const AdminCenter : React.FC = () => {
   const dispatch = useDispatch();
@@ -24,44 +24,32 @@ const AdminCenter : React.FC = () => {
     dispatch(loadHallsRequest());
   }, [])
 
-  const onClickAddHall = () : void => {
-    let newHallId : number = 0;
-    if (halls.length) {
-      halls.forEach(hall => {
-        if (hall.hallId >= newHallId) {
-          newHallId = hall.hallId;
-          newHallId++;
-        }
-      });
-    }
-    else {
-      newHallId = 1;
-    }
+  const onClickAddHall = useCallback(() : void => {
+    const newHallId : number = AdminCenterService.defindIndexNewHallItem(halls);
+
     const newHall : HallInterface = {
       hallId : newHallId,
       maxTablesCount : maxTablesCount,
       tables : []
     }
     dispatch(addHall(newHall));
-  }
-
-  const onClickAddHallMemo = useCallback(() => onClickAddHall(), []);
+  }, [halls])
 
   return (
     <>
-      <header className="headerSection">
+      <header className="header-section">
         <div className="fixed-container flex-container">
-          <h2 className="headerSection__headline">Бронирование столов. Администрирование</h2>
-          <div className="headerInfoContainer">
-            <span className="headerInfoContainer__username">Пользователь</span>
+          <h2 className="header-section__headline">Бронирование столов. Администрирование</h2>
+          <div className="header-info-container">
+            <span className="header-info-container__username">Пользователь</span>
           </div>
         </div>
       </header>
 
-      <main className="mainSection">
+      <main className="main-section">
         <div className="fixed-container flex-container">
           <div className="add">
-            <Button className="add__btn" variant="outlined" sx={{border : '1px solid #e87b16', color : '#e87b16'}} onClick={onClickAddHallMemo}>Добавить зал</Button>
+            <Button className="add__btn" variant="outlined" sx={{border : '1px solid #e87b16', color : '#e87b16'}} onClick={onClickAddHall}>Добавить зал</Button>
           </div>
           {
             halls.map(hall => {

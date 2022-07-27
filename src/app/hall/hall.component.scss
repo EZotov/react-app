@@ -1,4 +1,4 @@
-.hallContainer {
+.hall-container {
   display: flex;
   flex-direction: column;
   padding: 50px 40px;
@@ -16,13 +16,13 @@
     text-align: center;
   }
 
-  &__delBtn {
+  &__del-btn {
     position: absolute !important;
     right: 40px;
     top : 10px;
   }
 
-  .hallList {
+  .hall-list {
     display: grid;
     grid-gap : 40px;
     grid-template-columns: repeat(auto-fit, minmax(130px, 215px));
@@ -32,7 +32,7 @@
     margin: 0;
     margin-top: 40px;
 
-    .hallListItem {
+    .hall-list-item {
       cursor: pointer;
       border : 1px solid #d0d0d0;
       border-radius: 10px;
@@ -46,18 +46,18 @@
         font-size: 24px;
       }
 
-      &__countPlaces {
+      &__count-places {
         font-size: 20px;
         margin-top: 40px;
       }
     }
-    
-    .hallListItem:first-child {
+
+    .hall-list-item:first-child {
       margin-left: 0;
     }
   }
 
-  .hallContainer__addTableBtn {
+  .hall-container__add-table-btn {
     border : none;
     text-align: center;
     cursor: pointer;
@@ -69,11 +69,11 @@
     font-size: 20px;
     font-weight: bold;
   }
-  .hallContainer__addTableBtn:hover {
+  .hall-container__add-table-btn:hover {
     background-color: #585858;
   }
 }
 
-.hallContainer:first-child {
+.hall-container:first-child {
   margin-top: 0;
 }

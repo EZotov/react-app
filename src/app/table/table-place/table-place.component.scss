@@ -1,4 +1,4 @@
-.tableGeneralContainer__place {
+.table-general-container__place {
   display: block;
   background-color: #ffffff;
   height: 100%;
@@ -11,23 +11,23 @@
   cursor: pointer;
 }
 
-.tableGeneralContainer__place:hover, .tableGeneralContainer__place:active {
+.table-general-container__place:hover, .table-general-container__place:active {
   color : #ffffff;
   border : 1px solid #ffffff;
   background-color: #f1943f;
 }
 
-.tableGeneralContainer__place_square {
+.table-general-container__place_square {
   width: 100px;
   padding-top: 30px;
 }
 
-.tableGeneralContainer__place_circle {
+.table-general-container__place_circle {
   width: 80px;
   padding-top: 15px;
 }
 
-.tableGeneralContainer__place_reserved {
+.table-general-container__place_reserved {
   background-color: #cf8282;
   color: #000000;
 }

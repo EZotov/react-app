@@ -1,4 +1,4 @@
-.reservehallList {
+.reserve-hall-list {
   list-style: none;
   padding: 0;
   margin: 0;
@@ -7,13 +7,14 @@
   grid-auto-rows: 150px;
   grid-gap: 10px;
 
-  .reservehallListItem {
+  .reserve-hall-list-item {
     background-color: #dbdbdb;
     color : #000000;
     transition: ease all 0.2s;
     border-radius: 10px;
+    padding: 10px;
 
-    .reservehallListItemLink {
+    .reserve-hall-list-item-link {
       display: flex;
       flex-direction: column;
       height: 100%;
@@ -24,14 +25,14 @@
         text-align: center;
       }
 
-      &__countTables {
+      &__count-tables {
         text-align: center;
         margin-top: 20px;
       }
     }
   }
-  
-  .reservehallListItem:hover {
+
+  .reserve-hall-list-item:hover {
     transform: scale(105%);
   }
 }

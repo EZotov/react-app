@@ -21,7 +21,7 @@ interface TableProps {
 }
 
 const SquareTable : React.FC<TableProps> = (props) => {
-  const { type, size, places, tableId, hallId } = props;
+  const { constructorMode, type, size, places, tableId, hallId } = props;
   const [countPlacesX, countPlacesY] = size;
 
   //Rect parameters
@@ -30,9 +30,53 @@ const SquareTable : React.FC<TableProps> = (props) => {
 
   const smartGrid = AdminCenterService.createRenderIndexesArray(countPlacesX, grid);
 
+  if (constructorMode === ConstructorType.view) {
+    return (
+      <div style={{padding : 0}} className="table-general-container">
+          <div style={{gridTemplateColumns : `repeat(${countPlacesX + 2}, 100px)`, gridTemplateRows : `repeat(${countPlacesY + 2}, 100px)`}} className="square-table-container">
+            {
+              grid.map(i => {
+                if (smartGrid.includes(i)) {
+                  tablePlaceId++;
+                  const place = places.find(place => place.placeId === tablePlaceId);
+                  if (!place) {
+                    return (
+                      <div key={i}></div>
+                    );
+                  }
+                  
+                  return (
+                    <TablePlace
+                      placeId={tablePlaceId}
+                      hallId={hallId}
+                      tableId={tableId}
+                      tableType={type}
+                      key={i}
+                      placeStatus={place ? place.placeStatus : TablePlaceStatus.notSetting}
+                    />
+                  );
+                }
+                return (
+                  <div key={i}></div>
+                )
+              })
+            }
+            <Box className="square-table-container__table" sx={
+                {
+                  width : `${50 + (100 * countPlacesX) + ''}px`,
+                  height : `${50 + (100 * countPlacesY) + ''}px`,
+                  backgroundColor: 'primary.dark',
+                  border : '2px solid #000000'
+                }
+              } />
+          </div>
+      </div>
+    );
+  }
+
   return (
-    <div style={{padding : 0}} className="tableGeneralContainer">
-        <div style={{gridTemplateColumns : `repeat(${countPlacesX + 2}, 100px)`, gridTemplateRows : `repeat(${countPlacesY + 2}, 100px)`}} className="squareTableContainer">
+    <div style={{padding : 0}} className="table-general-container">
+        <div style={{gridTemplateColumns : `repeat(${countPlacesX + 2}, 100px)`, gridTemplateRows : `repeat(${countPlacesY + 2}, 100px)`}} className="square-table-container">
           {
             grid.map(i => {
               if (smartGrid.includes(i)) {
@@ -54,7 +98,7 @@ const SquareTable : React.FC<TableProps> = (props) => {
               )
             })
           }
-          <Box className="squareTableContainer__table" sx={
+          <Box className="square-table-container__table" sx={
               {
                 width : `${50 + (100 * countPlacesX) + ''}px`,
                 height : `${50 + (100 * countPlacesY) + ''}px`,

@@ -1,0 +1,26 @@
+.viewer-container {
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 10px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  width: 800px;
+  height: 750px;
+
+  &__headline {
+    color : #000000;
+  }
+
+  &__close-btn {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    width: 30px;
+    height: 30px;
+    border : none;
+    cursor: pointer;
+    background: url('../../../assets/close_grey.svg') no-repeat center;
+  }
+}

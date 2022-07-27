@@ -22,7 +22,7 @@ const TablePlace : React.FC<TablePlaceProps> = (props) => {
 
 
 
-  const onClickPlaceBtn = (hallId : number, tableId : number, placeId : number) : void => {
+  const onClickPlaceBtn = () : void => {
     switch(placeStatus) {
       case TablePlaceStatus.free:
         onDelPlaceTable(hallId, tableId, placeId);
@@ -49,10 +49,10 @@ const TablePlace : React.FC<TablePlaceProps> = (props) => {
 
   const componentClassesDefinition = () : string => {
     if (tableType === 'square') {
-      return 'tableGeneralContainer__place tableGeneralContainer__place_square';
+      return 'table-general-container__place table-general-container__place_square';
     }
     if (tableType === 'circle') {
-      return 'tableGeneralContainer__place tableGeneralContainer__place_circle';
+      return 'table-general-container__place table-general-container__place_circle';
     }
   }
 
@@ -61,17 +61,17 @@ const TablePlace : React.FC<TablePlaceProps> = (props) => {
   switch(placeStatus) {
     case TablePlaceStatus.notSetting:
       return (
-        <button className={componentClassesDefinitionMemo} type="button" onClick={() => onClickPlaceBtn(hallId, tableId, placeId)}>
+        <button className={componentClassesDefinitionMemo} type="button" onClick={onClickPlaceBtn}>
           Добавить <br/> место
         </button>
       );
     case TablePlaceStatus.reserved:
       return (
-        <div className={`${componentClassesDefinitionMemo} tableGeneralContainer__place_reserved`}>Забронировано</div>
+        <div className={`${componentClassesDefinitionMemo} table-general-container__place_reserved`}>Забронировано</div>
       )
     case TablePlaceStatus.free:
       return (
-        <button className={componentClassesDefinitionMemo} type="button" onClick={() => onClickPlaceBtn(hallId, tableId, placeId)}>Свободно</button>
+        <button className={componentClassesDefinitionMemo} type="button" onClick={onClickPlaceBtn}>Свободно</button>
       );
     default:
       return null;

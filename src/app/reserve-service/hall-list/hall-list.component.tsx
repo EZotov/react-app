@@ -8,15 +8,17 @@ import './hall-list.component.scss';
 
 const HallListComponent : React.FC<any> = ()  => {
   const halls = useSelector(selectHalls);
+
+
   return(
-    <ul className="reservehallList">
+    <ul className="reserve-hall-list">
       {
         halls.map(hall => {
           return (
-            <li key={hall.hallId} className="reservehallListItem">
-              <Link className="reservehallListItemLink" to={`hall/${hall.hallId}`}>
-                <h3 className="reservehallListItemLink__headline">Залл №{hall.hallId}</h3>
-                <span className="reservehallListItemLink__countTables">Количество столов : {hall.tables.length} из {hall.maxTablesCount}</span>
+            <li key={hall.hallId} className="reserve-hall-list-item">
+              <Link className="reserve-hall-list-item-link" to={`hall/${hall.hallId}`}>
+                <h3 className="reserve-hall-list-item-link__headline">Залл №{hall.hallId}</h3>
+                <span className="reserve-hall-list-item-link__count-tables">Количество столов : {hall.tables.length}</span>
               </Link>
             </li>
           )

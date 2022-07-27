@@ -17,21 +17,21 @@ const ReserveService : React.FC<any> = () => {
 
   return (
     <>
-      <header className="headerSection">
+      <header className="header-section">
         <div className="fixed-container">
           <h2 className="">Бронирование столов</h2>
         </div>
       </header>
 
-      <main>
+      <main className="main-section">
         <div className="fixed-container">
-          <div className="reserveContainer">
+          <div className="reserve-container">
             <Link to="/administration">
               Перейти в админинистрирование
             </Link>
             <Routes>
               <Route path="/" element={<HallListComponent/>}/>
-              <Route path="hall/:id" element={<ReserveHallComponent/>} />
+              <Route path="hall/:id/*" element={<ReserveHallComponent />} />
             </Routes>
           </div>
         </div>

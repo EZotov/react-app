@@ -5,6 +5,11 @@ const createRenderIndexesArray = (countPlacesX : number, grid : number[]) : numb
     let endRowIndex = startRowIndex + countPlacesX + 1;
 
     const renderIndexesArray = grid.map(i => {
+      if (i === endRowIndex + 1) {
+        startRowIndex = i;
+        endRowIndex = startRowIndex + countPlacesX + 1;
+      }
+
       if ((i < countPlacesX + 1 && i > 0) || (i > grid.length - 2 - countPlacesX && i < grid.length-1)) {
         return i;
       }
@@ -13,13 +18,8 @@ const createRenderIndexesArray = (countPlacesX : number, grid : number[]) : numb
           return i;
         }
       }
-
-      if (i === endRowIndex) {
-        startRowIndex = i + 1;
-        endRowIndex = startRowIndex + countPlacesX + 1;
-      }
     });
-    return renderIndexesArray;
+  return renderIndexesArray;
 }
 
 const defindIndexNewTableItem = (array : Table[]) : number => {
@@ -45,9 +45,33 @@ const defindIndexNewTableItem = (array : Table[]) : number => {
     });
     return nextIdTable;
   }
-  else {
-    return 1;
-  }
+  return 1;
 }
 
-export default {createRenderIndexesArray, defindIndexNewTableItem};
+const defindIndexNewHallItem = (array : Hall[]) : number => {
+  let nextIdTable : number = 1;
+  let maxItemId : number = 0;
+  if (array.length) {
+    const tableIdArray = array.map(item => {
+      return item.hallId;
+    });
+
+    array.forEach((item, i) => {
+      if (item.hallId >= maxItemId) {
+        maxItemId = item.hallId;
+        maxItemId++;
+      }
+
+      if (!tableIdArray.includes(i + 1)) {
+        nextIdTable = i + 1;
+      }
+      else {
+        nextIdTable = maxItemId;
+      }
+    });
+    return nextIdTable;
+  }
+  return 1;
+}
+
+export default {createRenderIndexesArray, defindIndexNewTableItem, defindIndexNewHallItem};

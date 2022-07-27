@@ -1,10 +1,10 @@
-.tableGeneralContainer {
+.table-general-container {
   padding: 60px 70px;
   display: flex;
   justify-content: center;
   position: relative;
 
-  .squareTableContainer {
+  .square-table-container {
     display: grid;
     grid-template-columns: repeat(3, 100px);
     grid-template-rows: repeat(3, 100px);
@@ -12,7 +12,7 @@
     background-color: #9bebed;
     position: relative;
 
-    .squareTableContainer__table {
+    .square-table-container__table {
       position: absolute;
       top : 50%;
       left: 50%;

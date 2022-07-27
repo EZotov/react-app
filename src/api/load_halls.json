@@ -24,6 +24,31 @@
             "sizeX" : 1,
             "sizeY" : 1
           }
+        },
+        {
+          "tableId" : 2,
+          "maxPlaces" : 4,
+          "places" : [
+              {
+                "placeId" : 1,
+                "placeStatus" : "FREE"
+              },
+              {
+                "placeId" : 2,
+                "placeStatus" : "FREE"
+              },
+              {
+                "placeId" : 7,
+                "placeStatus" : "FREE"
+              }
+            ],
+          "type" : "square",
+          "constructorParams" : {
+              "placesCount" : 0,
+              "sizeCircle" : 0,
+              "sizeX" : 2,
+              "sizeY" : 2
+            }
         }
       ]
     }
