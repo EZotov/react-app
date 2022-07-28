@@ -20,24 +20,24 @@ if (typeof window !== 'undefined') {
   reSaga.run(mainSagaWatcher);
   delete window_object.REDUX_DATA;
 
-  const root = ReactDOM.hydrateRoot(document.querySelector('.app'),
-    <Provider store={store}>
-      <Router>
-        <App/>
-      </Router>
-    </Provider>
-  );
+  // const root = ReactDOM.hydrateRoot(document.querySelector('.app'),
+  //   <Provider store={store}>
+  //     <Router>
+  //       <App/>
+  //     </Router>
+  //   </Provider>
+  // );
 }
 
 
-// const root = ReactDOM.createRoot(document.querySelector('.app'));
-// root.render(
-//   <Provider store={store}>
-//     <Router>
-//       <App/>
-//     </Router>
-//   </Provider>
-// );
+const root = ReactDOM.createRoot(document.querySelector('.app'));
+root.render(
+  <Provider store={store}>
+    <Router>
+      <App/>
+    </Router>
+  </Provider>
+);
 
 
 

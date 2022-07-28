@@ -1,4 +1,3 @@
-import { END } from 'redux-saga';
 import { call, put, SagaReturnType, takeEvery } from 'redux-saga/effects';
 import ApiService from '../../app/services/api.service';
 import { SendHallHttpAction } from '../../types/administration.types';

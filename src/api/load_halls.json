@@ -44,8 +44,8 @@
             ],
           "type" : "square",
           "constructorParams" : {
-              "placesCount" : 0,
-              "sizeCircle" : 0,
+              "placesCount" : 1,
+              "sizeCircle" : 2,
               "sizeX" : 2,
               "sizeY" : 2
             }

@@ -1,30 +1,6 @@
 import { AdministrationActionsType, TableType } from "../../types/types";
-import { ConstructorParameters, Hall, Table, TablePlace } from "../../types/interfaces";
-import { ActionsHttpType, ActionsType } from "../../types/enums.type";
-
-export const addTable = (hallId : number, table : Table) : AdministrationActionsType => {
-  return {
-    type : ActionsType.ADD_TABLE,
-    hallId,
-    table
-  }
-}
-
-export const delTable = (hallId : number, tableId : number) : AdministrationActionsType => {
-  return {
-    type : ActionsType.DELETE_TABLE,
-    hallId,
-    tableId
-  }
-}
-
-export const updateTable = (hallId : number, table : Table) : AdministrationActionsType => {
-  return {
-    type : ActionsType.UPDATE_TABLE,
-    hallId,
-    table
-  }
-}
+import { ConstructorParameters, TablePlace } from "../../types/interfaces";
+import { ActionsType } from "../../types/enums.type";
 
 export const selectTable = (hallId : number, tableId : number, constructorParameters : ConstructorParameters, places : TablePlace[]) : AdministrationActionsType => {
   return {
@@ -51,19 +27,7 @@ export const setConstructorParams = (params : ConstructorParameters) : Administr
   }
 }
 
-export const deleteHall = (hallId : number) : AdministrationActionsType => {
-  return {
-    type : ActionsType.DELETE_HALL,
-    hallId
-  }
-}
 
-export const addHall = (hall : Hall) : AdministrationActionsType => {
-  return {
-    type : ActionsType.ADD_HALL,
-    hall
-  }
-}
 
 export const addPlaceTable = (place : TablePlace) : AdministrationActionsType => {
   return {

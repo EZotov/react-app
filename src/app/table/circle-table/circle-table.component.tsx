@@ -50,6 +50,7 @@ const CircleTable : React.FC<TableProps> = (props) => {
                 return (
                   <div key={i} style={{transform : `rotate(${angle + ''}deg) translateX(-50%)`, transformOrigin : `1px ${transformOriginValue + 50 * countPlacesX + ''}px`}} className="circle-table-place-wrapper">
                     <TablePlace
+                      constructorMode={constructorMode}
                       placeId={i + 1}
                       hallId={hallId}
                       tableId={tableId}
@@ -89,6 +90,7 @@ const CircleTable : React.FC<TableProps> = (props) => {
               return (
                 <div key={i} style={{transform : `rotate(${angle + ''}deg) translateX(-50%)`, transformOrigin : `1px ${transformOriginValue + 50 * countPlacesX + ''}px`}} className="circle-table-place-wrapper">
                   <TablePlace
+                    constructorMode={constructorMode}
                     placeId={i + 1}
                     hallId={hallId}
                     tableId={tableId}

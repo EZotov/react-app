@@ -3,8 +3,10 @@ import React, { useCallback, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useSearchParams } from 'react-router-dom'
 
-import { addTable, changeConstrucorType, delTable, setConstructorParams, updateTable } from '../../redux/actions/administration.actions';
-import { selectConstructor, selectConstructorParams, selectMode, selectTables } from '../../redux/selectors/administration.selector';
+import { changeConstrucorType, setConstructorParams } from '../../redux/actions/administration.actions';
+import { addTable, delTable, updateTable } from '../../redux/actions/general.actions';
+import { selectConstructor, selectConstructorParams, selectMode } from '../../redux/selectors/administration.selector';
+import { selectTables } from '../../redux/selectors/general.selector';
 import { ConstructorParameters } from "../../types/interfaces";
 import { Table as TableInterface } from '../../types/interfaces';
 import { ConstructorType } from '../../types/enums.type';
@@ -14,6 +16,7 @@ import SquareTable from '../table/square-table/square-table.component';
 import CircleTable from '../table/circle-table/circle-table.component';
 
 import './table-constructor.component.scss';
+
 
 let typeParameterValue : ConstructorType;
 

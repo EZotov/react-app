@@ -2,36 +2,42 @@ import React, { useMemo } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { addPlaceTable, delPlaceTable } from '../../../redux/actions/administration.actions';
-import { TablePlaceStatus } from '../../../types/enums.type';
+import { ConstructorType, TablePlaceStatus } from '../../../types/enums.type';
 import { PlaceStateType, TableType } from '../../../types/types';
 import { TablePlace as TablePlaceInterface } from '../../../types/interfaces';
 
 import './table-place.component.scss';
+import { setPlaceMode } from '../../../redux/actions/reserve.actions';
 
 interface TablePlaceProps {
   placeStatus : PlaceStateType,
   tableType : TableType,
   placeId : number,
   hallId : number,
-  tableId : number
+  tableId : number,
+  constructorMode : ConstructorType
 }
+
 
 const TablePlace : React.FC<TablePlaceProps> = (props) => {
   const dispatch = useDispatch();
-  const { placeStatus, tableType, placeId, hallId, tableId } = props;
-
-
+  const { constructorMode, placeStatus, tableType, placeId, hallId, tableId } = props;
 
   const onClickPlaceBtn = () : void => {
-    switch(placeStatus) {
-      case TablePlaceStatus.free:
-        onDelPlaceTable(hallId, tableId, placeId);
-        break;
-      case TablePlaceStatus.notSetting:
-        onAddPlaceTable(placeId);
-        break;
-      default:
-        break;
+    if (constructorMode === ConstructorType.view) {
+      dispatch(setPlaceMode(hallId, tableId, placeId, TablePlaceStatus.reserved));
+    }
+    else {
+      switch(placeStatus) {
+        case TablePlaceStatus.free:
+          onDelPlaceTable(hallId, tableId, placeId);
+          break;
+        case TablePlaceStatus.notSetting:
+          onAddPlaceTable(placeId);
+          break;
+        default:
+          break;
+      }
     }
   }
 
@@ -67,7 +73,7 @@ const TablePlace : React.FC<TablePlaceProps> = (props) => {
       );
     case TablePlaceStatus.reserved:
       return (
-        <div className={`${componentClassesDefinitionMemo} table-general-container__place_reserved`}>Забронировано</div>
+        <div className={`${componentClassesDefinitionMemo} table-general-container__place_reserved`}>Занято</div>
       )
     case TablePlaceStatus.free:
       return (

@@ -44,9 +44,10 @@ const SquareTable : React.FC<TableProps> = (props) => {
                       <div key={i}></div>
                     );
                   }
-                  
+
                   return (
                     <TablePlace
+                      constructorMode={constructorMode}
                       placeId={tablePlaceId}
                       hallId={hallId}
                       tableId={tableId}
@@ -84,6 +85,7 @@ const SquareTable : React.FC<TableProps> = (props) => {
                 const place = places.find(place => place.placeId === tablePlaceId);
                 return (
                   <TablePlace
+                    constructorMode={constructorMode}
                     placeId={tablePlaceId}
                     hallId={hallId}
                     tableId={tableId}

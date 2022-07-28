@@ -1,6 +1,6 @@
 
 import { ActionsHttpType, ActionsType } from "./enums.type";
-import { ConstructorParameters, Hall, Table, TablePlace } from "./interfaces";
+import { ConstructorParameters, Hall, TablePlace } from "./interfaces";
 import { TableType } from "./types";
 
 
@@ -14,40 +14,12 @@ export interface SetConstructorParamsAction {
   params : ConstructorParameters
 }
 
-export interface AddTableAction {
-  type : ActionsType.ADD_TABLE,
-  hallId : number,
-  table : Table
-}
-
-export interface DelTableAction {
-  type : ActionsType.DELETE_TABLE,
-  hallId : number,
-  tableId : number
-}
-
-export interface UpdateTableAction {
-  type : ActionsType.UPDATE_TABLE,
-  hallId : number,
-  table : Table
-}
-
 export interface SelectTableAction {
   type : ActionsType.SELECT_TABLE,
   hallId : number,
   tableId : number,
   constructorParameters : ConstructorParameters,
   places : TablePlace[]
-}
-
-export interface DeleteHallAction {
-  type : ActionsType.DELETE_HALL,
-  hallId : number
-}
-
-export interface AddHallAction {
-  type : ActionsType.ADD_HALL,
-  hall : Hall
 }
 
 export interface ResetConstructorAction {
@@ -62,7 +34,6 @@ export interface SaveHallIdAction {
 export interface AddPlaceInTableAction {
   type : ActionsType.ADD_PLACE_IN_TABLE,
   place : TablePlace
-
 }
 
 export interface DeletePlaceFromTableAction {
@@ -72,14 +43,7 @@ export interface DeletePlaceFromTableAction {
   placeId : number
 }
 
-export interface LoadHallsHttpAction {
-  type : ActionsHttpType.LOAD_HALLS_REQUEST
-}
 
-export interface LoadHallsSuccessHttpAction {
-  type : ActionsHttpType.LOAD_HALLS_REQUEST_SUCCESS,
-  halls : Hall[]
-}
 
 export interface SendHallHttpAction {
   type : ActionsHttpType.ADD_NEW_HALL_REQUEST,

@@ -3,8 +3,8 @@ import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
 
-import { addHall } from '../../redux/actions/administration.actions';
-import { AdministrationSelectors } from '../../redux/selectors';
+import { addHall } from '../../redux/actions/general.actions';
+import { GeneralSelector } from '../../redux/selectors';
 import Hall from '../hall/hall.component';
 import { Hall as HallInterface } from '../../types/interfaces';
 import TableConstructor from '../table-constructor/table-constructor.component';
@@ -18,7 +18,7 @@ const maxTablesCount : number = 20;
 
 const AdminCenter : React.FC = () => {
   const dispatch = useDispatch();
-  const { halls } = useSelector(AdministrationSelectors.selectAdmin);
+  const halls = useSelector(GeneralSelector.selectHalls);
 
   React.useEffect(() => {
     dispatch(loadHallsRequest());

@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { Link, Route, Routes, useParams } from 'react-router-dom';
 
 import { RootState } from '../../..';
-import { selectTables } from '../../../redux/selectors/administration.selector';
+import { selectTables } from '../../../redux/selectors/general.selector';
 import { TablePlaceStatus } from '../../../types/enums.type';
 import ReserveTableViewerComponent from '../reserve-table-viewer/reserve-table-viewer.component';
 
@@ -31,9 +31,9 @@ const ReserveHallComponent : React.FC<any> = () => {
             });
             return (
               <li key={table.tableId} className="reserve-hall-list-item">
-                <Link to={`table/${table.tableId}`}>
-                  <h3 className="">Стол №{table.tableId}</h3>
-                  <span className="">Свободно мест : {freePlacesCount} из {table.places.length}</span>
+                <Link className="reserve-hall-list-item-link" to={`table/${table.tableId}`}>
+                  <h3 className="reserve-hall-list-item-link__headline">Стол №{table.tableId}</h3>
+                  <span className="reserve-hall-list-item-link__place-count">Свободно мест : {freePlacesCount} из {table.places.length}</span>
                 </Link>
               </li>
             );
