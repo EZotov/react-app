@@ -61,7 +61,7 @@ const AdminCenter : React.FC = () => {
         </div>
       </main>
       <Routes>
-        <Route path="tableConstructor" element={<TableConstructor/>}/>
+        <Route path="tableConstructor" element={<TableConstructor />}/>
       </Routes>
     </>
   );

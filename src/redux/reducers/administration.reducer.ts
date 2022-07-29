@@ -1,4 +1,4 @@
-import { ActionsType } from "../../types/enums.type";
+import { ActionsType, TableType } from "../../types/enums.type";
 import { TableConstructor } from "../../types/interfaces";
 import { AdministrationActionsType, HttpActionsType } from "../../types/types";
 
@@ -8,7 +8,7 @@ export interface AdministrationState {
 }
 
 const defaultConstructor : TableConstructor = {
-  mode : 'circle',
+  mode : TableType.circle,
   places : [],
   constructorParameters : {
     sizeCircle : 2,

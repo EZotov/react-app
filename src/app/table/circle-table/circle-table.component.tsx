@@ -1,16 +1,14 @@
 import Box from '@mui/material/Box';
 import React from 'react';
 
-import { TableType } from '../../../types/types';
 import TablePlace from '../table-place/table-place.component';
 import { TablePlace as  TablePlaceInterface} from '../../../types/interfaces';
-import { ConstructorType, TablePlaceStatus } from '../../../types/enums.type';
+import { ConstructorType, TablePlaceStatus, TableType } from '../../../types/enums.type';
 
 import './circle-table.component.scss';
 
 
 interface TableProps {
-  type : TableType,
   countPlacesCircle : number,
   size : [number, number],
   constructorMode : ConstructorType,
@@ -20,7 +18,7 @@ interface TableProps {
 }
 
 const CircleTable : React.FC<TableProps> = (props) => {
-  const { constructorMode, type, countPlacesCircle, size, places, tableId, hallId } = props;
+  const { constructorMode, countPlacesCircle, size, places, tableId, hallId } = props;
   const [countPlacesX, countPlacesY] = size;
 
   //Circle Parameters
@@ -54,7 +52,7 @@ const CircleTable : React.FC<TableProps> = (props) => {
                       placeId={i + 1}
                       hallId={hallId}
                       tableId={tableId}
-                      tableType={type}
+                      tableType={TableType.circle}
                       placeStatus={place ? place.placeStatus : TablePlaceStatus.notSetting}
                     />
                   </div>
@@ -94,7 +92,7 @@ const CircleTable : React.FC<TableProps> = (props) => {
                     placeId={i + 1}
                     hallId={hallId}
                     tableId={tableId}
-                    tableType={type}
+                    tableType={TableType.circle}
                     placeStatus={place ? place.placeStatus : TablePlaceStatus.notSetting}
                   />
                 </div>

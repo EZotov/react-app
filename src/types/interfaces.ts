@@ -1,4 +1,5 @@
-import { PlaceStateType, TableType } from "./types"
+import { TableType } from "./enums.type"
+import { PlaceStateType } from "./types"
 
 export interface TableSize {
   width : number,

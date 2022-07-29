@@ -1,7 +1,7 @@
 
-import { ActionsHttpType, ActionsType } from "./enums.type";
+import { ActionsHttpType, ActionsType, TableType } from "./enums.type";
 import { ConstructorParameters, Hall, TablePlace } from "./interfaces";
-import { TableType } from "./types";
+
 
 
 export interface ChangeConstrucorTypeAction {

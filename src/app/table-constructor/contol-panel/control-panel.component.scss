@@ -1,0 +1,48 @@
+.control-panel {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top : 1px solid #000000;
+  color : #000000;
+
+  .control-panel-element {
+    display: flex;
+    flex-direction: column;
+    width: 150px;
+
+    .control-panel-element-text-wrapper {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      &__label {
+        font-size: 18px;
+        font-weight: bold;
+      }
+
+      &__value {
+        display: inline-block;
+        padding: 5px 10px;
+        margin-left: 10px;
+        border : 1px solid #000000;
+        background-color: #1565c0;
+        color : #ffffff;
+      }
+    }
+
+    .control-panel-element-btn-wrapper {
+      display: flex;
+      flex-direction: column;
+      margin-top: 5px;
+
+      &__increase-btn, &__decrease-btn {
+        height: 40px;
+      }
+
+      &__decrease-btn {
+        margin-top: 10px;
+      }
+    }
+  }
+}

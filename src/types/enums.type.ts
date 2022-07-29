@@ -32,3 +32,15 @@ export enum TablePlaceStatus {
   reserved = 'RESERVED',
   notSetting = 'NOT SETTING'
 }
+
+export enum TableType {
+  square = 'square',
+  circle = 'circle'
+}
+
+export enum Parameters {
+  sizeCircle = 'sizeCircle',
+  sizeX = 'sizeX',
+  sizeY = 'sizeY',
+  placesCount = 'placesCount'
+}

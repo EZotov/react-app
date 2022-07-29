@@ -1,6 +1,6 @@
-import { AdministrationActionsType, TableType } from "../../types/types";
+import { AdministrationActionsType } from "../../types/types";
 import { ConstructorParameters, TablePlace } from "../../types/interfaces";
-import { ActionsType } from "../../types/enums.type";
+import { ActionsType, TableType } from "../../types/enums.type";
 
 export const selectTable = (hallId : number, tableId : number, constructorParameters : ConstructorParameters, places : TablePlace[]) : AdministrationActionsType => {
   return {

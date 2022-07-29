@@ -1,17 +1,15 @@
 import Box from '@mui/material/Box';
 import React from 'react';
 
-import { TableType } from '../../../types/types';
 import AdminCenterService from '../../services/admin-center.service';
 import TablePlace from '../table-place/table-place.component';
 import { TablePlace as  TablePlaceInterface} from '../../../types/interfaces';
-import { ConstructorType, TablePlaceStatus } from '../../../types/enums.type';
+import { ConstructorType, TablePlaceStatus, TableType } from '../../../types/enums.type';
 
 import './square-table.component.scss';
 
 
 interface TableProps {
-  type : TableType,
   countPlacesCircle : number,
   size : [number, number],
   constructorMode : ConstructorType,
@@ -21,7 +19,7 @@ interface TableProps {
 }
 
 const SquareTable : React.FC<TableProps> = (props) => {
-  const { constructorMode, type, size, places, tableId, hallId } = props;
+  const { constructorMode, size, places, tableId, hallId } = props;
   const [countPlacesX, countPlacesY] = size;
 
   //Rect parameters
@@ -51,7 +49,7 @@ const SquareTable : React.FC<TableProps> = (props) => {
                       placeId={tablePlaceId}
                       hallId={hallId}
                       tableId={tableId}
-                      tableType={type}
+                      tableType={TableType.square}
                       key={i}
                       placeStatus={place ? place.placeStatus : TablePlaceStatus.notSetting}
                     />
@@ -89,7 +87,7 @@ const SquareTable : React.FC<TableProps> = (props) => {
                     placeId={tablePlaceId}
                     hallId={hallId}
                     tableId={tableId}
-                    tableType={type}
+                    tableType={TableType.square}
                     key={i}
                     placeStatus={place ? place.placeStatus : TablePlaceStatus.notSetting}
                   />

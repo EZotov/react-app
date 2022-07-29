@@ -1,5 +1,5 @@
 import { ActionsHttpType, ActionsType, TablePlaceStatus } from "../../types/enums.type";
-import { Hall, Table, TablePlace } from "../../types/interfaces";
+import { Hall, Table } from "../../types/interfaces";
 import { GeneralActionsType, HttpActionsType } from "../../types/types";
 
 export interface GeneralState {
@@ -87,7 +87,7 @@ export const generalReducer = (state : GeneralState = initState, action : Genera
         const sourceTableIndex = state.halls[sourceHallIndex].tables.findIndex(table => table.tableId === action.tableId);
         const sourcePlaceIndex = state.halls[sourceHallIndex].tables[sourceTableIndex].places.findIndex(place => place.placeId === action.placeId);
 
-        const newTablesArray = state.halls[sourceHallIndex].tables.map<Table>(table => {
+        const newTablesArray = state.halls[sourceHallIndex].tables.map(table => {
           if (table.tableId === action.tableId) {
             const newTable : Table = {...table};
             newTable.places[sourcePlaceIndex].placeStatus = TablePlaceStatus.reserved;

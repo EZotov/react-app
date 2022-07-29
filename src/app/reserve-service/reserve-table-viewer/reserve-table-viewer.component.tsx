@@ -5,10 +5,9 @@ import { useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import { RootState } from '../../..';
-import { selectCurrentTable, selectHalls, selectTables } from '../../../redux/selectors/general.selector';
-import { ConstructorType } from '../../../types/enums.type';
-import CircleTable from '../../table/circle-table/circle-table.component';
-import SquareTable from '../../table/square-table/square-table.component';
+import { selectCurrentTable } from '../../../redux/selectors/general.selector';
+import { ConstructorType, TableType } from '../../../types/enums.type';
+import Table from '../../table/table.component';
 
 import './reserve-table-viewer.component.scss';
 
@@ -42,32 +41,15 @@ const ReserveTableViewerComponent : React.FC<ReserveTableViewerProps> = (props) 
         <h2 className="viewer-container__headline">Бронирование мест стола №{table.tableId}, зал №{hallId}</h2>
         <button className="viewer-container__close-btn" type="button" onClick={onClickCloseViewerBtn}/>
         <div className="viewer-main">
-          {
-            table.type === 'square' && (
-              <SquareTable
-              constructorMode={ConstructorType.view}
-              hallId={hallId}
-              tableId={tableId}
-              places={table.places}
-              countPlacesCircle={0}
-              type='square'
-              size={[table.constructorParams.sizeX, table.constructorParams.sizeY]}
-            />
-            )
-          }
-          {
-            table.type === 'circle' && (
-              <CircleTable
-                constructorMode={ConstructorType.view}
-                hallId={hallId}
-                tableId={tableId}
-                places={table.places}
-                countPlacesCircle={table.constructorParams.placesCount}
-                type='circle'
-                size={[table.constructorParams.sizeCircle, table.constructorParams.sizeCircle]}
-              />
-            )
-          }
+          <Table
+            constructorParams={table.constructorParams}
+            constructorMode={ConstructorType.view}
+            hallId={hallId}
+            tableId={tableId}
+            places={table.places}
+            type={table.type}
+            size={[table.constructorParams.sizeX, table.constructorParams.sizeY]}
+          />
           <form className="viewer-main-form" onSubmit={(e) => onSubmitReservationForm(e)}>
             <h3 className="viewer-main-form__headline">Информация о бронировании</h3>
             <div className="field-set">
