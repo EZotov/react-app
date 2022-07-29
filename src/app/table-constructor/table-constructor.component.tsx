@@ -1,5 +1,5 @@
 import Button from '@mui/material/Button';
-import React, { useCallback, useMemo } from 'react';
+import React, { useCallback, useMemo, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useSearchParams } from 'react-router-dom'
 
@@ -17,7 +17,6 @@ import CircleTable from '../table/circle-table/circle-table.component';
 
 import './table-constructor.component.scss';
 
-
 let typeParameterValue : ConstructorType;
 
 const TableConstructor : React.FC = () => {
@@ -29,11 +28,17 @@ const TableConstructor : React.FC = () => {
   const constructorParams = useSelector(selectConstructorParams);
   const tables = useSelector((state : RootState) => selectTables(state, constructor.hallId));
 
+  const isInitialMount = useRef(true);
+
   let memoizedTableId : number = 0;
 
   if (tables) {
     memoizedTableId = useMemo(() => AdminCenterService.defindIndexNewTableItem(tables), [tables]);
   }
+
+  React.useEffect(() => {
+    isInitialMount.current ? isInitialMount.current = false : navigate('/administration');
+  }, [tables]);
 
   switch(params.get('type')) {
     case 'new':
@@ -137,8 +142,8 @@ const TableConstructor : React.FC = () => {
 
   const onClickDeleteTableBtn = useCallback(() : void => {
     dispatch(delTable(constructor.hallId, constructor.tableId));
-    navigate('/administration');
   }, []);
+
 
   return (
     <div className="modal-overlay">
