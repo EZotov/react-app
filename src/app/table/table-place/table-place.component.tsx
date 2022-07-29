@@ -2,8 +2,8 @@ import React, { useMemo } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { addPlaceTable, delPlaceTable } from '../../../redux/actions/administration.actions';
-import { ConstructorType, TablePlaceStatus } from '../../../types/enums.type';
-import { PlaceStateType, TableType } from '../../../types/types';
+import { ConstructorType, TablePlaceStatus, TableType } from '../../../types/enums.type';
+import { PlaceStateType } from '../../../types/types';
 import { TablePlace as TablePlaceInterface } from '../../../types/interfaces';
 
 import './table-place.component.scss';
