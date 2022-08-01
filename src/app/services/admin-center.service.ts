@@ -20,15 +20,13 @@ const createRenderIndexesArray = (countPlacesX : number, grid : number[]) : numb
       }
     });
   return renderIndexesArray;
-}
+};
 
 const defindIndexNewTableItem = (array : Table[]) : number => {
   let nextIdTable : number = 1;
   let maxItemId : number = 0;
   if (array.length) {
-    const tableIdArray = array.map(item => {
-      return item.tableId;
-    });
+    const tableIdArray = array.map(item => item.tableId);
 
     array.forEach((item, i) => {
       if (item.tableId >= maxItemId) {
@@ -46,15 +44,13 @@ const defindIndexNewTableItem = (array : Table[]) : number => {
     return nextIdTable;
   }
   return 1;
-}
+};
 
 const defindIndexNewHallItem = (array : Hall[]) : number => {
   let nextIdTable : number = 1;
   let maxItemId : number = 0;
   if (array.length) {
-    const tableIdArray = array.map(item => {
-      return item.hallId;
-    });
+    const tableIdArray = array.map(item => item.hallId);
 
     array.forEach((item, i) => {
       if (item.hallId >= maxItemId) {
@@ -72,6 +68,6 @@ const defindIndexNewHallItem = (array : Hall[]) : number => {
     return nextIdTable;
   }
   return 1;
-}
+};
 
 export default {createRenderIndexesArray, defindIndexNewTableItem, defindIndexNewHallItem};

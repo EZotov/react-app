@@ -9,25 +9,25 @@
   color : #1565c0;
   text-align: center;
   cursor: pointer;
-}
 
-.table-general-container__place:hover, .table-general-container__place:active {
-  color : #ffffff;
-  border : 1px solid #ffffff;
-  background-color: #f1943f;
-}
+  &:hover, &:active {
+    color : #ffffff;
+    border : 1px solid #ffffff;
+    background-color: #f1943f;
+  }
 
-.table-general-container__place_square {
-  width: 100px;
-  padding-top: 30px;
-}
+  &_square {
+    width: 100px;
+    padding-top: 30px;
+  }
 
-.table-general-container__place_circle {
-  width: 80px;
-  padding-top: 15px;
-}
+  &_circle {
+    width: 80px;
+    padding-top: 15px;
+  }
 
-.table-general-container__place_reserved {
-  background-color: #cf8282;
-  color: #000000;
+  &_reserved {
+    background-color: #cf8282;
+    color: #000000;
+  }
 }

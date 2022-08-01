@@ -1,7 +1,7 @@
-import { RootState } from "../..";
-import { TableType } from "../../types/enums.type";
-import { TableConstructor, ConstructorParameters } from "../../types/interfaces";
-import { AdministrationState } from "../reducers/administration.reducer";
+import { RootState } from '../..';
+import { TableType } from '../../types/enums.type';
+import { TableConstructor, ConstructorParameters } from '../../types/interfaces';
+import { AdministrationState } from '../reducers/administration.reducer';
 
 export const selectAdmin = (state : RootState) : AdministrationState => state.administration;
 

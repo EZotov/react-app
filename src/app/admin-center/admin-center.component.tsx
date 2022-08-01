@@ -33,7 +33,7 @@ const AdminCenter : React.FC = () => {
       tables : []
     }
     dispatch(addHall(newHall));
-  }, [halls])
+  }, [halls]);
 
   return (
     <>
@@ -52,11 +52,10 @@ const AdminCenter : React.FC = () => {
             <Button className="add__btn" variant="outlined" sx={{border : '1px solid #e87b16', color : '#e87b16'}} onClick={onClickAddHall}>Добавить зал</Button>
           </div>
           {
-            halls.map(hall => {
-              return (
+            halls.map(hall => (
                 <Hall key={hall.hallId} id={hall.hallId} maxTablesCount={hall.maxTablesCount} />
-              );
-            })
+              )
+            )
           }
         </div>
       </main>
@@ -65,6 +64,6 @@ const AdminCenter : React.FC = () => {
       </Routes>
     </>
   );
-}
+};
 
 export default AdminCenter;

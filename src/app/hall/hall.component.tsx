@@ -14,7 +14,7 @@ import './hall.component.scss';
 interface HallProps {
   id : number,
   maxTablesCount : number
-}
+};
 
 const Hall : React.FC<HallProps> = (props) => {
   const { id, maxTablesCount  } = props;
@@ -24,7 +24,7 @@ const Hall : React.FC<HallProps> = (props) => {
 
   const onClickDeleteHallBtn = useCallback(() : void => {
     dispatch(deleteHall(id));
-  }, [])
+  }, []);
 
   const onClickAddTableBtn = useCallback(() : void => {
     dispatch(resetConstructor());
@@ -48,7 +48,7 @@ const Hall : React.FC<HallProps> = (props) => {
       )
     );
     navigate('tableConstructor?type=edit');
-  }, [])
+  }, []);
 
   return (
     <div className="hall-container">
@@ -73,6 +73,6 @@ const Hall : React.FC<HallProps> = (props) => {
       </ul>
     </div>
   )
-}
+};
 
 export default Hall;

@@ -5,10 +5,10 @@ import { GeneralSelector } from '../../../redux/selectors';
 
 import './hall-list.component.scss';
 
-const HallListComponent : React.FC<any> = ()  => {
+const HallListComponent : React.FC = ()  => {
   const halls = useSelector(GeneralSelector.selectHalls);
 
-  return(
+  return (
     <ul className="reserve-hall-list">
       {
         halls.map(hall => (
@@ -23,6 +23,6 @@ const HallListComponent : React.FC<any> = ()  => {
       }
     </ul>
   );
-}
+};
 
 export default HallListComponent;

@@ -1,5 +1,5 @@
-import { ChangeConstrucorTypeAction, SetConstructorParamsAction, SelectTableAction,ResetConstructorAction, AddPlaceInTableAction, DeletePlaceFromTableAction, SaveHallIdAction, SendHallHttpAction, SendHallSuccessHttpAction } from "./administration.types";
-import { AddHallAction, AddTableAction, DeleteHallAction, DelTableAction, LoadHallsHttpAction, LoadHallsSuccessHttpAction, ReservePlaceAction, UpdateTableAction } from "./general.types";
+import { ChangeConstrucorTypeAction, SetConstructorParamsAction, SelectTableAction,ResetConstructorAction, AddPlaceInTableAction, DeletePlaceFromTableAction, SaveHallIdAction, SendHallHttpAction, SendHallSuccessHttpAction } from './administration.types';
+import { AddHallAction, AddTableAction, DeleteHallAction, DelTableAction, LoadHallsHttpAction, LoadHallsSuccessHttpAction, ReservePlaceAction, UpdateTableAction } from './general.types';
 
 export type PlaceStateType = 'FREE' | 'RESERVED' | 'NOT SETTING';
 

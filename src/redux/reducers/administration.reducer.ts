@@ -5,7 +5,7 @@ import { AdministrationActionsType, HttpActionsType } from "../../types/types";
 
 export interface AdministrationState {
  constructor : TableConstructor
-}
+};
 
 const defaultConstructor : TableConstructor = {
   mode : TableType.circle,
@@ -18,11 +18,11 @@ const defaultConstructor : TableConstructor = {
   },
   hallId : 0,
   tableId : 0
-}
+};
 
 const initState : AdministrationState = {
   constructor : defaultConstructor
-}
+};
 
 export const administrationReducer = (state : AdministrationState = initState, action : AdministrationActionsType | HttpActionsType) : AdministrationState => {
   switch(action.type) {
@@ -35,7 +35,7 @@ export const administrationReducer = (state : AdministrationState = initState, a
           hallId : action.hallId,
           tableId : action.tableId
         }
-      }
+      };
     case ActionsType.CHANGE_CONSTRUCTOR_TYPE:
       return {
         constructor : {
@@ -45,7 +45,7 @@ export const administrationReducer = (state : AdministrationState = initState, a
           hallId : state.constructor.hallId,
           tableId : state.constructor.tableId
         }
-      }
+      };
     case ActionsType.SET_CONSTRUCTOR_PARAMS:
       return {
         constructor : {
@@ -55,12 +55,12 @@ export const administrationReducer = (state : AdministrationState = initState, a
           hallId : state.constructor.hallId,
           tableId : state.constructor.tableId
         }
-      }
+      };
 
     case ActionsType.RESET_CONSTRUCTOR:
       return {
         constructor : defaultConstructor
-      }
+      };
     case ActionsType.SAVE_HALL_ID_IN_CONSTRUCTOR:
       return {
         constructor : {
@@ -70,7 +70,7 @@ export const administrationReducer = (state : AdministrationState = initState, a
           places : state.constructor.places,
           tableId : state.constructor.tableId
         }
-      }
+      };
     case ActionsType.ADD_PLACE_IN_TABLE:
       return {
         constructor : {
@@ -80,7 +80,7 @@ export const administrationReducer = (state : AdministrationState = initState, a
           tableId : state.constructor.tableId,
           places : [...state.constructor.places, action.place]
         }
-      }
+      };
     case ActionsType.DELETE_PLACE_FROM_TABLE:
       const newPlaces = [...state.constructor.places];
       const placeIndex = newPlaces.find(place => place.placeId === action.placeId);

@@ -10,7 +10,7 @@ import ReserveTableViewerComponent from '../reserve-table-viewer/reserve-table-v
 import './reserve-hall.component.scss';
 
 
-const ReserveHallComponent : React.FC<any> = () => {
+const ReserveHallComponent : React.FC = () => {
   const params = useParams();
   const { id } = params;
   const tables = useSelector((state : RootState) => selectTables(state, Number(id)));
@@ -24,11 +24,13 @@ const ReserveHallComponent : React.FC<any> = () => {
         {
           tables.map(table => {
             let freePlacesCount : number = 0;
+
             table.places.forEach(place => {
               if (place.placeStatus === TablePlaceStatus.free) {
                 freePlacesCount++;
               }
             });
+
             return (
               <li key={table.tableId} className="reserve-hall-list-item">
                 <Link className="reserve-hall-list-item-link" to={`table/${table.tableId}`}>
@@ -46,6 +48,6 @@ const ReserveHallComponent : React.FC<any> = () => {
       </Routes>
     </div>
   );
-}
+};
 
 export default ReserveHallComponent;

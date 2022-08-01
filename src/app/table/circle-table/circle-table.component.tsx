@@ -15,7 +15,7 @@ interface TableProps {
   places : TablePlaceInterface[],
   hallId : number,
   tableId : number
-}
+};
 
 const CircleTable : React.FC<TableProps> = (props) => {
   const { constructorMode, countPlacesCircle, size, places, tableId, hallId } = props;
@@ -25,7 +25,8 @@ const CircleTable : React.FC<TableProps> = (props) => {
   const addAngle : number = 360 / countPlacesCircle;
   const circleTemplate : number[] = Array.from(Array(countPlacesCircle).keys());
   let angle : number = 0;
-  let transformOriginValue : number = 50;
+  let baseTransformOriginValue : number = 50;
+  const currentTransformOriginValue = baseTransformOriginValue + 50 * countPlacesX;
 
   if (constructorMode === ConstructorType.view) {
     return (
@@ -41,12 +42,12 @@ const CircleTable : React.FC<TableProps> = (props) => {
                 const place = places.find(place => place.placeId === i + 1);
                 if (!place) {
                   return (
-                    <div key={i}></div>
+                    <div key={i} />
                   );
                 }
 
                 return (
-                  <div key={i} style={{transform : `rotate(${angle + ''}deg) translateX(-50%)`, transformOrigin : `1px ${transformOriginValue + 50 * countPlacesX + ''}px`}} className="circle-table-place-wrapper">
+                  <div key={i} style={{transform : `rotate(${String(angle)}deg) translateX(-50%)`, transformOrigin : `1px ${currentTransformOriginValue}px`}} className="circle-table-place-wrapper">
                     <TablePlace
                       constructorMode={constructorMode}
                       placeId={i + 1}
@@ -83,10 +84,10 @@ const CircleTable : React.FC<TableProps> = (props) => {
                 angle = 0;
               }
               angle = angle + addAngle;
-
               const place = places.find(place => place.placeId === i + 1);
+
               return (
-                <div key={i} style={{transform : `rotate(${angle + ''}deg) translateX(-50%)`, transformOrigin : `1px ${transformOriginValue + 50 * countPlacesX + ''}px`}} className="circle-table-place-wrapper">
+                <div key={i} style={{transform : `rotate(${String(angle)}deg) translateX(-50%)`, transformOrigin : `1px ${currentTransformOriginValue}px`}} className="circle-table-place-wrapper">
                   <TablePlace
                     constructorMode={constructorMode}
                     placeId={i + 1}

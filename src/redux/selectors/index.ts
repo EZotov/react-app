@@ -6,4 +6,4 @@ export {
   AdministrationSelectors,
   ReseveServiceSelector,
   GeneralSelector
-}
+};

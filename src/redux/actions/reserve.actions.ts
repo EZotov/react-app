@@ -1,4 +1,4 @@
-import { ActionsType, TablePlaceStatus } from "../../types/enums.type";
+import { ActionsType, TablePlaceStatus } from '../../types/enums.type';
 
 export const setPlaceMode = (hallId : number, tableId : number, placeId : number, mode : TablePlaceStatus) => {
   return {
@@ -7,5 +7,5 @@ export const setPlaceMode = (hallId : number, tableId : number, placeId : number
     tableId,
     placeId,
     mode
-  }
-}
+  };
+};

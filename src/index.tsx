@@ -19,14 +19,6 @@ if (typeof window !== 'undefined') {
   store = createStore(rootReducer, window_object.REDUX_DATA, applyMiddleware(reSaga));
   reSaga.run(mainSagaWatcher);
   delete window_object.REDUX_DATA;
-
-  // const root = ReactDOM.hydrateRoot(document.querySelector('.app'),
-  //   <Provider store={store}>
-  //     <Router>
-  //       <App/>
-  //     </Router>
-  //   </Provider>
-  // );
 }
 
 

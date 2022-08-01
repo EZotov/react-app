@@ -1,6 +1,6 @@
-import { RootState } from "../..";
-import { TableType } from "../../types/enums.type";
-import { Hall, Table } from "../../types/interfaces";
+import { RootState } from '../..';
+import { TableType } from '../../types/enums.type';
+import { Hall, Table } from '../../types/interfaces';
 
 export const selectHalls = (state : RootState) : Hall[] => state.general.halls;
 

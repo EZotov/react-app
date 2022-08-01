@@ -42,10 +42,10 @@
 
       .field-set {
         margin-bottom: 20px;
-      }
-
-      .field-set:last-child {
-        margin-bottom: 0;
+        
+        &:last-child {
+          margin-bottom: 0;
+        }
       }
     }
   }

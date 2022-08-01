@@ -6,14 +6,14 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 import { RootState } from '../../..';
 import { selectCurrentTable } from '../../../redux/selectors/general.selector';
-import { ConstructorType, TableType } from '../../../types/enums.type';
+import { ConstructorType } from '../../../types/enums.type';
 import Table from '../../table/table.component';
 
 import './reserve-table-viewer.component.scss';
 
  interface ReserveTableViewerProps {
    hallId : number
- }
+ };
 
 const ReserveTableViewerComponent : React.FC<ReserveTableViewerProps> = (props) => {
   const navigate = useNavigate();
@@ -69,6 +69,6 @@ const ReserveTableViewerComponent : React.FC<ReserveTableViewerProps> = (props) 
       </div>
     </div>
   );
-}
+};
 
 export default ReserveTableViewerComponent;

@@ -8,7 +8,7 @@ import ReserveHallComponent from './reserve-hall/reserve-hall.component';
 
 import './reserve-service.component.scss';
 
-const ReserveService : React.FC<any> = () => {
+const ReserveService : React.FC = () => {
   const dispatch = useDispatch();
 
   React.useEffect(() => {
@@ -38,6 +38,6 @@ const ReserveService : React.FC<any> = () => {
       </main>
     </>
   )
-}
+};
 
 export default ReserveService;

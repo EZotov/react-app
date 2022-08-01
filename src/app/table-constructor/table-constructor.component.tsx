@@ -18,7 +18,7 @@ import './table-constructor.component.scss';
 
 const TableConstructor : React.FC = () => {
   const [typeParameterValue, setTypeParameterValue] = useState(ConstructorType.new);
-  
+
   const [params] = useSearchParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -73,17 +73,12 @@ const TableConstructor : React.FC = () => {
       }
     }
 
-    switch(typeParameterValue) {
-      case 'edit':
-        newTable.tableId = constructor.tableId;
-        dispatch(updateTable(constructor.hallId, newTable));
-        break;
-      case 'new':
-        newTable.tableId = memoizedTableId,
-        dispatch(addTable(constructor.hallId, newTable));
-        break;
-      default:
-        break;
+    if (typeParameterValue === ConstructorType.edit) {
+      newTable.tableId = constructor.tableId;
+      dispatch(updateTable(constructor.hallId, newTable));
+    } else if (typeParameterValue === ConstructorType.new) {
+      newTable.tableId = memoizedTableId,
+      dispatch(addTable(constructor.hallId, newTable));
     }
   }, [constructor]);
 
@@ -124,6 +119,6 @@ const TableConstructor : React.FC = () => {
       </div>
     </div>
   );
-}
+};
 
 export default TableConstructor;

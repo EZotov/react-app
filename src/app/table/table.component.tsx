@@ -15,39 +15,40 @@ interface TableProps {
   hallId : number,
   tableId : number,
   constructorParams : ConstructorParameters
-}
+};
 
 const Table : React.FC<TableProps> = (props) => {
   const { type, constructorMode, hallId, tableId, places, constructorParams } = props;
 
-  switch(type) {
-    case TableType.circle:
-      return (
-        <div className="table-wrapper">
-          <CircleTable
-            hallId={hallId}
-            tableId={tableId}
-            constructorMode={constructorMode}
-            places={places}
-            countPlacesCircle={constructorParams.placesCount}
-            size={[constructorParams.sizeCircle, constructorParams.sizeCircle]}
-          />
-        </div>
-      );
-    case TableType.square:
-      return (
-        <div className="table-wrapper">
-          <SquareTable
-            hallId={hallId}
-            tableId={tableId}
-            constructorMode={constructorMode}
-            places={places}
-            countPlacesCircle={constructorParams.placesCount}
-            size={[constructorParams.sizeX,constructorParams.sizeY]}
-          />
-        </div>
-      );
+  if (type === TableType.circle) {
+    return (
+      <div className="table-wrapper">
+        <CircleTable
+          hallId={hallId}
+          tableId={tableId}
+          constructorMode={constructorMode}
+          places={places}
+          countPlacesCircle={constructorParams.placesCount}
+          size={[constructorParams.sizeCircle, constructorParams.sizeCircle]}
+        />
+      </div>
+    );
+  } else if (type === TableType.square) {
+    return (
+      <div className="table-wrapper">
+        <SquareTable
+          hallId={hallId}
+          tableId={tableId}
+          constructorMode={constructorMode}
+          places={places}
+          countPlacesCircle={constructorParams.placesCount}
+          size={[constructorParams.sizeX,constructorParams.sizeY]}
+        />
+      </div>
+    );
   }
-}
+
+  return;
+};
 
 export default Table;

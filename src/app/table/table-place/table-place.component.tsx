@@ -16,7 +16,7 @@ interface TablePlaceProps {
   hallId : number,
   tableId : number,
   constructorMode : ConstructorType
-}
+};
 
 
 const TablePlace : React.FC<TablePlaceProps> = (props) => {
@@ -37,9 +37,9 @@ const TablePlace : React.FC<TablePlaceProps> = (props) => {
           break;
         default:
           break;
-      }
+      };
     }
-  }
+  };
 
   const onAddPlaceTable = (placeId : number) => {
     const newPlace : TablePlaceInterface = {
@@ -47,20 +47,20 @@ const TablePlace : React.FC<TablePlaceProps> = (props) => {
       placeStatus : TablePlaceStatus.free
     };
     dispatch(addPlaceTable(newPlace));
-  }
+  };
 
   const onDelPlaceTable = (hallId_delete : number, tableId_delete : number, placeId1_delete: number) => {
     dispatch(delPlaceTable(hallId_delete, tableId_delete, placeId1_delete));
-  }
+  };
 
   const componentClassesDefinition = () : string => {
-    if (tableType === 'square') {
+    if (tableType === TableType.square) {
       return 'table-general-container__place table-general-container__place_square';
     }
-    if (tableType === 'circle') {
+    if (tableType === TableType.circle) {
       return 'table-general-container__place table-general-container__place_circle';
     }
-  }
+  };
 
   const componentClassesDefinitionMemo = useMemo(() => componentClassesDefinition(), [tableType]);
 
@@ -74,14 +74,14 @@ const TablePlace : React.FC<TablePlaceProps> = (props) => {
     case TablePlaceStatus.reserved:
       return (
         <div className={`${componentClassesDefinitionMemo} table-general-container__place_reserved`}>Занято</div>
-      )
+      );
     case TablePlaceStatus.free:
       return (
         <button className={componentClassesDefinitionMemo} type="button" onClick={onClickPlaceBtn}>Свободно</button>
       );
     default:
       return null;
-  }
-}
+  };
+};
 
 export default TablePlace;

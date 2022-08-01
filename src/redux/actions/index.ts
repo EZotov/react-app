@@ -8,4 +8,4 @@ export {
   HttpActions,
   ReservationActions,
   GeneralActions
-}
+};
