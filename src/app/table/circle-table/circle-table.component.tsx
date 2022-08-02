@@ -15,7 +15,7 @@ interface TableProps {
   places : TablePlaceInterface[],
   hallId : number,
   tableId : number
-};
+}
 
 const CircleTable : React.FC<TableProps> = (props) => {
   const { constructorMode, countPlacesCircle, size, places, tableId, hallId } = props;
@@ -24,8 +24,8 @@ const CircleTable : React.FC<TableProps> = (props) => {
   //Circle Parameters
   const addAngle : number = 360 / countPlacesCircle;
   const circleTemplate : number[] = Array.from(Array(countPlacesCircle).keys());
-  let angle : number = 0;
-  let baseTransformOriginValue : number = 50;
+  let angle  = 0;
+  const baseTransformOriginValue  = 50;
   const currentTransformOriginValue = baseTransformOriginValue + 50 * countPlacesX;
 
   if (constructorMode === ConstructorType.view) {

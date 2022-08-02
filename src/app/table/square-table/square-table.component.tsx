@@ -16,7 +16,7 @@ interface TableProps {
   places : TablePlaceInterface[],
   hallId : number,
   tableId : number
-};
+}
 
 const SquareTable : React.FC<TableProps> = (props) => {
   const { constructorMode, size, places, tableId, hallId } = props;
@@ -24,7 +24,7 @@ const SquareTable : React.FC<TableProps> = (props) => {
 
   //Rect parameters
   const grid : number[] = Array.from(Array((countPlacesX + 2) * (countPlacesY + 2)).keys());
-  let tablePlaceId : number = 0;
+  let tablePlaceId  = 0;
   const gridLengthX = countPlacesX + 2;
   const gridLengthY = countPlacesY + 2;
 

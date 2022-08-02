@@ -27,7 +27,7 @@ app.use('*', (req, res) => {
 
   reSaga.run(mainSagaWatcher).toPromise().then(() => {
       const preloadedState = store.getState();
-      let appHTML = ReactDOMServer.renderToString(
+      const appHTML = ReactDOMServer.renderToString(
         <Provider store={store}>
           <StaticRouter location={req.originalUrl}>
             <App />
@@ -44,7 +44,7 @@ app.use('*', (req, res) => {
       res.status(200);
       res.send(indexHTML);
     })
-    .catch(error => res.status(500));
+    .catch(() => res.status(500));
     console.log(req.url);
     switch(req.originalUrl) {
       case '/administration':

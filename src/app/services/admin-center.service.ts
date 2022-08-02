@@ -23,8 +23,8 @@ const createRenderIndexesArray = (countPlacesX : number, grid : number[]) : numb
 };
 
 const defindIndexNewTableItem = (array : Table[]) : number => {
-  let nextIdTable : number = 1;
-  let maxItemId : number = 0;
+  let nextIdTable = 1;
+  let maxItemId = 0;
   if (array.length) {
     const tableIdArray = array.map(item => item.tableId);
 
@@ -47,8 +47,8 @@ const defindIndexNewTableItem = (array : Table[]) : number => {
 };
 
 const defindIndexNewHallItem = (array : Hall[]) : number => {
-  let nextIdTable : number = 1;
-  let maxItemId : number = 0;
+  let nextIdTable = 1;
+  let maxItemId = 0;
   if (array.length) {
     const tableIdArray = array.map(item => item.hallId);
 

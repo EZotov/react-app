@@ -23,7 +23,7 @@ const ReserveHallComponent : React.FC = () => {
       <ul className="reserve-hall-list">
         {
           tables.map(table => {
-            let freePlacesCount : number = 0;
+            let freePlacesCount = 0;
 
             table.places.forEach(place => {
               if (place.placeStatus === TablePlaceStatus.free) {

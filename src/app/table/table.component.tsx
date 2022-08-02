@@ -15,7 +15,7 @@ interface TableProps {
   hallId : number,
   tableId : number,
   constructorParams : ConstructorParameters
-};
+}
 
 const Table : React.FC<TableProps> = (props) => {
   const { type, constructorMode, hallId, tableId, places, constructorParams } = props;

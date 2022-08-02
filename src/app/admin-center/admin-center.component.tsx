@@ -14,7 +14,7 @@ import  AdminCenterService from '../services/admin-center.service';
 import './admin-center.component.scss';
 
 
-const maxTablesCount : number = 20;
+const maxTablesCount = 20;
 
 const AdminCenter : React.FC = () => {
   const dispatch = useDispatch();

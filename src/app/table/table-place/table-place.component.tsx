@@ -16,7 +16,7 @@ interface TablePlaceProps {
   hallId : number,
   tableId : number,
   constructorMode : ConstructorType
-};
+}
 
 
 const TablePlace : React.FC<TablePlaceProps> = (props) => {
@@ -37,7 +37,7 @@ const TablePlace : React.FC<TablePlaceProps> = (props) => {
           break;
         default:
           break;
-      };
+      }
     }
   };
 
@@ -81,7 +81,7 @@ const TablePlace : React.FC<TablePlaceProps> = (props) => {
       );
     default:
       return null;
-  };
+  }
 };
 
 export default TablePlace;

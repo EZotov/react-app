@@ -11,14 +11,14 @@ import './control-panel.component.scss';
 interface ControlPanelProps {
   constructorParams : ConstructorParameters,
   mode : TableType,
-};
+}
 
 const ControlPanel : React.FC<ControlPanelProps> = (props) => {
   const { constructorParams, mode } = props;
   const dispatch = useDispatch();
 
   const onClickIncrementValueParam = useCallback((parameter : keyof ConstructorParameters) : void => {
-    let newValueParams : ConstructorParameters = {
+    const newValueParams : ConstructorParameters = {
       placesCount : constructorParams.placesCount,
       sizeCircle : constructorParams.sizeCircle,
       sizeX : constructorParams.sizeX,
@@ -45,7 +45,7 @@ const ControlPanel : React.FC<ControlPanelProps> = (props) => {
   }, [constructorParams]);
 
   const onClickDecrementValueParam = useCallback((parameter : keyof ConstructorParameters) : void => {
-    let newValueParams : ConstructorParameters = {
+    const newValueParams : ConstructorParameters = {
       placesCount : constructorParams.placesCount,
       sizeCircle : constructorParams.sizeCircle,
       sizeX : constructorParams.sizeX,

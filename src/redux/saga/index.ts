@@ -15,7 +15,7 @@ function* loadHalls() : SagaReturnType<any> {
   catch (error) {
     console.log(error);
   }
-};
+}
 
 function* addHall(action : SendHallHttpAction) : SagaReturnType<any> {
   try {
@@ -25,10 +25,10 @@ function* addHall(action : SendHallHttpAction) : SagaReturnType<any> {
   catch (error) {
     console.log(error);
   }
-};
+}
 
 
 export function* mainSagaWatcher() {
   yield takeEvery(ActionsHttpType.LOAD_HALLS_REQUEST, loadHalls);
   yield takeEvery(ActionsHttpType.ADD_NEW_HALL_REQUEST, addHall);
-};
+}

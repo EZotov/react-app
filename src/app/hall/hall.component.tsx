@@ -14,7 +14,7 @@ import './hall.component.scss';
 interface HallProps {
   id : number,
   maxTablesCount : number
-};
+}
 
 const Hall : React.FC<HallProps> = (props) => {
   const { id, maxTablesCount  } = props;

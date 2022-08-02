@@ -13,7 +13,7 @@ import './reserve-table-viewer.component.scss';
 
  interface ReserveTableViewerProps {
    hallId : number
- };
+ }
 
 const ReserveTableViewerComponent : React.FC<ReserveTableViewerProps> = (props) => {
   const navigate = useNavigate();
@@ -23,7 +23,12 @@ const ReserveTableViewerComponent : React.FC<ReserveTableViewerProps> = (props) 
     name : '',
     phone : ''
   });
+
+  const setFormReserveDataMemo = useCallback(setFormReserveData, [formReserveData]);
+
+
   const table = useSelector((state : RootState) => selectCurrentTable(state, hallId, tableId));
+
 
   const onClickCloseViewerBtn = useCallback(() => {
     navigate(`/hall/${hallId}`);
@@ -31,9 +36,9 @@ const ReserveTableViewerComponent : React.FC<ReserveTableViewerProps> = (props) 
 
   const onSubmitReservationForm = useCallback((event) : void => {
     event.preventDefault();
-    alert('Заглушка');
+    alert('Заглушка (форма бронирования отправлена)');
+    onClickCloseViewerBtn();
   }, []);
-
 
   return (
     <div className="modal-overlay">
@@ -52,16 +57,18 @@ const ReserveTableViewerComponent : React.FC<ReserveTableViewerProps> = (props) 
           />
           <form className="viewer-main-form" onSubmit={(e) => onSubmitReservationForm(e)}>
             <h3 className="viewer-main-form__headline">Информация о бронировании</h3>
-            <div className="field-set">
-              <TextField id="viewer-main-form-name" label="На чьё имя забронировать" variant="outlined" sx={{
-                width : "100%"
-              }} />
-            </div>
+            <div className="field-wrapper">
+              <div className="field-set">
+                <TextField id="viewer-main-form-name" label="На чьё имя забронировать" variant="outlined" onChange={(e) => setFormReserveDataMemo({name : e.target.value, phone :formReserveData.phone})} sx={{
+                  width : "100%"
+                }} />
+              </div>
 
-            <div className="field-set">
-              <TextField id="viewer-main-form-name-phone" label="Мобильный телефон" variant="outlined" sx={{
-                width : "100%"
-              }} />
+              <div className="field-set">
+                <TextField id="viewer-main-form-name-phone" label="Мобильный телефон" variant="outlined" onChange={(e) => setFormReserveDataMemo({name : formReserveData.name, phone :e.target.value})} sx={{
+                  width : "100%"
+                }} />
+              </div>
             </div>
             <Button type="submit" className="viewer-main-form__submit-btn" variant="contained">Забронировать</Button>
           </form>

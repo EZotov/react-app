@@ -5,7 +5,7 @@ import { AdministrationActionsType, HttpActionsType } from "../../types/types";
 
 export interface AdministrationState {
  constructor : TableConstructor
-};
+}
 
 const defaultConstructor : TableConstructor = {
   mode : TableType.circle,
@@ -81,7 +81,7 @@ export const administrationReducer = (state : AdministrationState = initState, a
           places : [...state.constructor.places, action.place]
         }
       };
-    case ActionsType.DELETE_PLACE_FROM_TABLE:
+    case ActionsType.DELETE_PLACE_FROM_TABLE: {
       const newPlaces = [...state.constructor.places];
       const placeIndex = newPlaces.find(place => place.placeId === action.placeId);
       newPlaces.splice(newPlaces.indexOf(placeIndex), 1);
@@ -95,6 +95,7 @@ export const administrationReducer = (state : AdministrationState = initState, a
           places : newPlaces
         }
       };
+    }
     default :
       return state;
   }
