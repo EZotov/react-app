@@ -11,7 +11,18 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    align-items: center;
     width: 100%;
+
+    .lang-control-adm {
+      margin-top: 20px;
+      padding: 10px;
+      background-color: #ffffff;
+
+      .lang-control-adm__label {
+        background-color: inherit;
+      }
+    }
   }
 
   .header-info-container {

@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 import { setConstructorParams } from '../../../redux/actions/administration.actions';
 import { ControlLimits, Parameters, TableType } from '../../../types/enums.type';
 import { ConstructorParameters } from '../../../types/interfaces';
+import { LocaleKeys, t } from '../../locales';
 
 import './control-panel.component.scss';
 
@@ -60,23 +61,23 @@ const ControlPanel : React.FC<ControlPanelProps> = (props) => {
       <div className="control-panel">
         <div className="control-panel-element">
           <div className="control-panel-element-text-wrapper">
-            <span className="control-panel-element-text-wrapper__label">Размер по X</span>
+            <span className="control-panel-element-text-wrapper__label">{t(LocaleKeys.sizeX)}</span>
             <span className="control-panel-element-text-wrapper__value">{constructorParams.sizeX}</span>
           </div>
           <div className="control-panel-element-btn-wrapper">
-            <Button className="control-panel-element-btn-wrapper__increase-btn" variant="contained" onClick={() => onClickIncrementValueParam(Parameters.sizeX)}>Увеличить</Button>
-            <Button className="control-panel-element-btn-wrapper__decrease-btn" variant="contained" onClick={() => onClickDecrementValueParam(Parameters.sizeX)}>Уменьшить</Button>
+            <Button className="control-panel-element-btn-wrapper__increase-btn" variant="contained" onClick={() => onClickIncrementValueParam(Parameters.sizeX)}>{t(LocaleKeys.increment)}</Button>
+            <Button className="control-panel-element-btn-wrapper__decrease-btn" variant="contained" onClick={() => onClickDecrementValueParam(Parameters.sizeX)}>{t(LocaleKeys.decrement)}</Button>
           </div>
         </div>
 
         <div className="control-panel-element">
           <div className="control-panel-element-text-wrapper">
-            <span className="control-panel-element-text-wrapper__label">Размер по Y</span>
+            <span className="control-panel-element-text-wrapper__label">{t(LocaleKeys.sizeY)}</span>
             <span className="control-panel-element-text-wrapper__value">{constructorParams.sizeY}</span>
           </div>
           <div className="control-panel-element-btn-wrapper">
-            <Button className="control-panel-element-btn-wrapper__increase-btn" variant="contained" onClick={() => onClickIncrementValueParam(Parameters.sizeY)}>Увеличить</Button>
-            <Button className="control-panel-element-btn-wrapper__decrease-btn" variant="contained" onClick={() => onClickDecrementValueParam(Parameters.sizeY)}>Уменьшить</Button>
+            <Button className="control-panel-element-btn-wrapper__increase-btn" variant="contained" onClick={() => onClickIncrementValueParam(Parameters.sizeY)}>{t(LocaleKeys.increment)}</Button>
+            <Button className="control-panel-element-btn-wrapper__decrease-btn" variant="contained" onClick={() => onClickDecrementValueParam(Parameters.sizeY)}>{t(LocaleKeys.decrement)}</Button>
           </div>
         </div>
       </div>
@@ -86,23 +87,23 @@ const ControlPanel : React.FC<ControlPanelProps> = (props) => {
       <div className="control-panel">
         <div className="control-panel-element">
           <div className="control-panel-element-text-wrapper">
-            <span className="control-panel-element-text-wrapper__label">Размер</span>
+            <span className="control-panel-element-text-wrapper__label">{t(LocaleKeys.circle_size)}</span>
             <span className="control-panel-element-text-wrapper__value">{constructorParams.sizeCircle}</span>
           </div>
           <div className="control-panel-element-btn-wrapper">
-            <Button className="control-panel-element-btn-wrapper__increase-btn" variant="contained" onClick={() => onClickIncrementValueParam(Parameters.sizeCircle)}>Увеличить</Button>
-            <Button className="control-panel-element-btn-wrapper__decrease-btn" variant="contained" onClick={() => onClickDecrementValueParam(Parameters.sizeCircle)}>Уменьшить</Button>
+            <Button className="control-panel-element-btn-wrapper__increase-btn" variant="contained" onClick={() => onClickIncrementValueParam(Parameters.sizeCircle)}>{t(LocaleKeys.increment)}</Button>
+            <Button className="control-panel-element-btn-wrapper__decrease-btn" variant="contained" onClick={() => onClickDecrementValueParam(Parameters.sizeCircle)}>{t(LocaleKeys.decrement)}</Button>
           </div>
         </div>
 
         <div className="control-panel-element">
           <div className="control-panel-element-text-wrapper">
-            <span className="control-panel-element-text-wrapper__label">Кол-во мест</span>
+            <span className="control-panel-element-text-wrapper__label">{t(LocaleKeys.count_places)}</span>
             <span className="control-panel-element-text-wrapper__value">{constructorParams.placesCount}</span>
           </div>
           <div className="control-panel-element-btn-wrapper">
-            <Button className="control-panel-element-btn-wrapper__increase-btn" variant="contained" onClick={() => onClickIncrementValueParam(Parameters.placesCount)}>Увеличить</Button>
-            <Button className="control-panel-element-btn-wrapper__decrease-btn" variant="contained" onClick={() => onClickDecrementValueParam(Parameters.placesCount)}>Уменьшить</Button>
+            <Button className="control-panel-element-btn-wrapper__increase-btn" variant="contained" onClick={() => onClickIncrementValueParam(Parameters.placesCount)}>{t(LocaleKeys.increment)}</Button>
+            <Button className="control-panel-element-btn-wrapper__decrease-btn" variant="contained" onClick={() => onClickDecrementValueParam(Parameters.placesCount)}>{t(LocaleKeys.decrement)}</Button>
           </div>
         </div>
       </div>

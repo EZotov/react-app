@@ -1,3 +1,14 @@
 .reserve-container {
   padding: 20px 10px;
 }
+
+.lang-control {
+  padding: 10px;
+  background-color: #ffffff;
+  margin-top: 20px;
+
+  .lang-control__label {
+    background-color: inherit;
+    z-index: 1;
+  }
+}

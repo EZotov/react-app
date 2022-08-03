@@ -5,9 +5,10 @@ import { addPlaceTable, delPlaceTable } from '../../../redux/actions/administrat
 import { ConstructorType, TablePlaceStatus, TableType } from '../../../types/enums.type';
 import { PlaceStateType } from '../../../types/types';
 import { TablePlace as TablePlaceInterface } from '../../../types/interfaces';
+import { setPlaceMode } from '../../../redux/actions/reserve.actions';
+import { LocaleKeys, t } from '../../locales';
 
 import './table-place.component.scss';
-import { setPlaceMode } from '../../../redux/actions/reserve.actions';
 
 interface TablePlaceProps {
   placeStatus : PlaceStateType,
@@ -17,7 +18,6 @@ interface TablePlaceProps {
   tableId : number,
   constructorMode : ConstructorType
 }
-
 
 const TablePlace : React.FC<TablePlaceProps> = (props) => {
   const dispatch = useDispatch();
@@ -68,16 +68,16 @@ const TablePlace : React.FC<TablePlaceProps> = (props) => {
     case TablePlaceStatus.notSetting:
       return (
         <button className={componentClassesDefinitionMemo} type="button" onClick={onClickPlaceBtn}>
-          Добавить <br/> место
+          {t(LocaleKeys.notSetting)}
         </button>
       );
     case TablePlaceStatus.reserved:
       return (
-        <div className={`${componentClassesDefinitionMemo} table-general-container__place_reserved`}>Занято</div>
+        <div className={`${componentClassesDefinitionMemo} table-general-container__place_reserved`}>{t(LocaleKeys.reserved)}</div>
       );
     case TablePlaceStatus.free:
       return (
-        <button className={componentClassesDefinitionMemo} type="button" onClick={onClickPlaceBtn}>Свободно</button>
+        <button className={componentClassesDefinitionMemo} type="button" onClick={onClickPlaceBtn}>{t(LocaleKeys.free)}</button>
       );
     default:
       return null;

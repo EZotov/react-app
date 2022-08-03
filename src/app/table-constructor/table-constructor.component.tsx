@@ -15,6 +15,7 @@ import Table from '../table/table.component';
 import ControlPanel from './contol-panel/control-panel.component';
 
 import './table-constructor.component.scss';
+import { LocaleKeys, t } from '../locales';
 
 const TableConstructor : React.FC = () => {
   const [typeParameterValue, setTypeParameterValue] = useState(ConstructorType.new);
@@ -92,17 +93,17 @@ const TableConstructor : React.FC = () => {
       <div className="constructor-container">
         <div className="constructor-container-general">
           <div className="constructor-container-header">
-            <Button className="constructor-container-header__save-btn" variant="contained" onClick={onClickSaveTableBtn}>Сохранить</Button>
+            <Button className="constructor-container-header__save-btn" variant="contained" onClick={onClickSaveTableBtn}>{t(LocaleKeys.save_btn)}</Button>
             {
               typeParameterValue === ConstructorType.edit && (
-                <Button className="constructor-container-header__del-btn" variant="contained" onClick={onClickDeleteTableBtn}>Удалить</Button>
+                <Button className="constructor-container-header__del-btn" variant="contained" onClick={onClickDeleteTableBtn}>{t(LocaleKeys.delete)}</Button>
               )
             }
-            <h2 className="constructor-container-header__headline">Конструктор</h2>
+            <h2 className="constructor-container-header__headline">{t(LocaleKeys.constructor)}</h2>
           </div>
           <div className="contructor-table-type">
-            <Button className="contructor-table-type__square-btn" variant='outlined' disabled={mode === TableType.square} onClick={onClickSquareTypeBtn}>Квадратный</Button>
-            <Button className="contructor-table-type__round-btn" variant='outlined' disabled={mode === TableType.circle} onClick={onClickCircleTypeBtn}>Круглый</Button>
+            <Button className="contructor-table-type__square-btn" variant='outlined' disabled={mode === TableType.square} onClick={onClickSquareTypeBtn}>{t(LocaleKeys.square_type)}</Button>
+            <Button className="contructor-table-type__round-btn" variant='outlined' disabled={mode === TableType.circle} onClick={onClickCircleTypeBtn}>{t(LocaleKeys.circle_type)}</Button>
           </div>
           <Table
             constructorParams={constructorParams}

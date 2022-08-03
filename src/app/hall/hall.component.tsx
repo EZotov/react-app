@@ -8,6 +8,7 @@ import { changeConstrucorType, resetConstructor, saveHallIdInConstructor, select
 import { deleteHall } from '../../redux/actions/general.actions';
 import { selectTables } from '../../redux/selectors/general.selector';
 import { Table } from '../../types/interfaces';
+import { LocaleKeys, t } from '../locales';
 
 import './hall.component.scss';
 
@@ -52,21 +53,21 @@ const Hall : React.FC<HallProps> = (props) => {
 
   return (
     <div className="hall-container">
-      <h2 className="hall-container__headline">Зал {id}</h2>
-      <Button className="hall-container__del-btn" variant="outlined" sx={{color : 'red', border : '1px solid red'}} onClick={onClickDeleteHallBtn}>Удалить</Button>
+      <h2 className="hall-container__headline">{t(LocaleKeys.hall) + ' №' + id}</h2>
+      <Button className="hall-container__del-btn" variant="outlined" sx={{color : 'red', border : '1px solid red'}} onClick={onClickDeleteHallBtn}>{t(LocaleKeys.delete)}</Button>
       <ul className="hall-list">
         {
           tables.map(table => (
               <li key={table.tableId} className="hall-list-item" onClick={() => onClickTable(table)}>
-                <span className="hall-list-item__id">Стол №{table.tableId}</span>
-                <span className="hall-list-item__count-places">Мест : {table.places.length}</span>
+                <span className="hall-list-item__id">{t(LocaleKeys.table) + ' №' + table.tableId}</span>
+                <span className="hall-list-item__count-places">{t(LocaleKeys.places_title)} : {table.places.length}</span>
               </li>
           ))
         }
         {
           tables.length < maxTablesCount && (
             <li className="hall-list-item">
-              <button className="hall-container__add-table-btn" type="button" onClick={onClickAddTableBtn}>Добавить стол</button>
+              <button className="hall-container__add-table-btn" type="button" onClick={onClickAddTableBtn}>{t(LocaleKeys.add_table)}</button>
             </li>
           )
         }

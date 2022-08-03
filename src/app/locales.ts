@@ -1,6 +1,18 @@
 import { Language } from "../types/enums.type";
 
 const locale = {
+  lang_title : {
+    ru : 'Язык',
+    en : 'Language'
+  },
+  lang_en : {
+    ru : 'Английский',
+    en : 'English'
+  },
+  lang_ru : {
+    ru : 'Русский',
+    en : 'Russian'
+  },
   main_headline : {
     ru : 'Бронирование столов',
     en : 'Reservation Tables'
@@ -24,6 +36,10 @@ const locale = {
   count_free_place : {
     ru : 'Свободно мест',
     en : 'Free places'
+  },
+  table_counts : {
+    ru : 'Количество столов',
+    en : 'Tables count'
   },
   of : {
     ru : 'из',
@@ -53,6 +69,10 @@ const locale = {
     ru : 'Добавить место',
     en : 'Add place'
   },
+  tableViewerHeadline : {
+    ru : 'Бронирование мест стола',
+    en : 'Reservation places of table'
+  },
   reserve_btn : {
     ru : 'Забронировать',
     en : 'Reserve'
@@ -69,7 +89,7 @@ const locale = {
     ru : 'Мобильный телефон',
     en : 'Phone'
   },
-  places_count : {
+  places_title : {
     ru : 'Мест',
     en : 'Places'
   },
@@ -124,6 +144,9 @@ const locale = {
 };
 
 export enum LocaleKeys {
+  lang_title = 'lang_title',
+  lang_en = 'lang_en',
+  lang_ru = 'lang_ru',
   main_headline = 'main_headline',
   main_headline_adm = 'main_headline_adm',
   user = 'user',
@@ -133,15 +156,17 @@ export enum LocaleKeys {
   of = 'of',
   table = 'table',
   constructor = 'constructor',
+  table_counts = 'table_counts',
   hall = 'hall',
   free = 'free',
+  tableViewerHeadline = 'tableViewerHeadline',
   reserved = 'reserved',
   notSetting = 'notSetting',
   reserve_btn = 'reserve_btn',
   reserve_form_headline = 'reserve_form_headline',
   form_name = 'form_name',
   form_phone = 'form_phone',
-  places_count = 'places_count',
+  places_title = 'places_title',
   add_hall = 'add_hall',
   delete = 'delete',
   add_table = 'add_table',
@@ -156,13 +181,39 @@ export enum LocaleKeys {
   count_places = 'count_places'
 }
 
-export const t = (key : LocaleKeys, lang  = Language.russian) : string => {
-  switch(lang) {
-    case Language.english:
-      return locale[key].en || '';
-    case Language.russian:
-      return locale[key].ru || '';
-    default:
-      return '';
+class Localization {
+  initState = false;
+  language = Language.russian;
+
+  init() : void {
+    this.initState = true;
+  }
+
+  changeLanguage(lang : Language) : void {
+    if (this.initState) {
+      this.language = lang;
+    }
+  }
+
+  t(key : LocaleKeys) : string {
+    if (this.initState) {
+      switch(this.language) {
+        case Language.english:
+          return locale[key].en || '';
+        case Language.russian:
+          return locale[key].ru || '';
+        default:
+          return '';
+      }
+    }
+    return '';
   }
 }
+
+const localization = new Localization();
+const t = (key : LocaleKeys) => localization.t(key);
+const init = () => localization.init();
+const changeLanguage = (lang : Language) => localization.changeLanguage(lang);
+
+
+export { init, t, changeLanguage };
