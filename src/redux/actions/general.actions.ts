@@ -1,4 +1,4 @@
-import { ActionsType } from '../../types/enums.type';
+import { ActionsType, Language } from '../../types/enums.type';
 import { Hall, Table } from '../../types/interfaces';
 import { GeneralActionsType } from '../../types/types';
 
@@ -37,5 +37,12 @@ export const addHall = (hall : Hall) : GeneralActionsType => {
   return {
     type : ActionsType.ADD_HALL,
     hall
+  };
+};
+
+export const setLanguage = (lang : Language) : GeneralActionsType => {
+  return {
+    type : ActionsType.SET_LANGUAGE,
+    lang
   };
 };

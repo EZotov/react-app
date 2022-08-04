@@ -1,5 +1,5 @@
 import { RootState } from '../..';
-import { TableType } from '../../types/enums.type';
+import { Language, TableType } from '../../types/enums.type';
 import { Hall, Table } from '../../types/interfaces';
 
 export const selectHalls = (state : RootState) : Hall[] => state.general.halls;
@@ -27,3 +27,5 @@ export const selectCurrentTable = (state : RootState, hallId : number, tableId :
 
   return currentTable;
 };
+
+export const selectLanguage = (state : RootState) : Language => state.general.language;

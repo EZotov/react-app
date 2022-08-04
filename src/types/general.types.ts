@@ -1,4 +1,4 @@
-import { ActionsHttpType, ActionsType, TablePlaceStatus } from './enums.type'
+import { ActionsHttpType, ActionsType, Language, TablePlaceStatus } from './enums.type'
 import { Hall, Table } from './interfaces'
 
 export interface AddTableAction {
@@ -44,4 +44,9 @@ export interface ReservePlaceAction {
   tableId : number,
   placeId : number,
   mode : TablePlaceStatus
+}
+
+export interface SetLanguageAction {
+  type : ActionsType.SET_LANGUAGE,
+  lang : Language
 }

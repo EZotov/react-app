@@ -2,11 +2,13 @@ import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
-import React, { useCallback, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useCallback } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link, Route, Routes } from 'react-router-dom';
+import { setLanguage } from '../../redux/actions/general.actions';
 
 import { loadHallsRequest } from '../../redux/actions/http.actions';
+import { GeneralSelector } from '../../redux/selectors';
 import { Language } from '../../types/enums.type';
 import { changeLanguage, LocaleKeys, t } from '../locales';
 import HallListComponent from './hall-list/hall-list.component';
@@ -16,8 +18,7 @@ import './reserve-service.component.scss';
 
 const ReserveService : React.FC = () => {
   const dispatch = useDispatch();
-
-  const [currentLang, setCurrentLang] = useState(Language.russian);
+  const currentLang = useSelector(GeneralSelector.selectLanguage);
 
   React.useEffect(() => {
     dispatch(loadHallsRequest());
@@ -26,10 +27,10 @@ const ReserveService : React.FC = () => {
   const changeLang = useCallback((e) => {
     if (e.target.value === Language.russian) {
       changeLanguage(Language.russian);
-      setCurrentLang(Language.russian);
+      dispatch(setLanguage(Language.russian));
     } else if (e.target.value === Language.english) {
       changeLanguage(Language.english);
-      setCurrentLang(Language.english);
+      dispatch(setLanguage(Language.english));
     }
   }, [currentLang]);
 

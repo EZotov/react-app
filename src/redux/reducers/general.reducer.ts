@@ -1,13 +1,15 @@
-import { ActionsHttpType, ActionsType, TablePlaceStatus } from '../../types/enums.type';
+import { ActionsHttpType, ActionsType, Language, TablePlaceStatus } from '../../types/enums.type';
 import { Hall, Table } from '../../types/interfaces';
 import { GeneralActionsType, HttpActionsType } from '../../types/types';
 
 export interface GeneralState {
-  halls : Hall[]
+  halls : Hall[],
+  language : Language
 }
 
 const initState : GeneralState = {
-  halls : []
+  halls : [],
+  language : Language.russian
 };
 
 export const generalReducer = (state : GeneralState = initState, action : GeneralActionsType | HttpActionsType) : GeneralState => {
@@ -26,7 +28,8 @@ export const generalReducer = (state : GeneralState = initState, action : Genera
       newHallsAddTable[hallIndex].tables = newTablesAddTable;
 
       return {
-        halls : newHallsAddTable
+        halls : newHallsAddTable,
+        language : state.language
       };
     }
     case ActionsType.UPDATE_TABLE: {
@@ -58,7 +61,8 @@ export const generalReducer = (state : GeneralState = initState, action : Genera
         return hallItem;
       });
       return {
-        halls : newHallsUpdateTable
+        halls : newHallsUpdateTable,
+        language : state.language
       };
     }
     case ActionsType.DELETE_TABLE: {
@@ -82,7 +86,8 @@ export const generalReducer = (state : GeneralState = initState, action : Genera
       newHallsDelTable[hallIndexDelTAbleAction].tables = newTablesDelTable;
 
       return {
-        halls : newHallsDelTable
+        halls : newHallsDelTable,
+        language : state.language
       };
     }
     case ActionsType.DELETE_HALL: {
@@ -96,16 +101,19 @@ export const generalReducer = (state : GeneralState = initState, action : Genera
       newHalls.splice(state.halls.indexOf(hall_DelHallAction), 1);
 
       return {
-        halls : newHalls
+        halls : newHalls,
+        language : state.language
       };
     }
     case ActionsType.ADD_HALL:
       return {
-        halls : [...state.halls, action.hall]
+        halls : [...state.halls, action.hall],
+        language : state.language
       };
     case ActionsHttpType.LOAD_HALLS_REQUEST_SUCCESS:
       return {
-        halls : action.halls
+        halls : action.halls,
+        language : state.language
       };
     case ActionsType.SET_PLACE_MODE: {
       const sourceHallIndex = state.halls.findIndex(hall => hall.hallId === action.hallId);
@@ -125,10 +133,15 @@ export const generalReducer = (state : GeneralState = initState, action : Genera
       newHallsReserveServ[sourceHallIndex].tables = newTablesArray;
 
       return {
-        halls : newHallsReserveServ
+        halls : newHallsReserveServ,
+        language : state.language
       };
     }
-
+    case ActionsType.SET_LANGUAGE:
+      return {
+        halls : state.halls,
+        language : action.lang
+      }
     default:
       return state;
   }
