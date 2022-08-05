@@ -1,6 +1,10 @@
 import { Language } from "../types/enums.type";
 
 const locale = {
+  to_reservation_part : {
+    ru : 'В часть бронирования',
+    en : 'To reservation'
+  },
   lang_title : {
     ru : 'Язык',
     en : 'Language'
@@ -144,6 +148,7 @@ const locale = {
 };
 
 export enum LocaleKeys {
+  to_reservation_part = 'to_reservation_part',
   lang_title = 'lang_title',
   lang_en = 'lang_en',
   lang_ru = 'lang_ru',

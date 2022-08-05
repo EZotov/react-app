@@ -3,19 +3,20 @@ import React, { useCallback, useMemo, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useSearchParams } from 'react-router-dom'
 
-import { changeConstrucorType } from '../../redux/actions/administration.actions';
-import { addTable, delTable, updateTable } from '../../redux/actions/general.actions';
-import { selectConstructor, selectConstructorParams, selectMode } from '../../redux/selectors/administration.selector';
-import { selectTables } from '../../redux/selectors/general.selector';
-import { Table as TableInterface } from '../../types/interfaces';
-import { ConstructorType, TableType } from '../../types/enums.type';
-import AdminCenterService from '../services/admin-center.service';
-import { RootState } from '../..';
+import { changeConstrucorType } from '../../../redux/actions/administration.actions';
+import { addTable, delTable, updateTable } from '../../../redux/actions/general.actions';
+import { selectConstructor, selectConstructorParams, selectMode } from '../../../redux/selectors/administration.selector';
+import { selectTables } from '../../../redux/selectors/general.selector';
+import { Table as TableInterface } from '../../../types/interfaces';
+import { ConstructorType, TableType } from '../../../types/enums.type';
+import AdminCenterService from '../../services/admin-center.service';
+import { RootState } from '../../..';
 import Table from '../table/table.component';
 import ControlPanel from './contol-panel/control-panel.component';
+import { LocaleKeys, t } from '../../locales';
 
 import './table-constructor.component.scss';
-import { LocaleKeys, t } from '../locales';
+
 
 const TableConstructor : React.FC = () => {
   const [typeParameterValue, setTypeParameterValue] = useState(ConstructorType.new);

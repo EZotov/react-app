@@ -8,7 +8,7 @@ import { StaticRouter } from 'react-router-dom/server';
 import { applyMiddleware, legacy_createStore as createStore } from 'redux';
 import createSagaMiddleware, { END } from 'redux-saga';
 
-import App from '../app/app.component';
+import App from '../app/components/app.component';
 import { loadHallsRequest } from '../redux/actions/http.actions';
 import { rootReducer } from '../redux/reducers';
 import { mainSagaWatcher } from '../redux/saga';

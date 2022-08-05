@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { ConstructorType, TableType } from '../../types/enums.type';
-import { TablePlace, ConstructorParameters } from '../../types/interfaces';
+import { ConstructorType, TableType } from '../../../types/enums.type';
+import { TablePlace, ConstructorParameters } from '../../../types/interfaces';
 import CircleTable from './circle-table/circle-table.component';
 import SquareTable from './square-table/square-table.component';
 

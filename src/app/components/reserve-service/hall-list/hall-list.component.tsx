@@ -2,8 +2,8 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { GeneralSelector } from '../../../redux/selectors';
-import { LocaleKeys, t } from '../../locales';
+import { GeneralSelector } from '../../../../redux/selectors';
+import { LocaleKeys, t } from '../../../locales';
 
 import './hall-list.component.scss';
 

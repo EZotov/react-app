@@ -2,10 +2,10 @@ import Button from '@mui/material/Button';
 import React, { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { setConstructorParams } from '../../../redux/actions/administration.actions';
-import { ControlLimits, Parameters, TableType } from '../../../types/enums.type';
-import { ConstructorParameters } from '../../../types/interfaces';
-import { LocaleKeys, t } from '../../locales';
+import { setConstructorParams } from '../../../../redux/actions/administration.actions';
+import { ControlLimits, Parameters, TableType } from '../../../../types/enums.type';
+import { ConstructorParameters } from '../../../../types/interfaces';
+import { LocaleKeys, t } from '../../../locales';
 
 import './control-panel.component.scss';
 

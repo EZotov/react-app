@@ -5,12 +5,12 @@ import Select from '@mui/material/Select';
 import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, Route, Routes } from 'react-router-dom';
-import { setLanguage } from '../../redux/actions/general.actions';
 
-import { loadHallsRequest } from '../../redux/actions/http.actions';
-import { GeneralSelector } from '../../redux/selectors';
-import { Language } from '../../types/enums.type';
-import { changeLanguage, LocaleKeys, t } from '../locales';
+import { setLanguage } from '../../../redux/actions/general.actions';
+import { loadHallsRequest } from '../../../redux/actions/http.actions';
+import { GeneralSelector } from '../../../redux/selectors';
+import { Language } from '../../../types/enums.type';
+import { changeLanguage, LocaleKeys, t } from '../../locales';
 import HallListComponent from './hall-list/hall-list.component';
 import ReserveHallComponent from './reserve-hall/reserve-hall.component';
 
@@ -19,9 +19,12 @@ import './reserve-service.component.scss';
 const ReserveService : React.FC = () => {
   const dispatch = useDispatch();
   const currentLang = useSelector(GeneralSelector.selectLanguage);
+  const halls = useSelector(GeneralSelector.selectHalls);
 
   React.useEffect(() => {
-    dispatch(loadHallsRequest());
+    if (!halls.length) {
+      dispatch(loadHallsRequest());
+    }
   }, []);
 
   const changeLang = useCallback((e) => {

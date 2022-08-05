@@ -2,10 +2,10 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { Link, Route, Routes, useParams } from 'react-router-dom';
 
-import { RootState } from '../../..';
-import { selectTables } from '../../../redux/selectors/general.selector';
-import { TablePlaceStatus } from '../../../types/enums.type';
-import { LocaleKeys, t } from '../../locales';
+import { RootState } from '../../../..';
+import { selectTables } from '../../../../redux/selectors/general.selector';
+import { TablePlaceStatus } from '../../../../types/enums.type';
+import { LocaleKeys, t } from '../../../locales';
 import ReserveTableViewerComponent from '../reserve-table-viewer/reserve-table-viewer.component';
 
 import './reserve-hall.component.scss';

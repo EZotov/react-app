@@ -3,12 +3,12 @@ import  React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
-import { RootState } from '../..';
-import { changeConstrucorType, resetConstructor, saveHallIdInConstructor, selectTable } from '../../redux/actions/administration.actions';
-import { deleteHall } from '../../redux/actions/general.actions';
-import { selectTables } from '../../redux/selectors/general.selector';
-import { Table } from '../../types/interfaces';
-import { LocaleKeys, t } from '../locales';
+import { RootState } from '../../..';
+import { changeConstrucorType, resetConstructor, saveHallIdInConstructor, selectTable } from '../../../redux/actions/administration.actions';
+import { deleteHall } from '../../../redux/actions/general.actions';
+import { selectTables } from '../../../redux/selectors/general.selector';
+import { Table } from '../../../types/interfaces';
+import { LocaleKeys, t } from '../../locales';
 
 import './hall.component.scss';
 

@@ -3,9 +3,9 @@ import { Routes, Route } from 'react-router-dom';
 
 import AdminCenter from './admin-center/admin-center.component'
 import ReserveService from './reserve-service/reserve-service.component';
-import { init } from './locales';
+import { init } from '../locales';
 
-import '../styles.scss';
+import '../../styles.scss';
 import './app.component.scss';
 
 const App : React.FC = () => {
@@ -19,7 +19,7 @@ const App : React.FC = () => {
         <Route path='administration/*' element={<AdminCenter />}/>
       </Routes>
     </div>
-  )
+  );
 };
 
 export default App;

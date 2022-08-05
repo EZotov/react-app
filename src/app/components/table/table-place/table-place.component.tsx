@@ -1,12 +1,12 @@
 import React, { useMemo } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { addPlaceTable, delPlaceTable } from '../../../redux/actions/administration.actions';
-import { ConstructorType, TablePlaceStatus, TableType } from '../../../types/enums.type';
-import { PlaceStateType } from '../../../types/types';
-import { TablePlace as TablePlaceInterface } from '../../../types/interfaces';
-import { setPlaceMode } from '../../../redux/actions/reserve.actions';
-import { LocaleKeys, t } from '../../locales';
+import { addPlaceTable, delPlaceTable } from '../../../../redux/actions/administration.actions';
+import { ConstructorType, TablePlaceStatus, TableType } from '../../../../types/enums.type';
+import { PlaceStateType } from '../../../../types/types';
+import { TablePlace as TablePlaceInterface } from '../../../../types/interfaces';
+import { setPlaceMode } from '../../../../redux/actions/reserve.actions';
+import { LocaleKeys, t } from '../../../locales';
 
 import './table-place.component.scss';
 

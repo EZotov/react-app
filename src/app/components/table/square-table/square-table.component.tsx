@@ -1,10 +1,10 @@
 import Box from '@mui/material/Box';
 import React from 'react';
 
-import AdminCenterService from '../../services/admin-center.service';
+import AdminCenterService from '../../../services/admin-center.service';
 import TablePlace from '../table-place/table-place.component';
-import { TablePlace as  TablePlaceInterface} from '../../../types/interfaces';
-import { ConstructorType, TablePlaceStatus, TableType } from '../../../types/enums.type';
+import { TablePlace as  TablePlaceInterface} from '../../../../types/interfaces';
+import { ConstructorType, TablePlaceStatus, TableType } from '../../../../types/enums.type';
 
 import './square-table.component.scss';
 
@@ -23,6 +23,8 @@ const SquareTable : React.FC<TableProps> = (props) => {
   const [countPlacesX, countPlacesY] = size;
 
   //Rect parameters
+  const baseSizeTableView = 100;
+  const addingSizeTableView = 50;
   const grid : number[] = Array.from(Array((countPlacesX + 2) * (countPlacesY + 2)).keys());
   let tablePlaceId  = 0;
   const gridLengthX = countPlacesX + 2;
@@ -65,8 +67,8 @@ const SquareTable : React.FC<TableProps> = (props) => {
             }
             <Box className="square-table-container__table" sx={
                 {
-                  width : `${50 + (100 * countPlacesX) + ''}px`,
-                  height : `${50 + (100 * countPlacesY) + ''}px`,
+                  width : `${addingSizeTableView + (baseSizeTableView * countPlacesX) + ''}px`,
+                  height : `${addingSizeTableView + (baseSizeTableView * countPlacesY) + ''}px`,
                   backgroundColor: 'primary.dark',
                   border : '2px solid #000000'
                 }
@@ -104,8 +106,8 @@ const SquareTable : React.FC<TableProps> = (props) => {
           }
           <Box className="square-table-container__table" sx={
               {
-                width : `${50 + (100 * countPlacesX) + ''}px`,
-                height : `${50 + (100 * countPlacesY) + ''}px`,
+                width : `${addingSizeTableView + (baseSizeTableView * countPlacesX) + ''}px`,
+                height : `${addingSizeTableView + (baseSizeTableView * countPlacesY) + ''}px`,
                 backgroundColor: 'primary.dark',
                 border : '2px solid #000000'
               }

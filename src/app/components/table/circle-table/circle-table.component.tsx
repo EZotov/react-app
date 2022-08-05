@@ -2,8 +2,8 @@ import Box from '@mui/material/Box';
 import React from 'react';
 
 import TablePlace from '../table-place/table-place.component';
-import { TablePlace as  TablePlaceInterface} from '../../../types/interfaces';
-import { ConstructorType, TablePlaceStatus, TableType } from '../../../types/enums.type';
+import { TablePlace as  TablePlaceInterface} from '../../../../types/interfaces';
+import { ConstructorType, TablePlaceStatus, TableType } from '../../../../types/enums.type';
 
 import './circle-table.component.scss';
 
@@ -22,6 +22,8 @@ const CircleTable : React.FC<TableProps> = (props) => {
   const [countPlacesX, countPlacesY] = size;
 
   //Circle Parameters
+  const baseSizeTableView = 100;
+  const baseBorderRadiusTableView = 100;
   const addAngle : number = 360 / countPlacesCircle;
   const circleTemplate : number[] = Array.from(Array(countPlacesCircle).keys());
   let angle  = 0;
@@ -62,10 +64,10 @@ const CircleTable : React.FC<TableProps> = (props) => {
             }
             <Box className="circle-table-container__table" sx={
                 {
-                  width : countPlacesX * 100,
-                  height : countPlacesY * 100,
+                  width : countPlacesX * baseSizeTableView,
+                  height : countPlacesY * baseSizeTableView,
                   backgroundColor: 'primary.dark',
-                  borderRadius : 100,
+                  borderRadius : baseBorderRadiusTableView,
                   border : '2px solid #000000',
                   position : 'relative'
                 }
@@ -102,10 +104,10 @@ const CircleTable : React.FC<TableProps> = (props) => {
           }
           <Box className="circle-table-container__table" sx={
               {
-                width : countPlacesX * 100,
-                height : countPlacesY * 100,
+                width : countPlacesX * baseSizeTableView,
+                height : countPlacesY * baseSizeTableView,
                 backgroundColor: 'primary.dark',
-                borderRadius : 100,
+                borderRadius : baseBorderRadiusTableView,
                 border : '2px solid #000000',
                 position : 'relative'
               }

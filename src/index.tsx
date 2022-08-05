@@ -7,7 +7,7 @@ import { Provider } from 'react-redux';
 import createSagaMiddleware from 'redux-saga';
 import { mainSagaWatcher } from './redux/saga';
 import { rootReducer } from './redux/reducers/index';
-import App from './app/app.component';
+import App from './app/components/app.component';
 
 const reSaga = createSagaMiddleware();
 

@@ -4,10 +4,10 @@ import React, { useCallback, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 
-import { RootState } from '../../..';
-import { selectCurrentTable } from '../../../redux/selectors/general.selector';
-import { ConstructorType } from '../../../types/enums.type';
-import { LocaleKeys, t } from '../../locales';
+import { RootState } from '../../../..';
+import { selectCurrentTable } from '../../../../redux/selectors/general.selector';
+import { ConstructorType } from '../../../../types/enums.type';
+import { LocaleKeys, t } from '../../../locales';
 import Table from '../../table/table.component';
 
 import './reserve-table-viewer.component.scss';
@@ -20,6 +20,7 @@ const ReserveTableViewerComponent : React.FC<ReserveTableViewerProps> = (props) 
   const navigate = useNavigate();
   const { hallId } = props;
   const tableId = Number(useParams().id);
+  const table = useSelector((state : RootState) => selectCurrentTable(state, hallId, tableId));
   const [formReserveData, setFormReserveData] = useState({
     name : '',
     phone : ''
@@ -27,11 +28,8 @@ const ReserveTableViewerComponent : React.FC<ReserveTableViewerProps> = (props) 
 
   const setFormReserveDataMemo = useCallback(setFormReserveData, [formReserveData]);
 
-
-  const table = useSelector((state : RootState) => selectCurrentTable(state, hallId, tableId));
-
-
   const onClickCloseViewerBtn = useCallback(() => {
+
     navigate(`/hall/${hallId}`);
   }, []);
 

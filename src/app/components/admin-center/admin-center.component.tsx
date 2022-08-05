@@ -1,21 +1,21 @@
 import Button from '@mui/material/Button';
 import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Route, Routes } from 'react-router-dom';
+import { Link, Route, Routes } from 'react-router-dom';
 
-import { addHall, setLanguage } from '../../redux/actions/general.actions';
-import { GeneralSelector } from '../../redux/selectors';
+import { addHall, setLanguage } from '../../../redux/actions/general.actions';
+import { GeneralSelector } from '../../../redux/selectors';
 import Hall from '../hall/hall.component';
-import { Hall as HallInterface } from '../../types/interfaces';
+import { Hall as HallInterface } from '../../../types/interfaces';
 import TableConstructor from '../table-constructor/table-constructor.component';
-import { loadHallsRequest } from '../../redux/actions/http.actions';
-import  AdminCenterService from '../services/admin-center.service';
-import { changeLanguage, LocaleKeys, t } from '../locales';
+import { loadHallsRequest } from '../../../redux/actions/http.actions';
+import  AdminCenterService from '../../services/admin-center.service';
+import { changeLanguage, LocaleKeys, t } from '../../locales';
 import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
-import { Language } from '../../types/enums.type';
+import { Language } from '../../../types/enums.type';
 
 import './admin-center.component.scss';
 
@@ -73,14 +73,16 @@ const AdminCenter : React.FC = () => {
                   <MenuItem value={'en'}>{t(LocaleKeys.lang_en)}</MenuItem>
                 </Select>
               </FormControl>
+            </div>
           </div>
-
-        </div>
         </div>
       </header>
 
       <main className="main-section">
         <div className="fixed-container flex-container">
+          <Link to={'/'}>
+            {t(LocaleKeys.to_reservation_part)}
+          </Link>
           <div className="add">
             <Button className="add__btn" variant="outlined" sx={{border : '1px solid #e87b16', color : '#e87b16'}} onClick={onClickAddHall}>{t(LocaleKeys.add_hall)}</Button>
           </div>
