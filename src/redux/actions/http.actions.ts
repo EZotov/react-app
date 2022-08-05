@@ -1,5 +1,5 @@
 import { ActionsHttpType } from '../../types/enums.type';
-import { Hall } from '../../types/interfaces';
+import { Hall, Table, TablePlace } from '../../types/interfaces';
 import { HttpActionsType } from '../../types/types';
 
 export const loadHallsRequest = () : HttpActionsType => {
@@ -16,16 +16,18 @@ export const loadHallsRequestSuccess = (halls : Hall[]) : HttpActionsType => {
 };
 
 
-export const addHallRequest = (hall : Hall) : HttpActionsType => {
+export const reserveTableRequest = (hallId : number, tableId : number, reservedPlaces : TablePlace[]) : HttpActionsType => {
   return {
-    type : ActionsHttpType.ADD_NEW_HALL_REQUEST,
-    hall
+    type : ActionsHttpType.RESERVE_TABLE_REQUEST,
+    hallId,
+    tableId,
+    reservedPlaces
   };
 };
 
-export const addHallRequestSuccess = (hall : Hall) : HttpActionsType => {
+export const reserveTableRequestSuccess = (table : Table) : HttpActionsType => {
   return {
-    type : ActionsHttpType.ADD_NEW_HALL_REQUEST_SUCCESS,
-    hall
+    type : ActionsHttpType.RESERVE_TABLE_REQUES_SUCCESS,
+    table
   };
 };

@@ -1,0 +1,25 @@
+{
+    "tableId" : 2,
+    "maxPlaces" : 4,
+    "places" : [
+        {
+          "placeId" : 1,
+          "placeStatus" : "RESERVED"
+        },
+        {
+          "placeId" : 2,
+          "placeStatus" : "RESERVED"
+        },
+        {
+          "placeId" : 7,
+          "placeStatus" : "RESERVED"
+        }
+      ],
+    "type" : "square",
+    "constructorParams" : {
+        "placesCount" : 1,
+        "sizeCircle" : 2,
+        "sizeX" : 2,
+        "sizeY" : 2
+      }
+}

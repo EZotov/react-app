@@ -1,14 +1,14 @@
-import  axios from 'axios';
+import  axios, { AxiosStatic } from 'axios';
 
 import { baseApiUrl } from '../../environment';
-import { Hall } from '../../types/interfaces';
+import { TablePlace } from '../../types/interfaces';
 
-const startGetHalls = () : Promise<any> => {
+const startGetHalls = () : Promise<AxiosStatic> => {
   return axios.get(baseApiUrl + '/api/load_halls.json');
 }
 
-const addHall = (hall : Hall) : Promise<any> => {
-  return axios.get(baseApiUrl + '/api/load_halls.json');
+const reserveTable = (hallId : number, tableId : number, reservedPlaces : TablePlace[]) : Promise<AxiosStatic> => {
+  return axios.get(baseApiUrl + '/api/reserve_places.json');
 }
 
-export default { startGetHalls, addHall };
+export default { startGetHalls, reserveTable };

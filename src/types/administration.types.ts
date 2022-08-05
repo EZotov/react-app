@@ -1,6 +1,6 @@
 
 import { ActionsHttpType, ActionsType, TableType } from './enums.type';
-import { ConstructorParameters, Hall, TablePlace } from './interfaces';
+import { ConstructorParameters, Table, TablePlace } from './interfaces';
 
 
 
@@ -45,12 +45,14 @@ export interface DeletePlaceFromTableAction {
 
 
 
-export interface SendHallHttpAction {
-  type : ActionsHttpType.ADD_NEW_HALL_REQUEST,
-  hall : Hall
+export interface ReserveTableHttpAction {
+  type : ActionsHttpType.RESERVE_TABLE_REQUEST,
+  hallId : number,
+  tableId : number,
+  reservedPlaces : TablePlace[]
 }
 
-export interface SendHallSuccessHttpAction {
-  type : ActionsHttpType.ADD_NEW_HALL_REQUEST_SUCCESS,
-  hall : Hall
+export interface ReserveTableSuccessHttpAction {
+  type : ActionsHttpType.RESERVE_TABLE_REQUES_SUCCESS,
+  table : Table
 }

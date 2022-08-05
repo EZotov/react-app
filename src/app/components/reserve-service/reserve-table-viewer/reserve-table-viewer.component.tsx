@@ -1,12 +1,13 @@
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
-import React, { useCallback, useState } from 'react';
-import { useSelector } from 'react-redux';
+import React, { useCallback, useRef, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import { RootState } from '../../../..';
+import { reserveTableRequest } from '../../../../redux/actions/http.actions';
 import { selectCurrentTable } from '../../../../redux/selectors/general.selector';
-import { ConstructorType } from '../../../../types/enums.type';
+import { ConstructorType, TablePlaceStatus } from '../../../../types/enums.type';
 import { LocaleKeys, t } from '../../../locales';
 import Table from '../../table/table.component';
 
@@ -18,6 +19,8 @@ import './reserve-table-viewer.component.scss';
 
 const ReserveTableViewerComponent : React.FC<ReserveTableViewerProps> = (props) => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const isInitialMount = useRef(true);
   const { hallId } = props;
   const tableId = Number(useParams().id);
   const table = useSelector((state : RootState) => selectCurrentTable(state, hallId, tableId));
@@ -25,6 +28,17 @@ const ReserveTableViewerComponent : React.FC<ReserveTableViewerProps> = (props) 
     name : '',
     phone : ''
   });
+
+  const [submittedForm, setSubmittedForm] = useState(false);
+
+  React.useEffect(() => {
+    if (isInitialMount.current) {
+      isInitialMount.current = false;
+    } else {
+      alert('Заглушка (форма бронирования отправлена)');
+      onClickCloseViewerBtn();
+    }
+  }, [submittedForm]);
 
   const setFormReserveDataMemo = useCallback(setFormReserveData, [formReserveData]);
 
@@ -35,8 +49,8 @@ const ReserveTableViewerComponent : React.FC<ReserveTableViewerProps> = (props) 
 
   const onSubmitReservationForm = useCallback((event) : void => {
     event.preventDefault();
-    alert('Заглушка (форма бронирования отправлена)');
-    onClickCloseViewerBtn();
+    setSubmittedForm(true);
+    dispatch(reserveTableRequest(hallId, table.tableId, table.places.filter(place => place.placeStatus === TablePlaceStatus.reserved)));
   }, []);
 
   return (
