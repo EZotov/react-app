@@ -1,0 +1,56 @@
+{
+  "halls" : [
+    {
+      "hallId" : 1,
+      "maxTablesCount" : 20,
+      "tables" : [
+        {
+          "tableId" : 1,
+          "maxPlaces" : 3,
+          "places" : [
+            {
+              "placeId" : 1,
+              "placeStatus" : "FREE"
+            },
+            {
+              "placeId" : 2,
+              "placeStatus" : "FREE"
+            }
+          ],
+          "type" : "circle",
+          "constructorParams" : {
+            "placesCount" : 3,
+            "sizeCircle" : 2,
+            "sizeX" : 1,
+            "sizeY" : 1
+          }
+        },
+        {
+          "tableId" : 2,
+          "maxPlaces" : 4,
+          "places" : [
+              {
+                "placeId" : 1,
+                "placeStatus" : "FREE"
+              },
+              {
+                "placeId" : 2,
+                "placeStatus" : "FREE"
+              },
+              {
+                "placeId" : 7,
+                "placeStatus" : "FREE"
+              }
+            ],
+          "type" : "square",
+          "constructorParams" : {
+              "placesCount" : 1,
+              "sizeCircle" : 2,
+              "sizeX" : 2,
+              "sizeY" : 2
+            }
+        }
+      ]
+    }
+  ]
+}
