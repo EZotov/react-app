@@ -1,6 +1,6 @@
 import { RootState } from '../..';
-import { Language, TableType } from '../../types/enums.type';
-import { Hall, Table } from '../../types/interfaces';
+import { Language, TablePlaceStatus, TableType } from '../../types/enums.type';
+import { Hall, Table, TablePlace } from '../../types/interfaces';
 
 export const selectHalls = (state : RootState) : Hall[] => state.general.halls;
 
@@ -27,5 +27,10 @@ export const selectCurrentTable = (state : RootState, hallId : number, tableId :
 
   return currentTable;
 };
+
+export const selectReservedPlaces = (state : RootState,  hallId : number, tableId : number) : TablePlace[] => {
+  const table = selectCurrentTable(state, hallId, tableId);
+  return table.places.filter(place => place.placeStatus === TablePlaceStatus.reserved);
+}
 
 export const selectLanguage = (state : RootState) : Language => state.general.language;

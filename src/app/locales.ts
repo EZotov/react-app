@@ -144,6 +144,26 @@ const locale = {
   count_places : {
     ru : 'Кол-во мест',
     en : 'Count places'
+  },
+  name_form_control_req : {
+    ru : 'Поле имени обязательно',
+    en : 'Name field is required'
+  },
+  phone_form_control_req : {
+    ru : 'Поле мобильного телефона обязательно',
+    en : 'Phone field is required'
+  },
+  phone_form_control_pattern : {
+    ru : 'Неверный формат',
+    en : 'Format error'
+  },
+  form_notSelected_place : {
+    ru : 'Место не выбрано',
+    en : 'Place is not selected'
+  },
+  form_success : {
+    ru : 'Резервирование прошло успешно',
+    en : 'Reservation was success'
   }
 };
 
@@ -183,7 +203,12 @@ export enum LocaleKeys {
   sizeX = 'sizeX',
   sizeY = 'sizeY',
   circle_size = 'circle_size',
-  count_places = 'count_places'
+  count_places = 'count_places',
+  name_form_control_req = 'name_form_control_req',
+  phone_form_control_req = 'phone_form_control_req',
+  phone_form_control_pattern = 'phone_form_control_pattern',
+  form_notSelected_place = 'form_notSelected_place',
+  form_success = 'form_success'
 }
 
 class Localization {
